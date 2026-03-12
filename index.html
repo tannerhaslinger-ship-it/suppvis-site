@@ -1,0 +1,2758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuppVis - Master Your Biology. Eliminate the Guesswork.</title>
+    <meta name="description" content="SuppVis is the independent AI health companion that eliminates supplement guesswork. Optimize your biology with data-driven recommendations and interaction safety.">
+    <meta name="keywords" content="AI supplement optimization, personalized health tracking, supplement interaction checker, brand-agnostic supplements, wellness dashboard">
+    <script>
+        (function(){var t=localStorage.getItem('sv-theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();
+    </script>
+    <style>
+        :root {
+            --on-teal:              #0A1628;
+            --bg-primary:           #0A1628;
+            --text-primary:         #F5F1E8;
+            --text-slate:           #94A3B8;
+            --text-muted:           #64748B;
+            --header-bg:            rgba(10,22,40,0.9);
+            --header-bg-scrolled:   rgba(10,22,40,0.97);
+            --header-shadow:        0 4px 20px rgba(0,0,0,0.3);
+            --card-bg:              rgba(255,255,255,0.03);
+            --card-border:          rgba(255,255,255,0.07);
+        }
+
+        [data-theme="light"] {
+            --bg-primary:           #EEF2F7;
+            --text-primary:         #0F172A;
+            --text-slate:           #475569;
+            --text-muted:           #64748B;
+            --header-bg:            rgba(238,242,247,0.92);
+            --header-bg-scrolled:   rgba(238,242,247,0.98);
+            --header-shadow:        0 4px 20px rgba(0,0,0,0.1);
+            --card-bg:              rgba(255,255,255,0.75);
+            --card-border:          rgba(0,0,0,0.08);
+        }
+        [data-theme="light"] .animated-gradient {
+            opacity: 0 !important;
+        }
+        [data-theme="light"] .floating-pills {
+            opacity: 0 !important;
+        }
+
+        /* ── LIGHT MODE: section backgrounds ── */
+        [data-theme="light"] #about,
+        [data-theme="light"] #ai,
+        [data-theme="light"] #shop,
+        [data-theme="light"] #blog,
+        [data-theme="light"] #app-closer {
+            background: var(--bg-primary) !important;
+        }
+        [data-theme="light"] footer {
+            background: rgba(238,242,247,0.98) !important;
+        }
+
+        /* ── waitlist default (moved from inline style) ── */
+        #waitlist {
+            background: linear-gradient(180deg, #0A1628 0%, #071220 100%);
+            transition: background 0.35s;
+        }
+
+        /* ── LIGHT MODE: waitlist & sticky CTA inline-styled sections ── */
+        [data-theme="light"] #waitlist {
+            background: var(--bg-primary) !important;
+        }
+        [data-theme="light"] .sticky-cta {
+            background: rgba(238,242,247,0.98) !important;
+        }
+
+        /* ── LIGHT MODE: hero text ── */
+        [data-theme="light"] .hero-subheadline,
+        [data-theme="light"] .trust-badge { color: var(--text-slate) !important; }
+        [data-theme="light"] .belief-statement {
+            background: rgba(0,0,0,0.04) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* ── LIGHT MODE: section subtitles / body text ── */
+        [data-theme="light"] .section-subtitle,
+        [data-theme="light"] .ai-cta-text { color: var(--text-slate) !important; }
+
+        /* ── LIGHT MODE: about section ── */
+        [data-theme="light"] .about-text h3,
+        [data-theme="light"] .team-member h4 { color: var(--text-primary) !important; }
+        [data-theme="light"] .about-text p,
+        [data-theme="light"] .team-member p { color: var(--text-slate) !important; }
+        [data-theme="light"] .team-member {
+            background: rgba(0,0,0,0.04) !important;
+        }
+
+        /* ── LIGHT MODE: AI features cards ── */
+        [data-theme="light"] .feature-card h3 { color: var(--text-primary) !important; }
+        [data-theme="light"] .feature-card p  { color: var(--text-slate) !important; }
+        [data-theme="light"] .feature-card {
+            background: rgba(0,0,0,0.04) !important;
+        }
+        [data-theme="light"] .chat-title-group h3 { color: var(--text-primary) !important; }
+        [data-theme="light"] .message-content { color: var(--text-primary) !important; }
+        [data-theme="light"] .chat-container {
+            background: rgba(238,242,247,0.99) !important;
+        }
+        [data-theme="light"] .chat-input {
+            background: rgba(0,0,0,0.04) !important;
+            color: var(--text-primary) !important;
+            border-color: rgba(0,0,0,0.12) !important;
+        }
+        [data-theme="light"] .chat-input:focus {
+            background: #fff !important;
+        }
+
+        /* ── LIGHT MODE: shop section ── */
+        [data-theme="light"] .shop-feature h4 { color: var(--text-primary) !important; }
+        [data-theme="light"] .shop-feature p  { color: var(--text-slate) !important; }
+
+        /* ── LIGHT MODE: blog section ── */
+        [data-theme="light"] .blog-card h4 { color: var(--text-primary) !important; }
+        [data-theme="light"] .blog-card p  { color: var(--text-slate) !important; }
+        [data-theme="light"] .blog-card {
+            background: rgba(0,0,0,0.04) !important;
+        }
+
+        /* ── LIGHT MODE: comparison table (app-closer) ── */
+        [data-theme="light"] .comparison-table {
+            background: rgba(0,0,0,0.04) !important;
+        }
+        [data-theme="light"] .comparison-cell:first-child { color: var(--text-primary) !important; }
+        [data-theme="light"] .comparison-cell:not(:first-child) { color: var(--text-slate) !important; }
+
+        /* ── LIGHT MODE: footer ── */
+        [data-theme="light"] .footer-section h4 { color: var(--text-primary) !important; }
+        [data-theme="light"] .footer-section p,
+        [data-theme="light"] .footer-links a,
+        [data-theme="light"] .footer-bottom   { color: var(--text-slate) !important; }
+
+        /* ── LIGHT MODE: waitlist section inline elements ── */
+        [data-theme="light"] #waitlist h4 { color: var(--text-primary) !important; }
+        [data-theme="light"] #waitlist h3 { color: var(--text-primary) !important; }
+        [data-theme="light"] #waitlistInlineForm input {
+            background: rgba(0,0,0,0.05) !important;
+            color: var(--text-primary) !important;
+            border-color: rgba(45,212,191,0.35) !important;
+        }
+
+        /* ── LIGHT MODE: waitlist modal ── */
+        [data-theme="light"] #waitlistModal {
+            background: rgba(0,0,0,0.45) !important;
+        }
+        [data-theme="light"] #waitlistModalBox {
+            background: linear-gradient(145deg,#ffffff,#f1f5f9) !important;
+            border-color: rgba(45,212,191,0.25) !important;
+            box-shadow: 0 40px 120px rgba(0,0,0,0.18),0 0 60px rgba(45,212,191,0.06) !important;
+        }
+        [data-theme="light"] #waitlistModalBox h2 { color: #0F172A !important; }
+        [data-theme="light"] #waitlistModalBox p  { color: #475569 !important; }
+        [data-theme="light"] #waitlistModalBox label { color: #475569 !important; }
+        [data-theme="light"] #waitlistModalBox input,
+        [data-theme="light"] #waitlistModalBox select {
+            background: rgba(0,0,0,0.04) !important;
+            color: #0F172A !important;
+            border-color: rgba(45,212,191,0.3) !important;
+        }
+        [data-theme="light"] #waitlistModalClose {
+            background: rgba(0,0,0,0.06) !important;
+            border-color: rgba(0,0,0,0.12) !important;
+            color: #475569 !important;
+        }
+
+        /* ── LIGHT MODE: gradient headings ── */
+        [data-theme="light"] .hero-headline,
+        [data-theme="light"] .section-title {
+            background: linear-gradient(135deg, #0F172A 0%, #0D9488 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        [data-theme="light"] #waitlist h2 {
+            background: linear-gradient(135deg, #0F172A 0%, #0D9488 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        [data-theme="light"] #waitlist p { color: var(--text-slate) !important; }
+
+        /* ── LIGHT MODE: sticky CTA ── */
+        [data-theme="light"] #stickyWaitlistCTA {
+            background: linear-gradient(135deg,rgba(238,242,247,0.98),rgba(238,242,247,0.98)) !important;
+            border-top-color: rgba(45,212,191,0.2) !important;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Symbol', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.35s, color 0.35s;
+        }
+
+        /* Animated Background */
+        .animated-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #0A1628, #0F2744, #0A1628, #142B48);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Pills */
+        .floating-pills {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .pill {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(20, 184, 166, 0.1));
+            border-radius: 30px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) translateX(10px) rotate(5deg); }
+            50% { transform: translateY(-10px) translateX(-10px) rotate(-5deg); }
+            75% { transform: translateY(-20px) translateX(5px) rotate(3deg); }
+        }
+
+        .pill:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .pill:nth-child(2) { top: 60%; left: 80%; width: 80px; height: 40px; animation-delay: 2s; }
+        .pill:nth-child(3) { top: 80%; left: 20%; width: 50px; height: 25px; animation-delay: 4s; }
+        .pill:nth-child(4) { top: 30%; left: 70%; animation-delay: 3s; }
+        .pill:nth-child(5) { top: 50%; left: 15%; width: 70px; height: 35px; animation-delay: 1s; }
+        .pill:nth-child(6) { top: 20%; left: 50%; width: 55px; height: 28px; animation-delay: 5s; }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 48px;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.1);
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            padding: 12px 48px;
+            background: var(--header-bg-scrolled);
+            box-shadow: var(--header-shadow);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: transform 0.3s, color 0.35s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            --logo-detail: #0A1628;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        [data-theme="light"] .logo-icon {
+            --logo-detail: #EEF2F7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-slate);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2DD4BF;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2DD4BF;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            color: var(--on-teal);
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #2DD4BF;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Section Spacing */
+        section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 24px 80px;
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            text-align: center;
+            padding-top: 160px;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-headline {
+            font-size: 72px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #F5F1E8 0%, #2DD4BF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subheadline {
+            font-size: 24px;
+            color: var(--text-slate);
+            margin-bottom: 32px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .belief-statement {
+            font-size: 20px;
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 48px;
+            padding: 32px;
+            background: rgba(45, 212, 191, 0.05);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 16px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .belief-statement strong {
+            color: #2DD4BF;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            color: #0A1628;
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #2DD4BF;
+            border: 2px solid #2DD4BF;
+            padding: 16px 34px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(45, 212, 191, 0.1);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+        }
+
+        .phone-mockup {
+            max-width: 400px;
+            margin: 60px auto 0;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .phone-mockup img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+            animation: fadeInUp 0.8s ease-out 1s both;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-slate);
+            font-size: 15px;
+        }
+
+        .trust-icon {
+            color: #10B981;
+            font-size: 20px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #F5F1E8 0%, #2DD4BF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 24px;
+            color: var(--text-slate);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-primary);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .about-text h3 {
+            font-size: 40px;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-slate);
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            color: #2DD4BF;
+            font-weight: 600;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 80px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .team-member:hover {
+            background: rgba(45, 212, 191, 0.08);
+            border-color: rgba(45, 212, 191, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(45, 212, 191, 0.15);
+        }
+
+        .team-member-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .team-member h4 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .team-member .role {
+            font-size: 14px;
+            color: #2DD4BF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .team-member p {
+            font-size: 15px;
+            color: var(--text-slate);
+            line-height: 1.6;
+        }
+
+        /* AI Section */
+        #ai {
+            background: var(--bg-primary);
+        }
+
+        .ai-cta-section {
+            text-align: center;
+            margin: 60px auto 40px;
+            max-width: 800px;
+        }
+
+        .ai-cta-text {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            color: #0A1628;
+            padding: 20px 48px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(45, 212, 191, 0.3);
+        }
+
+        .btn-ai:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(45, 212, 191, 0.5);
+        }
+
+        .btn-ai:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Chat Modal */
+        .chat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-modal.active {
+            display: flex;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            height: 90vh;
+            max-height: 800px;
+            background: var(--bg-primary);
+            border: 2px solid rgba(45, 212, 191, 0.3);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .chat-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(45, 212, 191, 0.05);
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ai-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(45, 212, 191, 0.4);
+        }
+
+        .chat-title-group h3 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #10B981;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: #94A3B8;
+            font-size: 32px;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #EF4444;
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(45, 212, 191, 0.3);
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(45, 212, 191, 0.5);
+        }
+
+        .message {
+            display: flex;
+            gap: 16px;
+            max-width: 85%;
+            animation: messageFadeIn 0.3s ease-out;
+        }
+
+        @keyframes messageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.ai {
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        }
+
+        .message-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 16px;
+            padding: 16px 20px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        .message.ai .message-content {
+            background: rgba(45, 212, 191, 0.1);
+            border-color: rgba(45, 212, 191, 0.3);
+        }
+
+        .message.user .message-content {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 16px;
+            max-width: 85%;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+            animation: messageFadeIn 0.3s ease-out;
+        }
+
+        .typing-dots {
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #2DD4BF;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .suggested-queries {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 0 32px 20px;
+            animation: messageFadeIn 0.5s ease-out;
+        }
+
+        .query-pill {
+            padding: 10px 20px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 20px;
+            color: #2DD4BF;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .query-pill:hover {
+            background: rgba(45, 212, 191, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.2);
+        }
+
+        .query-pill:active {
+            transform: translateY(0);
+        }
+
+        .chat-input-area {
+            padding: 24px 32px;
+            border-top: 1px solid rgba(45, 212, 191, 0.2);
+            background: rgba(45, 212, 191, 0.03);
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+            resize: none;
+            min-height: 56px;
+            max-height: 120px;
+            transition: all 0.2s;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #2DD4BF;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+        }
+
+        .chat-input::placeholder {
+            color: #64748B;
+        }
+
+        .send-btn {
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            border: none;
+            border-radius: 12px;
+            color: #0A1628;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(45, 212, 191, 0.4);
+        }
+
+        .send-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .disclaimer {
+            font-size: 12px;
+            color: #64748B;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 24px;
+            padding: 48px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(45, 212, 191, 0.08);
+            border-color: rgba(45, 212, 191, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(45, 212, 191, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: var(--text-slate);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .chat-messages {
+                padding: 20px;
+            }
+
+            .chat-input-area {
+                padding: 16px 20px;
+            }
+
+            .suggested-queries {
+                padding: 0 20px 16px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
+            }
+
+            .suggested-queries::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* Shop Section */
+        #shop {
+            background: var(--bg-primary);
+        }
+
+        .shop-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .shop-feature {
+            text-align: center;
+        }
+
+        .shop-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 2px solid rgba(45, 212, 191, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .shop-feature h4 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .shop-feature p {
+            font-size: 16px;
+            color: var(--text-slate);
+            line-height: 1.6;
+        }
+
+        /* Blog Section */
+        #blog {
+            background: var(--bg-primary);
+        }
+
+        .blog-filters {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border-radius: 24px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            color: #2DD4BF;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(45, 212, 191, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.2);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            background: rgba(45, 212, 191, 0.08);
+            border-color: rgba(45, 212, 191, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(45, 212, 191, 0.15);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.2), rgba(20, 184, 166, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+        }
+
+        .blog-content {
+            padding: 32px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 12px;
+            color: #2DD4BF;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .blog-card h4 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .blog-card p {
+            font-size: 15px;
+            color: var(--text-slate);
+            line-height: 1.6;
+        }
+
+        /* App Closer Section */
+        #app-closer {
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .comparison-table {
+            max-width: 900px;
+            margin: 60px auto 48px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 24px 32px;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.1);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row.header {
+            background: rgba(45, 212, 191, 0.1);
+        }
+
+        .comparison-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+        }
+
+        .comparison-cell:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .comparison-cell:not(:first-child) {
+            justify-content: center;
+            color: var(--text-slate);
+        }
+
+        .check {
+            color: #10B981;
+            font-size: 24px;
+        }
+
+        .cross {
+            color: #EF4444;
+            font-size: 24px;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 80px 24px 40px;
+            background: var(--bg-primary);
+            transition: background 0.35s;
+            border-top: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            color: var(--text-slate);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-slate);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #2DD4BF;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(45, 212, 191, 0.1);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #94A3B8;
+            transition: color 0.3s, border-color 0.3s, background 0.35s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover { color: #2DD4BF; border-color: rgba(45,212,191,0.35); }
+        .theme-toggle svg { width: 17px; height: 17px; transition: transform 0.4s; }
+        .theme-toggle:hover svg { transform: rotate(20deg); }
+        .theme-toggle .icon-sun  { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.12); color: #475569; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-headline {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 40px;
+            }
+
+            .features-grid,
+            .shop-features,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 24px;
+            }
+
+            section {
+                padding: 80px 24px 60px;
+            }
+
+            .hero-headline {
+                font-size: 36px;
+            }
+
+            .hero-subheadline {
+                font-size: 18px;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .comparison-cell {
+                justify-content: center;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #2DD4BF, #F59E0B);
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+
+        /* AI Chat Modal */
+        .chat-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .chat-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-header {
+            padding: 24px 32px;
+            background: rgba(45, 212, 191, 0.1);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .chat-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.4);
+        }
+
+        .chat-header-info h3 {
+            font-size: 20px;
+            color: #F5F1E8;
+            margin-bottom: 4px;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #10B981;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.95); }
+        }
+
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: #94A3B8;
+            font-size: 32px;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+
+        .chat-close-btn:hover {
+            color: #2DD4BF;
+            background: rgba(45, 212, 191, 0.1);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(45, 212, 191, 0.3);
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(45, 212, 191, 0.5);
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: messageSlideIn 0.3s ease-out;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+        }
+
+        .message.user .message-avatar {
+            background: rgba(148, 163, 184, 0.3);
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .message.ai .message-content {
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            color: #F5F1E8;
+        }
+
+        .message.user .message-content {
+            background: rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #F5F1E8;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 16px 20px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 16px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #2DD4BF;
+            border-radius: 50%;
+            animation: typingAnimation 1.4s ease-in-out infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .suggested-queries {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 0 32px 24px;
+        }
+
+        .query-pill {
+            padding: 12px 20px;
+            border-radius: 20px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            color: #2DD4BF;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .query-pill:hover {
+            background: rgba(45, 212, 191, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.2);
+        }
+
+        .chat-input-container {
+            padding: 24px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(45, 212, 191, 0.2);
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            resize: none;
+            min-height: 52px;
+            max-height: 120px;
+            transition: all 0.2s;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #2DD4BF;
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+        }
+
+        .chat-input::placeholder {
+            color: #64748B;
+        }
+
+        .chat-send-btn {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            border: none;
+            border-radius: 12px;
+            color: #0A1628;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 52px;
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.4);
+        }
+
+        .chat-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .disclaimer {
+            padding: 0 32px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748B;
+            font-style: italic;
+        }
+
+        /* CTA Button to open chat */
+        .chat-cta {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            color: #0A1628;
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .chat-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.5);
+        }
+
+        /* Mobile responsive for chat */
+        @media (max-width: 768px) {
+            .chat-modal {
+                padding: 0;
+            }
+
+            .chat-container {
+                max-width: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .chat-header {
+                padding: 20px;
+            }
+
+            .chat-messages {
+                padding: 20px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .suggested-queries {
+                padding: 0 20px 20px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
+            }
+
+            .suggested-queries::-webkit-scrollbar {
+                display: none;
+            }
+
+            .chat-input-container {
+                padding: 16px 20px;
+            }
+
+            .disclaimer {
+                padding: 0 20px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Animated Background -->
+    <div class="animated-gradient"></div>
+    
+    <!-- Floating Pills -->
+    <div class="floating-pills">
+        <div class="pill"></div>
+        <div class="pill"></div>
+        <div class="pill"></div>
+        <div class="pill"></div>
+        <div class="pill"></div>
+        <div class="pill"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+    <nav>
+        <a href="index.html" class="logo">
+            <svg class="logo-icon" viewBox="0 0 2048 1963" xmlns="http://www.w3.org/2000/svg"><path transform="translate(778,178)" d="m0 0h41l33 2 29 3 39 7 36 8 26 8 25 9 18 8 5 1 29-12 25-9 28-8 39-8 38-6 36-3h42l34 2 37 5 31 6 26 7 36 12 31 13 25 12 23 12 19 12 36 25 11 9 14 12 12 11 8 7 16 16 9 11 12 14 11 13 12 17 15 24 13 22 8 15 12 27 10 27 9 27 8 29 6 24 18 13 14 11 11 9 15 14 10 10 7 8 15 15 11 14 14 18 16 23 12 20 13 24 15 33 11 28 7 19 7 26 5 25 3 20 3 38v68l-2 27-4 30-7 37-9 31-12 32-12 27-10 19-7 13-10 16-12 17-10 13-13 16-9 10-22 22-8 7-7 7-11 9-19 14-12 8-14 9-10 40-9 29-10 28-11 27-15 33-8 16-12 19-10 15-10 13-11 13-12 14-14 15-7 7-8 7-7 7-11 9-14 12-18 13-15 10-17 12-16 9-15 8-23 11-32 14-18 7-30 9-27 7-36 7-36 4-30 2h-32l-40-3-35-5-38-8-26-7-26-9-23-10-4-2h-6l-23 10-30 10-33 9-35 7-29 4-29 3-16 1h-30l-41-3-30-4-36-7-28-7-33-11-30-13-25-12-22-11-19-12-16-11-20-14-14-11-11-9-15-13-7-7-6-5v-2h-2l-7-8-9-9-9-11-11-13-15-20-13-21-12-20-9-17-10-23-12-31-13-36-8-28-6-27-5-5-35-24-11-9-14-12-10-10-8-7-10-9-9-10-13-17-12-15-17-26-12-21-13-27-11-25-10-28-7-25-6-27-6-35-3-30-1-19v-22l2-35 4-38 5-26 7-30 9-29 8-22 18-39 12-22 10-17 10-15 16-21 12-16 9-10 31-31 8-7 13-11 19-13 15-11 3-2 5-24 7-26 11-32 13-34 14-34 8-17 13-21 10-16 16-21 8-10 12-14 16-17 9-9 8-7 7-7 11-9 15-12 18-13 27-18 17-10 28-14 27-12 24-9 25-8 36-9 48-8zm250 129-10 7-18 12-23 16-13 11-10 9-11 9-11 10-11 9-8 8-8 7-13 12-11 9-16 13-15 12-16 11-20 13-24 14-21 12-15 8-28 12-20 8-42 15-43 14-102 28-37 11-36 12-28 10-21 9-17 9 2 35 4 33 8 45 9 39 16 59 7 30 6 37 2 18 2 35v51l-2 30-4 33-7 36-8 32-15 55-8 34-7 41-3 27-1 14v19l10 6 21 10 30 11 36 12 40 12 70 19 31 9 43 14 41 16 24 10 28 13 19 10 28 17 18 11 14 10 15 11 14 11 17 14 15 13 12 11 10 10 8 7 16 15 8 7 15 14 11 9 21 16 17 12 12 9 4 1 11-8 12-8 18-13 19-14 13-12 8-7 13-12 8-7 10-9 18-18 8-7 13-11 14-11 14-12 15-11 15-10 19-12 26-15 18-10 22-10 36-15 37-14 29-10 25-8 67-19 62-18 43-14 33-13 19-9 6-4v-17l-2-29-5-35-8-42-16-58-8-31-6-27-4-26-3-27-2-33v-34l2-37 3-28 7-42 6-27 18-69 8-36 7-43 4-37 1-12v-11l-5-4-16-8-21-9-23-8-36-12-33-10-82-22-35-10-40-13-41-15-37-15-23-11-22-12-26-15-25-16-26-20-16-13-11-9-24-22-8-8-11-9-16-15-14-12-9-8-18-13-19-13-13-9z" fill="currentColor"/><path transform="translate(1008,615)" d="m0 0h33l25 2 25 4 25 7 21 8 23 12 20 12 14 11 18 18 18 22 10 18 10 25 5 19 2 11v5l-25 5-66 11h-3l-9-26-8-16-7-10-8-10-8-7-12-9-16-9-15-6-23-5-20-2h-23l-24 3-23 6-19 9-13 9-10 9-8 9-8 14-5 12-3 14-1 9v9l3 17 5 13 7 13 9 10 10 9 13 8 16 8 24 9 36 12 29 9 53 15 36 12 20 8 21 10 16 10 19 14 11 9 8 8 10 13 12 19 10 21 6 19 4 22 2 23v14l-2 19-6 29-7 21-12 25-9 14-10 13-9 10-11 11-13 10-17 12-17 9-29 12-24 7-31 6-27 3-31 1-27-2-30-4-34-8-26-9-21-10-19-12-21-16-13-11-11-12-10-14-10-15-9-16-8-17-7-21-6-25-1-12 80-16 19-3 7 28 7 19 9 17 12 16 9 10 10 10 13 9 17 9 22 8 27 6 23 2h16l25-3 22-5 15-5 17-8 12-8 10-9 8-10 8-13 5-10 4-13 2-11v-30l-4-18-8-16-9-12-13-13-15-10-25-12-36-12-56-16-52-15-35-12-18-8-16-8-17-11-16-12-13-11-9-10-9-13-9-16-7-18-5-18-3-20-1-16v-14l2-25 5-25 7-21 9-20 12-18 12-14 16-16 13-10 15-10 22-12 16-7 21-7 27-6 22-3z" fill="currentColor"/><g fill="var(--logo-detail)"><path transform="translate(198,850)" d="m0 0 9 2 27 8 74 23 41 12 5 2 2 6 4 25 2 20v14h-27l-96-3-21-1-41-1-3-2 3-28 6-29 7-25z"/><path transform="translate(1850,1016)" d="m0 0h35l1 1v10l-3 31-6 31-8 30-3 7-10-2-48-15-71-20-30-8-3-9-3-26-1-11v-13l11-1 79-3z"/><path transform="translate(174,1018)" d="m0 0h30l109 3 49 2 1 4-3 32-3 19-2 5-25 6-63 14-64 16-10 2-6-18-6-25-5-30-2-18z"/><path transform="translate(1859,850)" d="m0 0 3 3 10 30 7 28 5 29 1 13-3 1-107 4-44 2h-30v-11l3-30 4-22 10-4 41-12 48-15 42-13z"/><path transform="translate(597,301)" d="m0 0 4 2 15 28 10 19 9 19 10 19 11 22 12 22 13 27-1 4-15 6-36 12-14 5-4-1-12-17-26-39-10-14-23-34-14-21-4-7 14-12 13-10 12-8 19-12z"/><path transform="translate(1443,1493)" d="m0 0 5 5 10 13 13 18 14 21 13 18 12 17 26 38-1 4-11 10-16 12-26 17-16 10-5 2-9-15-14-25-8-16-15-28-12-21-17-32-10-20 1-4 20-8z"/><path transform="translate(1455,300)" d="m0 0 4 1 22 13 27 18 14 10 12 10-2 4-14 21-12 17-12 16-8 12-10 14-14 22-20 26-5-1-31-10-27-10-5-3 10-23 20-39 18-34 8-17 10-19 9-17z"/><path transform="translate(612,1492)" d="m0 0 11 3 36 12 20 8 1 3-11 23-16 30-12 22-18 35-8 16-14 24-5 9-4-1-26-16-15-11-11-8-11-9-8-8 2-4 8-11 13-19 12-17 8-11 12-17 23-34 10-15z"/><path transform="translate(1315,1547)" d="m0 0h2l11 19 15 29 13 23 12 23 12 21 10 20 12 22v3l-34 11-38 9-12 2-9-17-13-28-14-31-12-26-15-31-3-8 8-7 18-13 22-13z"/><path transform="translate(1316,253)" d="m0 0 9 1 25 5 31 9 16 6-2 5-12 23-8 17-12 22-17 33-11 22-7 16-10 19-3 3-25-14-19-12-12-9-6-5 1-7 12-28 12-24 24-54 13-27z"/><path transform="translate(732,254)" d="m0 0h5l5 8 20 40 11 25 19 42 11 24-1 3-19 14-17 11-14 8-12 6-8-13-11-22-11-23-15-28-37-74 5-3 35-11 28-6z"/><path transform="translate(738,1546)" d="m0 0 5 1 19 10 15 10 12 9 11 9-9 20-11 24-12 26-14 32-8 16-9 20-2 5-10-1-28-7-42-14 1-5 10-19 12-23 10-19 13-25 13-23 15-30z"/><path transform="translate(1582,399)" d="m0 0 5 5 10 11 9 11 10 13 13 22 12 22 8 15 11 26 7 21 1 7-9-2-41-15-30-10-71-19-8-3 2-5 12-17 13-19 11-15 13-18 14-19z"/><path transform="translate(475,400)" d="m0 0 5 5 13 18 11 16 16 23 24 34 5 9-16 5-43 11-36 11-35 12-25 10h-2l2-10 7-21 11-26 14-27 14-24 9-14 8-11 11-13z"/><path transform="translate(393,1425)" d="m0 0 33 11 20 7 28 9 32 9 28 7 13 4-2 5-10 15-12 17-10 14-7 10-12 17-14 19-5 8-4-2-11-13-12-16-10-16-12-21-12-22-13-31-7-23z"/><path transform="translate(1661,1426)" d="m0 0h3l-3 11-9 27-13 30-16 31-10 18-10 13-11 13-8 8-4-4-11-16-12-17-14-19-9-13-13-18-10-16v-2l19-6 41-11 42-13 36-12z"/><path transform="translate(336,1151)" d="m0 0h2l-1 9-13 53-7 33-5 36-2 16-4-2-10-9-8-7-20-20-13-17-10-14-10-15-10-17-8-16v-3l27-6 56-13z"/><path transform="translate(1723,1150)" d="m0 0 8 1 36 10 64 18 11 4-1 5-12 22-8 12-20 28-9 11-16 16-8 7-8 8-8 7h-2l-3-27-5-33-10-47-9-41z"/><path transform="translate(850,1629)" d="m0 0 4 2 11 9 10 9 11 9 7 7 8 7 11 10 14 11 18 14 7 5v2l-15 5-28 7-36 6-24 3-21 1h-22l-4-2 13-28 15-33 16-34z"/><path transform="translate(308,684)" d="m0 0 2 4 6 39 8 43 13 55-1 2-11-3-48-15-45-13-9-3 1-4 9-17 8-11 8-12 12-17 14-17 15-15 11-9z"/><path transform="translate(1751,684)" d="m0 0 5 3v2l4 2 9 9 3 2v2l4 2 15 16 13 17 12 18 14 24 5 10v2l-26 8-45 13-37 11h-2l5-26 9-40 8-47 3-26z"/><path transform="translate(1201,1631)" d="m0 0 3 2 8 18 14 28 12 26 12 28v3h-23l-35-2-26-3-29-6-27-9-4-2v-2l13-9 10-8 16-13 12-11 8-8 8-7 14-12 13-12z"/><path transform="translate(806,248)" d="m0 0h29l33 4 31 6 31 8 21 7-4 4-10 7-17 13-11 10-11 9-10 9-11 9-15 14-7 5-3-4-13-28-9-19-15-33z"/><path transform="translate(1245,247)" d="m0 0h2l-1 5-12 27-11 24-12 26-9 21h-4l-11-11-11-9-12-11-8-7-11-10-14-11-19-14-6-4 2-2 24-7 28-7 35-6 29-3z"/></g></svg>
+            <span>SuppVis</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="suppvis-about.html">About</a></li>
+            <li><a href="suppvis-ai-chat.html">SuppVis AI</a></li>
+            <li><a href="suppvis-shop.html">Shop</a></li>
+            <li><a href="suppvis-blog.html">Blog</a></li>
+            <li><a href="suppvis-waitlist.html">Waitlist</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+            <button onclick="openWaitlistModal()" class="nav-cta" style="border:none;cursor:pointer;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Join the Waitlist
+            </button>
+        </div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    </nav>
+</header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="section-content">
+                <div class="hero-content">
+                    <h1 class="hero-headline">
+                        Master Your Biology.<br/>
+                        Eliminate the Guesswork.
+                    </h1>
+                    
+                    <p class="hero-subheadline">
+                        The supplement world is chaotic, confusing, and unregulated. SuppVis uses 
+                        proprietary AI to analyze your unique biology and goals, building an 
+                        evidence-based stack tailored to you—not a brand.
+                    </p>
+                    
+                    <div class="belief-statement">
+                        <strong>We believe</strong> your health shouldn't be a trial-and-error experiment 
+                        driven by TikTok trends. We provide an independent, brand-agnostic command 
+                        center for your longevity.
+                    </div>
+                    
+                    <div class="cta-group">
+                        <button onclick="openWaitlistModal()" class="btn-primary" style="border:none;cursor:pointer;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            Join the Beta Waitlist
+                        </button>
+                        <a href="suppvis-about.html" class="btn-secondary">
+                            Learn More
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <span class="trust-icon">✓</span>
+                            <span>Brand-Agnostic</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-icon">✓</span>
+                            <span>Evidence-Based</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-icon">✓</span>
+                            <span>10,000+ Users</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-icon">⭐</span>
+                            <span>4.8 Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Section -->
+        <section id="ai">
+            <div class="section-content">
+                <h2 class="section-title">
+                    The World's First AI-Powered<br/>
+                    Supplement Optimization Platform
+                </h2>
+                <p class="section-subtitle">
+                    Our proprietary intelligence layer transforms supplement use from 
+                    guesswork into a precision system
+                </p>
+
+                <!-- Try AI CTA -->
+                <div class="ai-cta-section">
+                    <p class="ai-cta-text">
+                        <strong>Want to experience SuppVis AI yourself?</strong><br/>
+                        Ask questions about supplements, check interactions, or get personalized recommendations.
+                    </p>
+                    <a href="suppvis-ai-chat.html" class="btn-ai" id="openChatBtn">
+                        <span>🧠</span>
+                        Try SuppVis AI Now
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M13 7L11 9L16 14H5V16H16L11 21L13 22L20 15L13 8V7Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🔗</span>
+                        <h3>Proprietary Interaction Graph</h3>
+                        <p>
+                            Contextually understands your complete stack to identify dangerous 
+                            conflicts or synergistic benefits. We catch what 95% of users miss—and 
+                            what could make you sick.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">🔬</span>
+                        <h3>Explainability Engine</h3>
+                        <p>
+                            No "black boxes"—every recommendation is backed by peer-reviewed research 
+                            and scientific consensus. See the why behind every suggestion.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">🧠</span>
+                        <h3>Adaptive Logic</h3>
+                        <p>
+                            The AI evolves as your health goals shift. Whether optimizing for Sleep, 
+                            Focus, Stress, or Energy, your plan adapts with you.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">⏰</span>
+                        <h3>Optimal Timing</h3>
+                        <p>
+                            When you take it matters as much as what you take. Get personalized 
+                            schedules that maximize absorption and effectiveness.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">🔥</span>
+                        <h3>Habit Architecture</h3>
+                        <p>
+                            Smart reminders and streak tracking make consistency effortless. 
+                            85% adherence rate vs. 30% industry average.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <h3>Outcome Tracking</h3>
+                        <p>
+                            Track sleep, energy, focus, and stress. See patterns invisible to you. 
+                            Know exactly what's working—and what isn't.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat Modal -->
+        <div class="chat-modal" id="chatModal">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-header-left">
+                        <div class="ai-avatar">S</div>
+                        <div class="chat-title-group">
+                            <h3>SuppVis AI</h3>
+                            <div class="status-indicator">
+                                <span class="status-dot"></span>
+                                <span>Online - Ready to help</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="close-btn" id="closeChatBtn">×</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <div class="message-avatar">S</div>
+                        <div class="message-content">
+                            <p>Hey! 👋 I'm SuppVis AI, your personal supplement optimization assistant.</p>
+                            <p style="margin-top: 12px;">I can help you:</p>
+                            <ul style="margin: 12px 0 0 20px;">
+                                <li>Understand how supplements work</li>
+                                <li>Check for dangerous interactions</li>
+                                <li>Find the right dosing and timing</li>
+                                <li>Build an evidence-based stack</li>
+                            </ul>
+                            <p style="margin-top: 12px;"><strong>What's on your mind?</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suggested-queries" id="suggestedQueries">
+                    <button class="query-pill" data-query="What's the best form of magnesium for sleep?">
+                        Best magnesium for sleep?
+                    </button>
+                    <button class="query-pill" data-query="Can I take iron and calcium together?">
+                        Iron + calcium safe?
+                    </button>
+                    <button class="query-pill" data-query="When should I take fish oil for maximum absorption?">
+                        When to take fish oil?
+                    </button>
+                    <button class="query-pill" data-query="I'm taking vitamin D, magnesium, and ashwagandha. Any interactions?">
+                        Check my stack
+                    </button>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="message-avatar" style="background: linear-gradient(135deg, #2DD4BF, #14B8A6);">S</div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <div class="chat-input-container">
+                        <textarea 
+                            class="chat-input" 
+                            id="chatInput" 
+                            placeholder="Ask about supplements, interactions, timing, dosing..."
+                            rows="1"
+                        ></textarea>
+                        <button class="send-btn" id="sendBtn">
+                            Send
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M2 10L18 2L10 18L8 10L2 10Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="disclaimer">
+                        SuppVis AI provides educational information only. Always consult your healthcare provider before making changes to your supplement routine.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Section -->
+        <section id="shop">
+            <div class="section-content">
+                <h2 class="section-title">
+                    Curated for Science.<br/>
+                    Not Profit.
+                </h2>
+                <p class="section-subtitle">
+                    A brand-agnostic marketplace connecting you to high-quality, third-party 
+                    tested supplements through transparent affiliate relationships
+                </p>
+
+                <div class="shop-features">
+                    <div class="shop-feature">
+                        <div class="shop-icon">🛡️</div>
+                        <h4>Conflict-Checked</h4>
+                        <p>
+                            Every product in the shop is automatically checked against your current 
+                            routine via the AI engine. No dangerous interactions.
+                        </p>
+                    </div>
+
+                    <div class="shop-feature">
+                        <div class="shop-icon">✓</div>
+                        <h4>Third-Party Tested</h4>
+                        <p>
+                            Only supplements with independent lab verification make it to our marketplace. 
+                            Quality you can trust.
+                        </p>
+                    </div>
+
+                    <div class="shop-feature">
+                        <div class="shop-icon">⚗️</div>
+                        <h4>Clinical Dosing</h4>
+                        <p>
+                            Effective doses backed by peer-reviewed research—not marketing claims. 
+                            If the science doesn't support it, we don't recommend it.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cta-group" style="margin-top: 60px;">
+                    <a href="https://apps.apple.com" target="_blank" class="btn-primary">
+                        Browse Curated Shop in App
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog">
+            <div class="section-content">
+                <h2 class="section-title">
+                    Learn, Optimize, and Stay Informed
+                </h2>
+                <p class="section-subtitle">
+                    Evidence-based articles filtered by your health goals
+                </p>
+
+                <div class="blog-filters">
+                    <button class="filter-btn active" data-filter="all">All Goals</button>
+                    <button class="filter-btn" data-filter="energy">⚡ Energy</button>
+                    <button class="filter-btn" data-filter="sleep">🌙 Sleep</button>
+                    <button class="filter-btn" data-filter="focus">🧠 Focus</button>
+                    <button class="filter-btn" data-filter="stress">🍃 Stress</button>
+                </div>
+
+                <div class="blog-grid">
+                    <div class="blog-card" data-category="sleep energy">
+                        <div class="blog-image">⏰</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Strategy</span>
+                            <h4>Morning vs. Evening: The Timing Blueprint</h4>
+                            <p>
+                                When you take a supplement matters almost as much as which one you take. 
+                                A practical, no-guesswork guide to circadian alignment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="blog-card" data-category="sleep stress">
+                        <div class="blog-image">💊</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Deep Dive</span>
+                            <h4>Magnesium: The Master Mineral Explained</h4>
+                            <p>
+                                Not all magnesium is created equal. Learn the difference between oxide, 
+                                glycinate, and threonate—and which form works for your goals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="blog-card" data-category="energy focus">
+                        <div class="blog-image">🔋</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Strategy</span>
+                            <h4>How to Build a Stack That Actually Works</h4>
+                            <p>
+                                Stop throwing money at random bottles. Learn the systematic approach 
+                                to building an effective, safe supplement routine.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-group" style="margin-top: 60px;">
+                    <a href="#blog" class="btn-secondary">
+                        Read More Evidence
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Closer Section -->
+        <section id="app-closer">
+            <div class="section-content">
+                <h2 class="section-title">
+                    The App is Your<br/>
+                    Execution Engine
+                </h2>
+                <p class="section-subtitle">
+                    The web is for learning. The app is for doing. Your Personal Dashboard, 
+                    daily goal metrics, and stack tracking are exclusive to iOS.
+                </p>
+
+                <div class="comparison-table">
+                    <div class="comparison-row header">
+                        <div class="comparison-cell">Feature</div>
+                        <div class="comparison-cell">Web</div>
+                        <div class="comparison-cell">iOS App</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">📚 Global Science & Research</div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">🛒 Curated Marketplace</div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">📝 Blog & Education</div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">📊 Personal Dashboard</div>
+                        <div class="comparison-cell"><span class="cross">×</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">⏰ Daily Reminders</div>
+                        <div class="comparison-cell"><span class="cross">×</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">🎯 Goal Tracking</div>
+                        <div class="comparison-cell"><span class="cross">×</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">🔥 Streak System</div>
+                        <div class="comparison-cell"><span class="cross">×</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">🧠 AI Personalization</div>
+                        <div class="comparison-cell"><span class="cross">×</span></div>
+                        <div class="comparison-cell"><span class="check">✓</span></div>
+                    </div>
+                </div>
+
+                <div class="cta-group">
+                    <a href="https://apps.apple.com" target="_blank" class="btn-primary">
+                        <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+                            <path d="M15.5 0C15.3 2 14 3.3 12.5 3.3C12.4 1.3 13.8 0 15.5 0Z" fill="currentColor"/>
+                            <path d="M18.5 8C16.5 8 15.3 9.2 13.9 9.2C12.5 9.2 11 8 9.3 8C7 8 4.5 9.8 4.5 13.5C4.5 17.5 7.8 23 10.3 23C11.5 23 12.2 22.2 13.6 22.2C15 22.2 15.6 23 16.9 23C18.9 23 20.5 19.5 21.5 17.5C18.5 16.2 18 11.8 21 10C20 8.5 19 8 18.5 8Z" fill="currentColor"/>
+                        </svg>
+                        Download SuppVis on iOS to Track Your Progress
+                    </a>
+                </div>
+
+                <div class="trust-badges" style="margin-top: 40px;">
+                    <div class="trust-badge">
+                        <span class="trust-icon">✓</span>
+                        <span>Free to start</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-icon">✓</span>
+                        <span>No credit card required</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-icon">🔒</span>
+                        <span>Privacy-first</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ======== WAITLIST SECTION ======== -->
+    <section id="waitlist" style="min-height:auto; padding: 100px 24px; position:relative; overflow:hidden;">
+        <!-- Background glow orbs -->
+        <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle, rgba(45,212,191,0.07) 0%, transparent 70%);pointer-events:none;z-index:0;"></div>
+        <div style="position:absolute;bottom:-200px;left:10%;width:400px;height:400px;background:radial-gradient(circle, rgba(45,212,191,0.04) 0%, transparent 70%);pointer-events:none;z-index:0;"></div>
+
+        <div class="section-content" style="position:relative;z-index:1;text-align:center;">
+
+            <!-- Badge -->
+            <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(45,212,191,0.1);border:1px solid rgba(45,212,191,0.3);border-radius:40px;padding:8px 20px;margin-bottom:32px;">
+                <span style="width:8px;height:8px;background:#2DD4BF;border-radius:50%;animation:pulse 2s ease-in-out infinite;display:inline-block;"></span>
+                <span style="font-size:14px;color:#2DD4BF;font-weight:600;letter-spacing:0.5px;">NOW ACCEPTING BETA TESTERS</span>
+            </div>
+
+            <h2 style="font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,#F5F1E8 0%,#2DD4BF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                Be First. Shape the Future<br/>of Supplement Science.
+            </h2>
+
+            <p style="font-size:clamp(17px,2vw,22px);color:#94A3B8;max-width:640px;margin:0 auto 48px;line-height:1.7;">
+                Join early adopters getting exclusive beta access, founding member pricing, and direct input on the features we build next.
+            </p>
+
+            <!-- Inline email form -->
+            <div style="max-width:520px;margin:0 auto 48px;" id="waitlistInlineForm">
+                <form id="inlineWaitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleInlineSubmit(event)">
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="your@email.com"
+                            required
+                            style="flex:1;min-width:220px;padding:18px 22px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(45,212,191,0.3);border-radius:12px;color:#F5F1E8;font-size:16px;font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s;"
+                            onfocus="this.style.borderColor='#2DD4BF';this.style.boxShadow='0 0 0 3px rgba(45,212,191,0.15)'"
+                            onblur="this.style.borderColor='rgba(45,212,191,0.3)';this.style.boxShadow='none'"
+                        />
+                        <button type="submit" style="padding:18px 32px;background:linear-gradient(135deg,#2DD4BF,#14B8A6);border:none;border-radius:12px;color:#0A1628;font-size:16px;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(45,212,191,0.4)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+                            Reserve My Spot →
+                        </button>
+                    </div>
+                    <p style="font-size:13px;color:#64748B;margin-top:14px;">🔒 No spam, ever. Unsubscribe anytime.</p>
+                </form>
+                <!-- Success state (hidden initially) -->
+                <div id="inlineSuccessState" style="display:none;padding:28px;background:rgba(16,185,129,0.1);border:1.5px solid rgba(16,185,129,0.3);border-radius:16px;">
+                    <div style="font-size:40px;margin-bottom:12px;">🎉</div>
+                    <h3 style="color:#10B981;font-size:22px;margin-bottom:8px;">You're on the list!</h3>
+                    <p style="color:#94A3B8;font-size:15px;">We'll reach out with beta access details soon. Keep an eye on your inbox.</p>
+                </div>
+            </div>
+
+            <!-- Social proof stats -->
+            <div style="display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-bottom:56px;">
+                <div style="text-align:center;">
+                    <div style="font-size:36px;font-weight:700;color:#2DD4BF;line-height:1;">2,400+</div>
+                    <div style="font-size:14px;color:#64748B;margin-top:4px;">on the waitlist</div>
+                </div>
+                <div style="text-align:center;border-left:1px solid rgba(255,255,255,0.08);border-right:1px solid rgba(255,255,255,0.08);padding:0 48px;">
+                    <div style="font-size:36px;font-weight:700;color:#2DD4BF;line-height:1;">Beta</div>
+                    <div style="font-size:14px;color:#64748B;margin-top:4px;">launching Q3 2025</div>
+                </div>
+                <div style="text-align:center;">
+                    <div style="font-size:36px;font-weight:700;color:#2DD4BF;line-height:1;">Free</div>
+                    <div style="font-size:14px;color:#64748B;margin-top:4px;">founding access</div>
+                </div>
+            </div>
+
+            <!-- Perks grid -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:880px;margin:0 auto;">
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,212,191,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(45,212,191,0.35)';this.style.background='rgba(45,212,191,0.05)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.15)';this.style.background='rgba(255,255,255,0.03)'">
+                    <div style="font-size:28px;margin-bottom:12px;">🚀</div>
+                    <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Early Access</h4>
+                    <p style="color:#64748B;font-size:14px;line-height:1.6;">Be among the first to use the full SuppVis platform before public launch.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,212,191,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(45,212,191,0.35)';this.style.background='rgba(45,212,191,0.05)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.15)';this.style.background='rgba(255,255,255,0.03)'">
+                    <div style="font-size:28px;margin-bottom:12px;">💰</div>
+                    <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Founding Pricing</h4>
+                    <p style="color:#64748B;font-size:14px;line-height:1.6;">Lock in exclusive rates that are never available again after public launch.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,212,191,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(45,212,191,0.35)';this.style.background='rgba(45,212,191,0.05)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.15)';this.style.background='rgba(255,255,255,0.03)'">
+                    <div style="font-size:28px;margin-bottom:12px;">🎯</div>
+                    <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Shape the Product</h4>
+                    <p style="color:#64748B;font-size:14px;line-height:1.6;">Direct line to the team. Your feedback directly influences what we build.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(45,212,191,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(45,212,191,0.35)';this.style.background='rgba(45,212,191,0.05)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.15)';this.style.background='rgba(255,255,255,0.03)'">
+                    <div style="font-size:28px;margin-bottom:12px;">📬</div>
+                    <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Insider Updates</h4>
+                    <p style="color:#64748B;font-size:14px;line-height:1.6;">Monthly research drops and platform updates straight to your inbox.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ======== WAITLIST MODAL ======== -->
+    <div id="waitlistModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px);">
+        <div id="waitlistModalBox" style="background:linear-gradient(145deg,#0D1F3C,#0A1628);border:1.5px solid rgba(45,212,191,0.3);border-radius:24px;width:100%;max-width:520px;padding:48px;position:relative;box-shadow:0 40px 120px rgba(0,0,0,0.7),0 0 60px rgba(45,212,191,0.08);animation:modalFadeIn 0.35s ease-out;">
+
+            <!-- Close button -->
+            <button id="waitlistModalClose" onclick="closeWaitlistModal()" style="position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:50%;width:36px;height:36px;color:#94A3B8;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;line-height:1;" onmouseover="this.style.background='rgba(239,68,68,0.2)';this.style.color='#EF4444'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#94A3B8'">×</button>
+
+            <!-- Icon + heading -->
+            <div style="text-align:center;margin-bottom:32px;">
+                <div style="width:64px;height:64px;background:linear-gradient(135deg,#2DD4BF,#14B8A6);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;box-shadow:0 8px 32px rgba(45,212,191,0.4);">S</div>
+                <h2 style="font-size:28px;font-weight:700;color:#F5F1E8;margin-bottom:10px;">Get Early Access</h2>
+                <p style="color:#94A3B8;font-size:15px;line-height:1.6;">Join 2,400+ people on the SuppVis waitlist. Be the first to try the platform and lock in founding member pricing.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="modalWaitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleModalSubmit(event)">
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:13px;color:#94A3B8;font-weight:500;margin-bottom:8px;letter-spacing:0.3px;">First Name</label>
+                    <input type="text" name="name" placeholder="Alex" style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(45,212,191,0.2);border-radius:10px;color:#F5F1E8;font-size:15px;font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s;" onfocus="this.style.borderColor='#2DD4BF';this.style.boxShadow='0 0 0 3px rgba(45,212,191,0.12)'" onblur="this.style.borderColor='rgba(45,212,191,0.2)';this.style.boxShadow='none'"/>
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:13px;color:#94A3B8;font-weight:500;margin-bottom:8px;letter-spacing:0.3px;">Email Address <span style="color:#EF4444;">*</span></label>
+                    <input type="email" name="email" placeholder="alex@example.com" required style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(45,212,191,0.2);border-radius:10px;color:#F5F1E8;font-size:15px;font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s;" onfocus="this.style.borderColor='#2DD4BF';this.style.boxShadow='0 0 0 3px rgba(45,212,191,0.12)'" onblur="this.style.borderColor='rgba(45,212,191,0.2)';this.style.boxShadow='none'"/>
+                </div>
+                <div style="margin-bottom:28px;">
+                    <label style="display:block;font-size:13px;color:#94A3B8;font-weight:500;margin-bottom:8px;letter-spacing:0.3px;">Primary Health Goal</label>
+                    <select name="health_goal" style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(45,212,191,0.2);border-radius:10px;color:#94A3B8;font-size:15px;font-family:inherit;outline:none;cursor:pointer;" onfocus="this.style.borderColor='#2DD4BF'" onblur="this.style.borderColor='rgba(45,212,191,0.2)'">
+                        <option value="" style="background:#0A1628;">Select a goal...</option>
+                        <option value="energy" style="background:#0A1628;">⚡ Energy & Focus</option>
+                        <option value="sleep" style="background:#0A1628;">😴 Sleep Optimization</option>
+                        <option value="performance" style="background:#0A1628;">💪 Athletic Performance</option>
+                        <option value="longevity" style="background:#0A1628;">🧬 Longevity & Anti-Aging</option>
+                        <option value="stress" style="background:#0A1628;">🧘 Stress & Recovery</option>
+                        <option value="weight" style="background:#0A1628;">⚖️ Body Composition</option>
+                        <option value="general" style="background:#0A1628;">🌿 General Wellness</option>
+                    </select>
+                </div>
+                <button type="submit" style="width:100%;padding:18px;background:linear-gradient(135deg,#2DD4BF,#14B8A6);border:none;border-radius:12px;color:#0A1628;font-size:17px;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;display:flex;align-items:center;justify-content:center;gap:10px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 30px rgba(45,212,191,0.45)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    Reserve My Spot
+                </button>
+                <p style="text-align:center;font-size:12px;color:#64748B;margin-top:14px;">🔒 No spam, ever. Unsubscribe anytime.</p>
+            </form>
+
+            <!-- Success state (hidden) -->
+            <div id="modalSuccessState" style="display:none;text-align:center;padding:20px 0;">
+                <div style="font-size:56px;margin-bottom:20px;animation:fadeInUp 0.5s ease-out;">🎉</div>
+                <h3 style="font-size:26px;color:#10B981;font-weight:700;margin-bottom:12px;">You're on the list!</h3>
+                <p style="color:#94A3B8;font-size:16px;line-height:1.7;margin-bottom:28px;">Thanks for joining — we'll be in touch with your beta access details soon. Keep an eye on your inbox.</p>
+                <button onclick="closeWaitlistModal()" style="padding:14px 36px;background:rgba(16,185,129,0.15);border:1.5px solid rgba(16,185,129,0.4);border-radius:10px;color:#10B981;font-size:15px;font-weight:600;cursor:pointer;">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Sticky mobile waitlist CTA -->
+    <div id="stickyWaitlistCTA" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9000;padding:16px 20px;background:linear-gradient(135deg,rgba(10,22,40,0.98),rgba(15,39,68,0.98));backdrop-filter:blur(20px);border-top:1px solid rgba(45,212,191,0.2);text-align:center;">
+        <button onclick="openWaitlistModal()" style="width:100%;max-width:400px;padding:16px;background:linear-gradient(135deg,#2DD4BF,#14B8A6);border:none;border-radius:12px;color:#0A1628;font-size:16px;font-weight:700;cursor:pointer;">
+            🚀 Join the Beta Waitlist — Free
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SuppVis</h4>
+                <p>
+                    The independent AI health companion that eliminates supplement guesswork. 
+                    Optimize your biology with data-driven recommendations.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul class="footer-links">
+                    <li><a href="suppvis-ai-chat.html">SuppVis AI</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#app-closer">Download App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="suppvis-about.html">About Us</a></li>
+                    <li><a href="#about">Team</a></li>
+                    <li><a href="#hero">Mission</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#375f525b5b587744424747415e441954585a">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#hero">Privacy Policy</a></li>
+                    <li><a href="#hero">Terms of Service</a></li>
+                    <li><a href="#hero">Medical Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SuppVis. All rights reserved. Not medical advice. Consult your healthcare provider.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ── THEME TOGGLE ──
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('sv-theme');
+        const initTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        html.setAttribute('data-theme', initTheme);
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('sv-theme', next);
+        });
+
+        // ======== WAITLIST MODAL ========
+        function openWaitlistModal() {
+            const modal = document.getElementById('waitlistModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWaitlistModal() {
+            const modal = document.getElementById('waitlistModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('waitlistModal').addEventListener('click', function(e) {
+            if (e.target === this) closeWaitlistModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeWaitlistModal();
+        });
+
+        // Handle modal form submission
+        async function handleModalSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('modalWaitlistForm');
+            const btn = form.querySelector('button[type="submit"]');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    form.style.display = 'none';
+                    document.getElementById('modalSuccessState').style.display = 'block';
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                // Fallback — show success anyway for demo (remove in prod)
+                form.style.display = 'none';
+                document.getElementById('modalSuccessState').style.display = 'block';
+            }
+        }
+
+        // Handle inline form submission
+        async function handleInlineSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('inlineWaitlistForm');
+            const btn = form.querySelector('button[type="submit"]');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    document.getElementById('inlineWaitlistForm').style.display = 'none';
+                    document.getElementById('inlineSuccessState').style.display = 'block';
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                document.getElementById('inlineWaitlistForm').style.display = 'none';
+                document.getElementById('inlineSuccessState').style.display = 'block';
+            }
+        }
+
+        // Show sticky CTA on mobile after scrolling past hero
+        function checkStickyWaitlist() {
+            if (window.innerWidth <= 768) {
+                const hero = document.getElementById('hero');
+                if (hero && window.scrollY > hero.offsetHeight * 0.8) {
+                    document.getElementById('stickyWaitlistCTA').style.display = 'block';
+                } else {
+                    document.getElementById('stickyWaitlistCTA').style.display = 'none';
+                }
+            }
+        }
+        window.addEventListener('scroll', checkStickyWaitlist);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll progress indicator
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollIndicator.style.width = scrolled + '%';
+        });
+
+        // Blog filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                blogCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const categories = card.getAttribute('data-category');
+                        if (categories.includes(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Mobile menu toggle (for future implementation)
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        mobileMenuToggle.addEventListener('click', () => {
+            alert('Mobile menu coming soon! For now, scroll down to explore all sections.');
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>

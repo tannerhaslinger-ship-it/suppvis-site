@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuppVis — Join the Waitlist</title>
+    <meta name="description" content="Join the pioneers who refuse to guess with their health. Secure your founding spot before SuppVis launches.">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Brand colours — unchanged by theme */
+            --teal:    #2DD4BF;
+            --teal2:   #14B8A6;
+            --red:     #EF4444;
+            --green:   #10B981;
+            --on-teal: #0A1628; /* text placed ON a teal surface */
+
+            /* Dark theme defaults */
+            --bg-primary:           #0A1628;
+            --bg-secondary:         #0D1F38;
+            --text-primary:         #F5F1E8;
+            --text-slate:           #94A3B8;
+            --text-muted:           #64748B;
+            --header-bg:            rgba(10,22,40,0.9);
+            --header-bg-scrolled:   rgba(10,22,40,0.97);
+            --header-shadow:        0 4px 20px rgba(0,0,0,0.3);
+            --card-bg:              rgba(255,255,255,0.03);
+            --card-border:          rgba(255,255,255,0.07);
+            --input-bg:             rgba(255,255,255,0.05);
+            --input-focus-bg:       rgba(255,255,255,0.08);
+            --placeholder-color:    #3D5068;
+            --grid-line:            rgba(45,212,191,0.035);
+            --ticker-bg:            rgba(45,212,191,0.02);
+            --ticker-border:        rgba(45,212,191,0.08);
+            --progress-track-bg:    rgba(255,255,255,0.06);
+            --select-option-bg:     #0D1F38;
+            --orb-opacity:          1;
+        }
+
+        [data-theme="light"] {
+            --bg-primary:           #EEF2F7;
+            --bg-secondary:         #DBEAFE;
+            --text-primary:         #0F172A;
+            --text-slate:           #475569;
+            --text-muted:           #64748B;
+            --header-bg:            rgba(238,242,247,0.92);
+            --header-bg-scrolled:   rgba(238,242,247,0.98);
+            --header-shadow:        0 4px 20px rgba(0,0,0,0.1);
+            --card-bg:              rgba(255,255,255,0.7);
+            --card-border:          rgba(0,0,0,0.08);
+            --input-bg:             rgba(255,255,255,0.8);
+            --input-focus-bg:       rgba(255,255,255,0.95);
+            --placeholder-color:    #94A3B8;
+            --grid-line:            rgba(20,184,166,0.06);
+            --ticker-bg:            rgba(20,184,166,0.04);
+            --ticker-border:        rgba(20,184,166,0.15);
+            --progress-track-bg:    rgba(0,0,0,0.08);
+            --select-option-bg:     #EEF2F7;
+            --orb-opacity:          0.5;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.35s, color 0.35s;
+        }
+
+        /* ── BACKGROUND ── */
+        .grid-bg {
+            position: fixed; inset: 0; z-index: 0;
+            background-image:
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 100%);
+            transition: background-image 0.35s;
+        }
+        .glow-orb {
+            position: fixed; z-index: 0; border-radius: 50%;
+            filter: blur(90px); pointer-events: none;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.35s;
+        }
+        .glow-orb.one {
+            width: 700px; height: 500px;
+            background: radial-gradient(circle, rgba(45,212,191,0.1), transparent 70%);
+            top: -180px; left: 50%; transform: translateX(-50%);
+        }
+        .glow-orb.two {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(20,184,166,0.07), transparent 70%);
+            bottom: 10%; right: -80px;
+        }
+        .floating-pills { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+        .pill {
+            position: absolute; border-radius: 30px;
+            background: linear-gradient(135deg, rgba(45,212,191,0.06), rgba(20,184,166,0.06));
+            border: 1px solid rgba(45,212,191,0.1);
+            animation: floatPill 10s ease-in-out infinite; opacity: 0.35;
+        }
+        @keyframes floatPill {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-18px) rotate(4deg); }
+            66% { transform: translateY(-8px) rotate(-4deg); }
+        }
+        .pill:nth-child(1) { width:70px;height:35px; top:12%;left:6%; animation-delay:0s; }
+        .pill:nth-child(2) { width:50px;height:25px; top:25%;right:8%; animation-delay:2s; }
+        .pill:nth-child(3) { width:90px;height:45px; top:60%;left:4%; animation-delay:4s; }
+        .pill:nth-child(4) { width:60px;height:30px; bottom:20%;right:5%; animation-delay:1.5s; }
+        .pill:nth-child(5) { width:40px;height:20px; top:80%;left:50%; animation-delay:3s; }
+
+        /* ── HEADER ── */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 20px 48px;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45,212,191,0.1);
+            transition: all 0.3s;
+        }
+        header.scrolled {
+            padding: 12px 48px;
+            background: var(--header-bg-scrolled);
+            box-shadow: var(--header-shadow);
+        }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex; align-items: center; gap: 12px;
+            font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700;
+            color: var(--text-primary); text-decoration: none; transition: transform 0.3s, color 0.35s;
+        }
+        .logo:hover { transform: scale(1.05); }
+        .logo-icon {
+            --logo-detail: #0A1628;
+            width: 40px; height: 40px; flex-shrink: 0;
+        }
+        [data-theme="light"] .logo-icon { --logo-detail: #EEF2F7; }
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--text-slate); text-decoration: none; font-size: 16px;
+            font-weight: 500; transition: color 0.3s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--teal); transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--teal); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--teal); }
+        .nav-links a.active::after { width: 100%; }
+        .nav-cta {
+            background: linear-gradient(135deg, var(--teal), var(--teal2));
+            color: var(--on-teal); padding: 12px 28px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex; align-items: center; gap: 8px;
+            border: none; cursor: pointer; font-family: inherit;
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(45,212,191,0.4); }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--teal); font-size: 28px; cursor: pointer; padding: 8px; }
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: var(--text-slate);
+            transition: color 0.3s, border-color 0.3s, background 0.35s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover { color: var(--teal); border-color: rgba(45,212,191,0.35); }
+        .theme-toggle svg { width: 17px; height: 17px; transition: transform 0.4s; }
+        .theme-toggle:hover svg { transform: rotate(20deg); }
+        .theme-toggle .icon-sun  { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+        /* ── LIGHT MODE: text readability ── */
+        [data-theme="light"] .headline .line-teal {
+            background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        main {
+            position: relative; z-index: 10;
+            max-width: 720px; margin: 0 auto;
+            padding: 130px 24px 80px;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center;
+        }
+
+        /* ── IDENTITY PILL ── */
+        .identity-pill {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(45,212,191,0.07);
+            border: 1px solid rgba(45,212,191,0.2);
+            border-radius: 40px; padding: 8px 20px;
+            font-family: 'DM Mono', monospace; font-size: 12px;
+            color: var(--teal); letter-spacing: 0.5px; text-transform: uppercase;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.6s ease-out both;
+        }
+        .identity-pill-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--teal); box-shadow: 0 0 8px var(--teal);
+            animation: pillPulse 2s ease-in-out infinite;
+        }
+        @keyframes pillPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+        /* ── HEADLINE ── */
+        .headline {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(42px, 7vw, 76px);
+            font-weight: 800; line-height: 1.0;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+            animation: fadeInDown 0.7s ease-out 0.1s both;
+        }
+        .headline .line-teal {
+            background: linear-gradient(135deg, var(--teal) 0%, #5EEAD4 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            display: block;
+        }
+
+        /* ── PIONEER TAGLINE ── */
+        .pioneer-tagline {
+            font-size: 18px; color: var(--text-slate); font-style: italic;
+            margin-bottom: 28px; line-height: 1.6;
+            animation: fadeInDown 0.7s ease-out 0.17s both;
+            transition: color 0.35s;
+        }
+        .pioneer-tagline em { color: var(--teal); font-style: normal; font-weight: 600; }
+
+        /* ── SUBHEADLINE ── */
+        .subheadline {
+            font-size: clamp(16px, 2vw, 18px); color: var(--text-slate);
+            max-width: 600px; line-height: 1.8; margin-bottom: 20px;
+            animation: fadeInDown 0.7s ease-out 0.22s both;
+            transition: color 0.35s;
+        }
+
+        /* ── FOUNDER NOTE ── */
+        .founder-note {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px; padding: 14px 20px;
+            margin-bottom: 52px; text-align: left; max-width: 560px;
+            animation: fadeInDown 0.7s ease-out 0.28s both;
+            transition: background 0.35s, border-color 0.35s;
+        }
+        .founder-avatar {
+            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--teal), var(--teal2));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: var(--on-teal);
+        }
+        .founder-quote { font-size: 13px; color: var(--text-slate); line-height: 1.6; transition: color 0.35s; }
+        .founder-quote strong { color: var(--text-primary); font-weight: 500; transition: color 0.35s; }
+        .founder-quote span { display: block; margin-top: 4px; font-size: 11px; color: var(--text-muted); font-family: 'DM Mono', monospace; letter-spacing: 0.3px; transition: color 0.35s; }
+
+        /* ── COUNTDOWN ── */
+        .countdown-wrapper {
+            width: 100%; margin-bottom: 44px;
+            animation: fadeInUp 0.7s ease-out 0.3s both;
+        }
+        .countdown-label {
+            font-family: 'DM Mono', monospace; font-size: 11px;
+            color: var(--teal); letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 18px; opacity: 0.7;
+        }
+        .countdown { display: flex; justify-content: center; gap: 12px; flex-wrap: nowrap; }
+        .countdown-unit {
+            display: flex; flex-direction: column; align-items: center;
+            background: var(--card-bg);
+            border: 1px solid rgba(45,212,191,0.15);
+            border-radius: 14px; padding: 16px 20px; min-width: 80px;
+            position: relative; overflow: hidden; transition: border-color 0.3s, background 0.35s;
+        }
+        .countdown-unit::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45,212,191,0.45), transparent);
+        }
+        .countdown-unit:hover { border-color: rgba(45,212,191,0.35); }
+        .countdown-number {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1;
+            background: linear-gradient(180deg, var(--text-primary) 0%, var(--teal) 140%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .countdown-number.flip { animation: numFlip 0.2s ease; }
+        @keyframes numFlip { 0%{transform:translateY(-5px);opacity:0.5} 100%{transform:translateY(0);opacity:1} }
+        .countdown-sep {
+            font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 700;
+            color: rgba(45,212,191,0.25); align-self: center; margin-top: -6px;
+            animation: sepBlink 1s ease-in-out infinite;
+        }
+        @keyframes sepBlink { 0%,100%{opacity:0.25} 50%{opacity:0.8} }
+        .countdown-sublabel {
+            font-family: 'DM Mono', monospace; font-size: 9px;
+            color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 8px;
+            transition: color 0.35s;
+        }
+
+        /* ── SPOTS PROGRESS ── */
+        .spots-wrapper {
+            width: 100%; max-width: 500px; margin-bottom: 44px;
+            animation: fadeInUp 0.7s ease-out 0.38s both;
+        }
+        .spots-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .spots-label { font-size: 13px; color: var(--text-slate); transition: color 0.35s; }
+        .spots-count { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--teal); }
+        .progress-track { width: 100%; height: 6px; background: var(--progress-track-bg); border-radius: 6px; overflow: hidden; transition: background 0.35s; }
+        .progress-fill {
+            height: 100%; border-radius: 6px;
+            background: linear-gradient(90deg, var(--teal2), var(--teal));
+            box-shadow: 0 0 10px rgba(45,212,191,0.45);
+            transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .spots-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 10px;
+        }
+        .spots-remaining { font-size: 12px; color: #FCA5A5; font-weight: 600; }
+        .spots-remaining span { color: var(--red); }
+        .price-lock-hint {
+            font-family: 'DM Mono', monospace; font-size: 11px;
+            color: var(--text-muted); display: flex; align-items: center; gap: 5px;
+            transition: color 0.35s;
+        }
+        .price-lock-hint::before { content: '🔒'; font-size: 10px; }
+
+        /* ── FORM ── */
+        .form-wrapper {
+            width: 100%; max-width: 500px; margin-bottom: 52px;
+            animation: fadeInUp 0.7s ease-out 0.45s both;
+        }
+        .form-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+        .form-input {
+            width: 100%; padding: 15px 20px;
+            background: var(--input-bg);
+            border: 1.5px solid rgba(45,212,191,0.18);
+            border-radius: 12px; color: var(--text-primary);
+            font-size: 16px; font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            outline: none; border-color: var(--teal);
+            background: var(--input-focus-bg);
+            box-shadow: 0 0 0 3px rgba(45,212,191,0.1);
+        }
+        .form-input::placeholder { color: var(--placeholder-color); }
+        select.form-input option { background: var(--select-option-bg); color: var(--text-primary); }
+
+        .submit-btn {
+            width: 100%; padding: 18px;
+            background: linear-gradient(135deg, var(--teal), var(--teal2));
+            border: none; border-radius: 12px;
+            color: var(--on-teal); font-family: 'Syne', sans-serif;
+            font-size: 18px; font-weight: 800; cursor: pointer;
+            transition: all 0.25s; letter-spacing: 0.2px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            position: relative; overflow: hidden;
+        }
+        .submit-btn::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(45,212,191,0.5); }
+        .submit-btn:hover::after { opacity: 1; }
+        .submit-btn:active { transform: translateY(0); }
+
+        .try-free-link {
+            display: block; margin-top: 16px;
+            font-size: 13px; color: var(--text-muted); text-align: center;
+            transition: color 0.35s;
+        }
+        .try-free-link a {
+            color: var(--teal); text-decoration: none; font-weight: 500;
+            border-bottom: 1px solid rgba(45,212,191,0.3); padding-bottom: 1px;
+            transition: border-color 0.2s;
+        }
+        .try-free-link a:hover { border-color: var(--teal); }
+
+        /* ── SUCCESS STATE ── */
+        .success-state {
+            display: none; flex-direction: column; align-items: center; gap: 14px;
+            padding: 36px 32px;
+            background: rgba(16,185,129,0.06);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 18px; width: 100%; max-width: 500px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        .success-state.visible { display: flex; }
+        .success-icon {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: rgba(16,185,129,0.12); border: 1.5px solid var(--green);
+            display: flex; align-items: center; justify-content: center; font-size: 26px;
+        }
+        .success-state h3 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); transition: color 0.35s; }
+        .success-state p { font-size: 15px; color: var(--text-slate); line-height: 1.65; max-width: 340px; text-align: center; transition: color 0.35s; }
+        .success-number {
+            font-family: 'DM Mono', monospace; font-size: 13px;
+            color: var(--green); background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.2); border-radius: 6px; padding: 6px 16px;
+        }
+        .form-disclaimer { font-size: 12px; color: var(--placeholder-color); margin-top: 14px; line-height: 1.5; text-align: center; transition: color 0.35s; }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45,212,191,0.12), transparent);
+            margin: 12px 0 44px;
+        }
+
+        /* ── OUTCOME TRUST ── */
+        .trust-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 14px; width: 100%; max-width: 500px; margin-bottom: 44px;
+            animation: fadeInUp 0.7s ease-out 0.5s both;
+        }
+        .trust-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px; padding: 18px 20px; text-align: left;
+            transition: border-color 0.3s, background 0.35s;
+        }
+        .trust-card:hover { border-color: rgba(45,212,191,0.2); }
+        .trust-card-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+        .trust-card-value {
+            font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 4px; transition: color 0.35s;
+        }
+        .trust-card-label { font-size: 13px; color: var(--text-muted); line-height: 1.5; transition: color 0.35s; }
+
+        /* ── FEATURE PILLS ── */
+        .feature-pills {
+            display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+            margin-bottom: 44px;
+            animation: fadeInUp 0.7s ease-out 0.55s both;
+        }
+        .feature-pill {
+            display: flex; align-items: center; gap: 7px;
+            padding: 7px 14px;
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 30px; font-size: 13px; color: var(--text-slate);
+            transition: background 0.35s, border-color 0.35s, color 0.35s;
+        }
+        .feature-pill span { color: var(--teal); font-size: 12px; }
+
+        /* ── TICKER ── */
+        .ticker-wrapper {
+            width: 100vw; margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            border-top: 1px solid var(--ticker-border);
+            border-bottom: 1px solid var(--ticker-border);
+            padding: 12px 0;
+            background: var(--ticker-bg);
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out 0.6s both;
+            transition: background 0.35s, border-color 0.35s;
+        }
+        .ticker-track {
+            display: flex; gap: 56px; white-space: nowrap;
+            animation: ticker 32s linear infinite; width: max-content;
+        }
+        @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        .ticker-item {
+            font-family: 'DM Mono', monospace; font-size: 11px;
+            color: var(--text-muted); letter-spacing: 0.3px;
+            display: flex; align-items: center; gap: 10px;
+            transition: color 0.35s;
+        }
+        .ticker-item::before { content: '◆'; color: rgba(45,212,191,0.3); font-size: 7px; }
+
+        .back-link {
+            font-size: 13px; color: var(--text-muted); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--teal); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInUp   { from{opacity:0;transform:translateY(22px)}  to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeIn     { from{opacity:0} to{opacity:1} }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            header { padding: 14px 20px; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            main { padding: 100px 16px 60px; }
+            .countdown-unit { min-width: 72px; padding: 14px 16px; }
+            .countdown-sep { font-size: 28px; }
+            .countdown { gap: 8px; }
+            .trust-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .founder-note { flex-direction: column; text-align: center; }
+            .spots-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="glow-orb one"></div>
+    <div class="glow-orb two"></div>
+    <div class="floating-pills">
+        <div class="pill"></div><div class="pill"></div><div class="pill"></div>
+        <div class="pill"></div><div class="pill"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 2048 1963" xmlns="http://www.w3.org/2000/svg"><path transform="translate(778,178)" d="m0 0h41l33 2 29 3 39 7 36 8 26 8 25 9 18 8 5 1 29-12 25-9 28-8 39-8 38-6 36-3h42l34 2 37 5 31 6 26 7 36 12 31 13 25 12 23 12 19 12 36 25 11 9 14 12 12 11 8 7 16 16 9 11 12 14 11 13 12 17 15 24 13 22 8 15 12 27 10 27 9 27 8 29 6 24 18 13 14 11 11 9 15 14 10 10 7 8 15 15 11 14 14 18 16 23 12 20 13 24 15 33 11 28 7 19 7 26 5 25 3 20 3 38v68l-2 27-4 30-7 37-9 31-12 32-12 27-10 19-7 13-10 16-12 17-10 13-13 16-9 10-22 22-8 7-7 7-11 9-19 14-12 8-14 9-10 40-9 29-10 28-11 27-15 33-8 16-12 19-10 15-10 13-11 13-12 14-14 15-7 7-8 7-7 7-11 9-14 12-18 13-15 10-17 12-16 9-15 8-23 11-32 14-18 7-30 9-27 7-36 7-36 4-30 2h-32l-40-3-35-5-38-8-26-7-26-9-23-10-4-2h-6l-23 10-30 10-33 9-35 7-29 4-29 3-16 1h-30l-41-3-30-4-36-7-28-7-33-11-30-13-25-12-22-11-19-12-16-11-20-14-14-11-11-9-15-13-7-7-6-5v-2h-2l-7-8-9-9-9-11-11-13-15-20-13-21-12-20-9-17-10-23-12-31-13-36-8-28-6-27-5-5-35-24-11-9-14-12-10-10-8-7-10-9-9-10-13-17-12-15-17-26-12-21-13-27-11-25-10-28-7-25-6-27-6-35-3-30-1-19v-22l2-35 4-38 5-26 7-30 9-29 8-22 18-39 12-22 10-17 10-15 16-21 12-16 9-10 31-31 8-7 13-11 19-13 15-11 3-2 5-24 7-26 11-32 13-34 14-34 8-17 13-21 10-16 16-21 8-10 12-14 16-17 9-9 8-7 7-7 11-9 15-12 18-13 27-18 17-10 28-14 27-12 24-9 25-8 36-9 48-8zm250 129-10 7-18 12-23 16-13 11-10 9-11 9-11 10-11 9-8 8-8 7-13 12-11 9-16 13-15 12-16 11-20 13-24 14-21 12-15 8-28 12-20 8-42 15-43 14-102 28-37 11-36 12-28 10-21 9-17 9 2 35 4 33 8 45 9 39 16 59 7 30 6 37 2 18 2 35v51l-2 30-4 33-7 36-8 32-15 55-8 34-7 41-3 27-1 14v19l10 6 21 10 30 11 36 12 40 12 70 19 31 9 43 14 41 16 24 10 28 13 19 10 28 17 18 11 14 10 15 11 14 11 17 14 15 13 12 11 10 10 8 7 16 15 8 7 15 14 11 9 21 16 17 12 12 9 4 1 11-8 12-8 18-13 19-14 13-12 8-7 13-12 8-7 10-9 18-18 8-7 13-11 14-11 14-12 15-11 15-10 19-12 26-15 18-10 22-10 36-15 37-14 29-10 25-8 67-19 62-18 43-14 33-13 19-9 6-4v-17l-2-29-5-35-8-42-16-58-8-31-6-27-4-26-3-27-2-33v-34l2-37 3-28 7-42 6-27 18-69 8-36 7-43 4-37 1-12v-11l-5-4-16-8-21-9-23-8-36-12-33-10-82-22-35-10-40-13-41-15-37-15-23-11-22-12-26-15-25-16-26-20-16-13-11-9-24-22-8-8-11-9-16-15-14-12-9-8-18-13-19-13-13-9z" fill="currentColor"/><path transform="translate(1008,615)" d="m0 0h33l25 2 25 4 25 7 21 8 23 12 20 12 14 11 18 18 18 22 10 18 10 25 5 19 2 11v5l-25 5-66 11h-3l-9-26-8-16-7-10-8-10-8-7-12-9-16-9-15-6-23-5-20-2h-23l-24 3-23 6-19 9-13 9-10 9-8 9-8 14-5 12-3 14-1 9v9l3 17 5 13 7 13 9 10 10 9 13 8 16 8 24 9 36 12 29 9 53 15 36 12 20 8 21 10 16 10 19 14 11 9 8 8 10 13 12 19 10 21 6 19 4 22 2 23v14l-2 19-6 29-7 21-12 25-9 14-10 13-9 10-11 11-13 10-17 12-17 9-29 12-24 7-31 6-27 3-31 1-27-2-30-4-34-8-26-9-21-10-19-12-21-16-13-11-11-12-10-14-10-15-9-16-8-17-7-21-6-25-1-12 80-16 19-3 7 28 7 19 9 17 12 16 9 10 10 10 13 9 17 9 22 8 27 6 23 2h16l25-3 22-5 15-5 17-8 12-8 10-9 8-10 8-13 5-10 4-13 2-11v-30l-4-18-8-16-9-12-13-13-15-10-25-12-36-12-56-16-52-15-35-12-18-8-16-8-17-11-16-12-13-11-9-10-9-13-9-16-7-18-5-18-3-20-1-16v-14l2-25 5-25 7-21 9-20 12-18 12-14 16-16 13-10 15-10 22-12 16-7 21-7 27-6 22-3z" fill="currentColor"/><g fill="var(--logo-detail)"><path transform="translate(198,850)" d="m0 0 9 2 27 8 74 23 41 12 5 2 2 6 4 25 2 20v14h-27l-96-3-21-1-41-1-3-2 3-28 6-29 7-25z"/><path transform="translate(1850,1016)" d="m0 0h35l1 1v10l-3 31-6 31-8 30-3 7-10-2-48-15-71-20-30-8-3-9-3-26-1-11v-13l11-1 79-3z"/><path transform="translate(174,1018)" d="m0 0h30l109 3 49 2 1 4-3 32-3 19-2 5-25 6-63 14-64 16-10 2-6-18-6-25-5-30-2-18z"/><path transform="translate(1859,850)" d="m0 0 3 3 10 30 7 28 5 29 1 13-3 1-107 4-44 2h-30v-11l3-30 4-22 10-4 41-12 48-15 42-13z"/><path transform="translate(597,301)" d="m0 0 4 2 15 28 10 19 9 19 10 19 11 22 12 22 13 27-1 4-15 6-36 12-14 5-4-1-12-17-26-39-10-14-23-34-14-21-4-7 14-12 13-10 12-8 19-12z"/><path transform="translate(1443,1493)" d="m0 0 5 5 10 13 13 18 14 21 13 18 12 17 26 38-1 4-11 10-16 12-26 17-16 10-5 2-9-15-14-25-8-16-15-28-12-21-17-32-10-20 1-4 20-8z"/><path transform="translate(1455,300)" d="m0 0 4 1 22 13 27 18 14 10 12 10-2 4-14 21-12 17-12 16-8 12-10 14-14 22-20 26-5-1-31-10-27-10-5-3 10-23 20-39 18-34 8-17 10-19 9-17z"/><path transform="translate(612,1492)" d="m0 0 11 3 36 12 20 8 1 3-11 23-16 30-12 22-18 35-8 16-14 24-5 9-4-1-26-16-15-11-11-8-11-9-8-8 2-4 8-11 13-19 12-17 8-11 12-17 23-34 10-15z"/><path transform="translate(1315,1547)" d="m0 0h2l11 19 15 29 13 23 12 23 12 21 10 20 12 22v3l-34 11-38 9-12 2-9-17-13-28-14-31-12-26-15-31-3-8 8-7 18-13 22-13z"/><path transform="translate(1316,253)" d="m0 0 9 1 25 5 31 9 16 6-2 5-12 23-8 17-12 22-17 33-11 22-7 16-10 19-3 3-25-14-19-12-12-9-6-5 1-7 12-28 12-24 24-54 13-27z"/><path transform="translate(732,254)" d="m0 0h5l5 8 20 40 11 25 19 42 11 24-1 3-19 14-17 11-14 8-12 6-8-13-11-22-11-23-15-28-37-74 5-3 35-11 28-6z"/><path transform="translate(738,1546)" d="m0 0 5 1 19 10 15 10 12 9 11 9-9 20-11 24-12 26-14 32-8 16-9 20-2 5-10-1-28-7-42-14 1-5 10-19 12-23 10-19 13-25 13-23 15-30z"/><path transform="translate(1582,399)" d="m0 0 5 5 10 11 9 11 10 13 13 22 12 22 8 15 11 26 7 21 1 7-9-2-41-15-30-10-71-19-8-3 2-5 12-17 13-19 11-15 13-18 14-19z"/><path transform="translate(475,400)" d="m0 0 5 5 13 18 11 16 16 23 24 34 5 9-16 5-43 11-36 11-35 12-25 10h-2l2-10 7-21 11-26 14-27 14-24 9-14 8-11 11-13z"/><path transform="translate(393,1425)" d="m0 0 33 11 20 7 28 9 32 9 28 7 13 4-2 5-10 15-12 17-10 14-7 10-12 17-14 19-5 8-4-2-11-13-12-16-10-16-12-21-12-22-13-31-7-23z"/><path transform="translate(1661,1426)" d="m0 0h3l-3 11-9 27-13 30-16 31-10 18-10 13-11 13-8 8-4-4-11-16-12-17-14-19-9-13-13-18-10-16v-2l19-6 41-11 42-13 36-12z"/><path transform="translate(336,1151)" d="m0 0h2l-1 9-13 53-7 33-5 36-2 16-4-2-10-9-8-7-20-20-13-17-10-14-10-15-10-17-8-16v-3l27-6 56-13z"/><path transform="translate(1723,1150)" d="m0 0 8 1 36 10 64 18 11 4-1 5-12 22-8 12-20 28-9 11-16 16-8 7-8 8-8 7h-2l-3-27-5-33-10-47-9-41z"/><path transform="translate(850,1629)" d="m0 0 4 2 11 9 10 9 11 9 7 7 8 7 11 10 14 11 18 14 7 5v2l-15 5-28 7-36 6-24 3-21 1h-22l-4-2 13-28 15-33 16-34z"/><path transform="translate(308,684)" d="m0 0 2 4 6 39 8 43 13 55-1 2-11-3-48-15-45-13-9-3 1-4 9-17 8-11 8-12 12-17 14-17 15-15 11-9z"/><path transform="translate(1751,684)" d="m0 0 5 3v2l4 2 9 9 3 2v2l4 2 15 16 13 17 12 18 14 24 5 10v2l-26 8-45 13-37 11h-2l5-26 9-40 8-47 3-26z"/><path transform="translate(1201,1631)" d="m0 0 3 2 8 18 14 28 12 26 12 28v3h-23l-35-2-26-3-29-6-27-9-4-2v-2l13-9 10-8 16-13 12-11 8-8 8-7 14-12 13-12z"/><path transform="translate(806,248)" d="m0 0h29l33 4 31 6 31 8 21 7-4 4-10 7-17 13-11 10-11 9-10 9-11 9-15 14-7 5-3-4-13-28-9-19-15-33z"/><path transform="translate(1245,247)" d="m0 0h2l-1 5-12 27-11 24-12 26-9 21h-4l-11-11-11-9-12-11-8-7-11-10-14-11-19-14-6-4 2-2 24-7 28-7 35-6 29-3z"/></g></svg>
+                <span>SuppVis</span>
+            </a>
+            <ul class="nav-links">
+            <li><a href="suppvis-about.html">About</a></li>
+            <li><a href="suppvis-ai-chat.html">SuppVis AI</a></li>
+            <li><a href="suppvis-shop.html">Shop</a></li>
+            <li><a href="suppvis-blog.html">Blog</a></li>
+            <li><a href="suppvis-waitlist.html">Waitlist</a></li>
+            </ul>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+                    <!-- Moon (shown in dark mode) -->
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <!-- Sun (shown in light mode) -->
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </button>
+                <a href="#waitlist-form" class="nav-cta">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    Join the Waitlist
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Identity Pill -->
+        <div class="identity-pill">
+            <span class="identity-pill-dot"></span>
+            Join the pioneers of SuppVis
+        </div>
+
+        <!-- Headline -->
+        <h1 class="headline">
+            Stop Guessing.<br>
+            <span class="line-teal">Start Knowing.</span>
+        </h1>
+
+        <!-- Pioneer Tagline -->
+        <p class="pioneer-tagline">
+            Join the pioneers <em>dedicated to maximizing their health</em> — not just hoping their supplements work.
+        </p>
+
+        <!-- Subheadline -->
+        <p class="subheadline">
+            Most people are spending hundreds of dollars a year on supplements with no idea if they're working, clashing, or even being absorbed. SuppVis fixes that — with AI-powered, evidence-backed guidance built around you.
+        </p>
+
+        <!-- Countdown -->
+        <div class="countdown-wrapper">
+            <p class="countdown-label">⏱ Beta Launch Countdown</p>
+            <div class="countdown">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-days">--</div>
+                    <div class="countdown-sublabel">Days</div>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-hours">--</div>
+                    <div class="countdown-sublabel">Hours</div>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-mins">--</div>
+                    <div class="countdown-sublabel">Minutes</div>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-secs">--</div>
+                    <div class="countdown-sublabel">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spots Progress -->
+        <div class="spots-wrapper">
+            <div class="spots-header">
+                <span class="spots-label">Founding Member Spots</span>
+                <span class="spots-count" id="spots-text">Loading...</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+            <div class="spots-footer">
+                <p class="spots-remaining" id="spots-remaining"></p>
+                <p class="price-lock-hint">$10/mo founding rate — locked in for life</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-wrapper" id="waitlist-form">
+            <form id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-row">
+                    <input type="text" name="name" class="form-input" placeholder="Your full name" required autocomplete="name"/>
+                    <input type="email" name="email" class="form-input" placeholder="Your email address" required autocomplete="email"/>
+                    <select name="goal" class="form-input">
+                        <option value="" disabled selected>Primary health goal (optional)</option>
+                        <option value="energy">⚡ Energy & Performance</option>
+                        <option value="sleep">😴 Sleep Optimization</option>
+                        <option value="focus">🧠 Focus & Cognition</option>
+                        <option value="longevity">🔬 Longevity & Anti-Aging</option>
+                        <option value="fat-loss">🏃 Fat Loss & Body Composition</option>
+                        <option value="stress">🧘 Stress & Recovery</option>
+                        <option value="immune">🛡️ Immune Health</option>
+                        <option value="general">✅ General Wellness</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    I'm In — Lock My Spot
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/></svg>
+                </button>
+            </form>
+
+            <div class="success-state" id="successState">
+                <div class="success-icon">✓</div>
+                <h3>Welcome to the first wave.</h3>
+                <p>You're in. We'll reach out before anyone else with your early access details and founding member rate.</p>
+                <div class="success-number" id="successNumber">Founding Member #—</div>
+            </div>
+
+            <p class="try-free-link">Not ready yet? <a href="suppvis-ai-chat.html">Try SuppVis AI free — no signup required.</a></p>
+            <p class="form-disclaimer">🔒 No spam. No selling your data. Unsubscribe anytime.</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Outcome Trust Grid -->
+        <div class="trust-grid">
+            <div class="trust-card">
+                <span class="trust-card-icon">🎯</span>
+                <div class="trust-card-value">Actually personalized</div>
+                <div class="trust-card-label">Built around your goals, your stack, your body — not a generic template.</div>
+            </div>
+            <div class="trust-card">
+                <span class="trust-card-icon">⚠️</span>
+                <div class="trust-card-value">Catches dangerous combos</div>
+                <div class="trust-card-label">Most people are taking supplements that fight each other. We flag it instantly.</div>
+            </div>
+            <div class="trust-card">
+                <span class="trust-card-icon">🛡️</span>
+                <div class="trust-card-value">Zero brand bias</div>
+                <div class="trust-card-label">We don't sell supplements. We have no incentive except your results.</div>
+            </div>
+            <div class="trust-card">
+                <span class="trust-card-icon">📚</span>
+                <div class="trust-card-value">40,000+ studies</div>
+                <div class="trust-card-label">Every recommendation is backed by peer-reviewed science, not influencer opinion.</div>
+            </div>
+        </div>
+
+        <!-- Feature Pills -->
+        <div class="feature-pills">
+            <div class="feature-pill"><span>✓</span> Interaction Checker</div>
+            <div class="feature-pill"><span>✓</span> AI Stack Builder</div>
+            <div class="feature-pill"><span>✓</span> Timing Optimizer</div>
+            <div class="feature-pill"><span>✓</span> Evidence Ratings</div>
+            <div class="feature-pill"><span>✓</span> Habit Tracking</div>
+            <div class="feature-pill"><span>✓</span> No Brand Bias</div>
+        </div>
+
+        <!-- Ticker -->
+        <div class="ticker-wrapper">
+            <div class="ticker-track">
+                <span class="ticker-item">Magnesium Glycinate for Sleep</span>
+                <span class="ticker-item">Creatine + Cognitive Function</span>
+                <span class="ticker-item">Vitamin D3 + K2 Synergy</span>
+                <span class="ticker-item">Iron + Calcium Interaction Warning</span>
+                <span class="ticker-item">Ashwagandha Cortisol Research</span>
+                <span class="ticker-item">Omega-3 Index Optimization</span>
+                <span class="ticker-item">NMN vs NR — NAD+ Precursors</span>
+                <span class="ticker-item">L-Theanine + Caffeine Stack</span>
+                <span class="ticker-item">Zinc Timing & Bioavailability</span>
+                <span class="ticker-item">Lion's Mane Neuroplasticity Data</span>
+                <span class="ticker-item">Magnesium Glycinate for Sleep</span>
+                <span class="ticker-item">Creatine + Cognitive Function</span>
+                <span class="ticker-item">Vitamin D3 + K2 Synergy</span>
+                <span class="ticker-item">Iron + Calcium Interaction Warning</span>
+                <span class="ticker-item">Ashwagandha Cortisol Research</span>
+                <span class="ticker-item">Omega-3 Index Optimization</span>
+                <span class="ticker-item">NMN vs NR — NAD+ Precursors</span>
+                <span class="ticker-item">L-Theanine + Caffeine Stack</span>
+                <span class="ticker-item">Zinc Timing & Bioavailability</span>
+                <span class="ticker-item">Lion's Mane Neuroplasticity Data</span>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 17L3 10L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Back to SuppVis
+        </a>
+
+    </main>
+
+    <script>
+        // ── THEME TOGGLE ──
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Initialise: saved pref → system pref → dark
+        const savedTheme = localStorage.getItem('sv-theme');
+        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const initTheme = savedTheme || (systemLight ? 'light' : 'dark');
+        html.setAttribute('data-theme', initTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('sv-theme', next);
+        });
+
+        // ── HEADER SCROLL ──
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        // ── COUNTDOWN — June 1, 2026 ──
+        const LAUNCH_DATE = new Date(2026, 5, 1, 8, 0, 0);
+        function updateCountdown() {
+            const diff = LAUNCH_DATE - new Date();
+            if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00'); return; }
+            const pad = n => String(n).padStart(2,'0');
+            const vals = {
+                'cd-days':  pad(Math.floor(diff / 86400000)),
+                'cd-hours': pad(Math.floor((diff / 3600000) % 24)),
+                'cd-mins':  pad(Math.floor((diff / 60000) % 60)),
+                'cd-secs':  pad(Math.floor((diff / 1000) % 60))
+            };
+            Object.entries(vals).forEach(([id, val]) => {
+                const el = document.getElementById(id);
+                if (el.textContent !== val) {
+                    el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
+                    el.textContent = val;
+                }
+            });
+        }
+        updateCountdown(); setInterval(updateCountdown, 1000);
+
+        // ── SPOTS PROGRESS ──
+        const TOTAL = 500;
+        let claimed = 347;
+        function updateSpots() {
+            const pct = (claimed / TOTAL) * 100;
+            document.getElementById('spots-text').textContent = `${claimed} / ${TOTAL} claimed`;
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('spots-remaining').innerHTML = `<span>⚠️ Only ${TOTAL - claimed} spots left</span>`;
+        }
+        updateSpots();
+        setInterval(() => { if (claimed < TOTAL - 5 && Math.random() < 0.3) { claimed++; updateSpots(); } }, 18000);
+
+        // ── FORM ──
+        const form = document.getElementById('waitlistForm');
+        const successState = document.getElementById('successState');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.innerHTML = 'Securing your spot...';
+            submitBtn.disabled = true;
+            try {
+                const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (!res.ok) throw new Error();
+            } catch {}
+            claimed++;
+            updateSpots();
+            form.style.display = 'none';
+            successState.classList.add('visible');
+            document.getElementById('successNumber').textContent = `Founding Member #${claimed}`;
+        });
+
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
+    </script>
+</body>
+</html>
