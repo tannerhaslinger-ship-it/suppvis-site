@@ -420,7 +420,7 @@
             <div class="chat-container">
 
                 <!-- Messages -->
-                <div class="messages-container" id="messagesContainer">
+                <div class="messages-container" id="chatMessages">
                     <div class="message ai">
                         <div class="message-avatar">S</div>
                         <div class="message-content">
@@ -498,531 +498,109 @@
             localStorage.setItem('sv-theme', next);
         });
 
-        const messagesContainer = document.getElementById('messagesContainer');
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const typingIndicator = document.getElementById('typingIndicator');
-        const suggestedQueries = document.getElementById('suggestedQueries');
-
-        // Suggested query pills
-        document.querySelectorAll('.query-pill').forEach(pill => {
-            pill.addEventListener('click', () => {
-                const query = pill.getAttribute('data-query');
-                chatInput.value = query;
-                sendMessage();
-            });
-        });
-
         // Auto-resize textarea
-        chatInput.addEventListener('input', function() {
+        document.getElementById('chatInput').addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = Math.min(this.scrollHeight, 130) + 'px';
         });
-
-        // Send on Enter
-        chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-
-        sendBtn.addEventListener('click', sendMessage);
-
-        async function sendMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
-
-            addMessage(message, 'user');
-            chatInput.value = '';
-            chatInput.style.height = 'auto';
-
-            if (suggestedQueries) suggestedQueries.style.display = 'none';
-
-            typingIndicator.classList.add('active');
-            scrollToBottom();
-            chatInput.disabled = true;
-            sendBtn.disabled = true;
-
-            try {
-                const response = await fetch('https://api.anthropic.com/v1/messages', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-api-key': '',
-                        'anthropic-version': '2023-06-01'
-                    },
-                    body: JSON.stringify({
-                        model: 'claude-sonnet-4-20250514',
-                        max_tokens: 1024,
-                        system: `You are SuppVis AI, an expert supplement optimization assistant. You help users:
-
-1. Understand how supplements work (mechanisms, benefits, evidence levels)
-2. Check for dangerous interactions between supplements, medications, and conditions
-3. Recommend optimal dosing and timing for maximum effectiveness
-4. Build evidence-based supplement stacks tailored to their goals
-
-Key principles:
-- Always cite evidence levels (Strong Clinical Data, Moderate Evidence, Emerging Research, Insufficient Evidence)
-- Flag dangerous interactions prominently with ⚠️ warning symbol
-- Be conservative and safety-first - when in doubt, recommend consulting a doctor
-- Remind users to consult healthcare providers for medical advice
-- Focus on education and empowerment, not prescribing
-- Use friendly, clear language without unnecessary medical jargon
-- Provide specific, actionable recommendations
-
-Format responses with:
-- Clear sections using **bold headers**
-- Bullet points for lists
-- ⚠️ for warnings/interactions
-- ✓ for safe combinations  
-- 💡 for helpful tips
-- Evidence level tags: [Strong Clinical Data], [Moderate Evidence], [Emerging Research]`,
-                        messages: [{ role: 'user', content: message }]
-                    })
-                });
-
-                typingIndicator.classList.remove('active');
-
-                if (!response.ok) throw new Error('API request failed');
-
-                const data = await response.json();
-                addMessage(data.content[0].text, 'ai');
-
-            } catch (error) {
-                typingIndicator.classList.remove('active');
-                console.log('Using demo mode:', error.message);
-                setTimeout(() => addMessage(getDemoResponse(message), 'ai'), 900);
-            } finally {
-                chatInput.disabled = false;
-                sendBtn.disabled = false;
-                chatInput.focus();
-            }
-        }
-
-        function addMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-
-            const avatar = document.createElement('div');
-            avatar.className = 'message-avatar';
-            if (sender === 'ai') {
-                avatar.textContent = 'S';
-                avatar.style.cssText = 'background:linear-gradient(135deg,#2DD4BF,#14B8A6);color:#0A1628;font-family:Syne,sans-serif;font-weight:700;';
-            } else {
-                avatar.textContent = '👤';
-            }
-
-            const content = document.createElement('div');
-            content.className = 'message-content';
-            content.innerHTML = formatMessage(text);
-
-            messageDiv.appendChild(avatar);
-            messageDiv.appendChild(content);
-            messagesContainer.appendChild(messageDiv);
-            scrollToBottom();
-        }
-
-        function formatMessage(text) {
-            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            text = text.replace(/\n/g, '<br>');
-            text = text.replace(/\[Strong Clinical Data\]/g, '<span class="tag-strong">[Strong Clinical Data]</span>');
-            text = text.replace(/\[Moderate Evidence\]/g, '<span class="tag-moderate">[Moderate Evidence]</span>');
-            text = text.replace(/\[Emerging Research\]/g, '<span class="tag-emerging">[Emerging Research]</span>');
-            return text;
-        }
-
-        function scrollToBottom() {
-            setTimeout(() => { messagesContainer.scrollTop = messagesContainer.scrollHeight; }, 80);
-        }
 
         // Mobile menu
         document.getElementById('mobileMenuToggle').addEventListener('click', () => {
             alert('Mobile menu coming soon!');
         });
 
-        // ── DEMO RESPONSES (all original content preserved) ──
-        function getDemoResponse(message) {
-            const lowerMessage = message.toLowerCase();
+        // ── CHAT API ──
+        const CHAT_API = 'https://suppvis-platform.vercel.app/api/website-chat';
+        let chatHistory = [];
 
-            if (lowerMessage.includes('magnesium') && lowerMessage.includes('sleep')) {
-                return `**Great question! For sleep specifically, magnesium glycinate is your best bet.**
+        async function sendMessage(message) {
+            if (!message.trim()) return;
 
-Here's the breakdown:
+            const queriesEl = document.getElementById('suggestedQueries');
+            if (queriesEl) queriesEl.style.display = 'none';
 
-**🏆 Magnesium Glycinate** (200-400mg, 1-2 hours before bed)
-✓ Highly bioavailable (chelated form absorbs well)
-✓ Gentle on digestion - won't cause laxative effect
-✓ Glycine component also aids sleep quality
-✓ Calms nervous system via GABA activation
+            addMessage('user', message);
+            chatHistory.push({ role: 'user', content: message });
 
-[Strong Clinical Data]
+            const input = document.getElementById('chatInput');
+            if (input) input.value = '';
+            if (input) input.style.height = 'auto';
 
-**Why it beats other forms for sleep:**
+            const sendBtn = document.getElementById('sendBtn');
+            if (sendBtn) sendBtn.disabled = true;
 
-**Magnesium Threonate**
-• Crosses blood-brain barrier better
-• More expensive
-• Better for cognition than pure sleep
-• Good alternative if budget allows
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.classList.add('active');
 
-**Magnesium Citrate**
-• Decent absorption
-• ⚠️ Can cause loose stools
-• Better taken earlier in day
+            const messages = document.getElementById('chatMessages');
+            messages.scrollTop = messages.scrollHeight;
 
-❌ **Avoid: Magnesium Oxide**
-• Only ~4% absorption
-• Mostly just a laxative
-• Cheapest but least effective
+            try {
+                const res = await fetch(CHAT_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message,
+                        history: chatHistory.slice(-10)
+                    }),
+                });
 
-**💡 Pro Tips:**
-• Take with small snack (improves absorption)
-• Separate from calcium by 2+ hours
-• Start at 200mg, increase if needed
-• Effects build over 2-4 weeks
+                const data = await res.json();
 
-⚠️ **Caution:** Check with doctor if taking antibiotics or have kidney issues
+                if (typing) typing.classList.remove('active');
+                if (sendBtn) sendBtn.disabled = false;
 
-Want me to check this against your current supplement stack?`;
+                if (data.reply) {
+                    addMessage('ai', data.reply);
+                    chatHistory.push({ role: 'assistant', content: data.reply });
+                } else {
+                    addMessage('ai', 'Something went wrong. Please try again.');
+                }
+            } catch (err) {
+                if (typing) typing.classList.remove('active');
+                if (sendBtn) sendBtn.disabled = false;
+                addMessage('ai', 'Unable to connect right now. Please try again in a moment.');
             }
 
-            if (lowerMessage.includes('iron') && lowerMessage.includes('calcium')) {
-                return `⚠️ **IMPORTANT INTERACTION DETECTED!**
-
-**Iron and calcium should NOT be taken together - they significantly interfere with each other's absorption.**
-
-**What happens:**
-❌ Calcium blocks iron absorption by up to 60%
-❌ Both minerals compete for the same intestinal transporters
-❌ Taking together = wasting money and potentially causing deficiency
-
-[Strong Clinical Data]
-
-**✅ Optimal Timing Strategy:**
-
-**🌅 MORNING (or midday):**
-**Iron** (on empty stomach if tolerated)
-• Take 30-60 min before eating
-• Pair with Vitamin C (orange juice, supplement) for 3x better absorption
-• Avoid coffee/tea for 1 hour (tannins block absorption)
-
-**🌙 EVENING (with dinner or before bed):**
-**Calcium** 
-• Take with food containing healthy fats
-• Naturally supports sleep/relaxation
-• Won't interfere with morning iron
-
-**Minimum Separation:** 2-4 hours apart (more is better)
-
-**💡 Additional Tips:**
-• Split calcium dose if taking 1000mg+ (body absorbs max 500mg at once)
-• Iron is best absorbed on empty stomach but can cause nausea - take with food if needed
-• Consider iron bisglycinate (gentler form)
-
-**📊 Why This Matters:**
-If you're taking iron for anemia or low ferritin, improper timing can prevent your levels from improving despite supplementation.
-
-Are you taking these for specific deficiencies? I can help optimize your full supplementation schedule!`;
-            }
-
-            if (lowerMessage.includes('fish oil') || lowerMessage.includes('omega')) {
-                return `**🐟 Optimal Fish Oil Timing Guide**
-
-The #1 rule: **Take with a fatty meal** for maximum absorption!
-
-**Best Times:**
-
-**🥑 With Your Largest Meal** (usually lunch or dinner)
-✓ Any meal containing 10-15g+ of fat
-✓ Avocado, olive oil, nuts, eggs, salmon, etc.
-✓ Fat-soluble nutrient needs dietary fat for absorption
-
-**Why timing matters:**
-• With fat: Up to 3x better absorption
-• Empty stomach: Minimal absorption + fish burps
-• With low-fat meal: Partial absorption
-
-[Strong Clinical Data]
-
-**💡 Advanced Strategies:**
-
-**For Cognitive Benefits:**
-• Morning or midday (so EPA/DHA are available during peak mental activity hours)
-
-**For Cardiovascular Benefits:**
-• Timing matters less - just take consistently with food
-
-**For Sleep/Mood:**
-• Evening with dinner may have slight advantage (DHA supports serotonin)
-
-**🎯 Practical Recommendation:**
-Take with your biggest, fattiest meal of the day - whatever time that is for you. Consistency matters more than perfect timing.
-
-**⚠️ Important Notes:**
-• Blood thinning effect - check with doctor if on blood thinners (warfarin, aspirin)
-• High doses (3g+) require medical supervision
-• Refrigerate after opening to prevent oxidation
-• Look for triglyceride form (better absorbed than ethyl ester)
-
-**Dosage Guide:**
-• General health: 1-2g EPA+DHA daily
-• Inflammation/cardiovascular: 2-4g EPA+DHA daily
-• Mental health support: 1-2g EPA+DHA with higher EPA ratio
-
-Want me to help build a complete supplement timing schedule around your goals?`;
-            }
-
-            if (lowerMessage.includes('check my stack') || lowerMessage.includes('vitamin d') && lowerMessage.includes('magnesium') && lowerMessage.includes('ashwagandha')) {
-                return `**🔍 Stack Analysis: Vitamin D + Magnesium + Ashwagandha**
-
-**✅ GOOD NEWS: This is an excellent, well-synergized stack!**
-
-**Interaction Check:**
-
-**Vitamin D + Magnesium** ✓ SYNERGISTIC
-• Magnesium is required to convert Vitamin D to its active form
-• Without adequate magnesium, Vitamin D supplementation is less effective
-• These should ALWAYS be taken together
-[Strong Clinical Data]
-
-**Vitamin D + Ashwagandha** ✓ COMPATIBLE
-• No known negative interactions
-• Both support immune function (additive benefit)
-• Both have mood-supporting properties
-[Moderate Evidence]
-
-**Magnesium + Ashwagandha** ✓ SYNERGISTIC
-• Both reduce cortisol and support stress response
-• Both improve sleep quality through different mechanisms
-• Excellent combination for sleep and anxiety
-[Moderate Evidence]
-
-**🎯 Optimal Timing Schedule:**
-
-**Morning (with breakfast):**
-• Vitamin D (fat-soluble - needs dietary fat)
-• Consider adding K2 (MK-7) to direct calcium properly
-• Take 5000 IU if deficient, 2000 IU for maintenance
-
-**Evening (1-2 hours before bed):**
-• Magnesium Glycinate (200-400mg)
-• Ashwagandha (300-600mg)
-• This combination is ideal for sleep
-
-**💡 Optimization Tips:**
-
-**For Vitamin D:**
-• Consider adding K2 (MK-7) to direct calcium properly
-• Take 5000 IU if deficient, 2000 IU for maintenance
-
-**For Magnesium:**
-• Start at 200mg, increase to 400mg if tolerated
-• RBC Magnesium test (more accurate than serum)
-• Avoid magnesium oxide (poor absorption)
-
-**For Ashwagandha:**
-• Take consistently for 4-8 weeks for full effects
-• Cycle off 1 week every 2-3 months
-• ⚠️ Check with doctor if on thyroid medication (can affect thyroid hormone)
-
-**📊 What This Stack Supports:**
-✓ Stress resilience
-✓ Sleep quality  
-✓ Immune function
-✓ Bone health
-✓ Mood regulation
-✓ Energy levels
-
-**🎯 What You Might Consider Adding:**
-Based on common health goals, potential additions:
-• **Omega-3 Fish Oil** (anti-inflammatory, brain health)
-• **Vitamin K2** (if taking higher dose Vitamin D)
-• **Zinc** (immune support, works with Vitamin D)
-
-Want me to suggest additions based on specific health goals?`;
-            }
-
-            if (lowerMessage.includes('sleep') || lowerMessage.includes('improve sleep')) {
-                return `**😴 Best Supplements for Sleep Quality**
-
-Here's the evidence-based stack for better sleep:
-
-**🏆 Tier 1 - Strong Evidence:**
-
-**Magnesium Glycinate** (200-400mg, 1-2 hours before bed)
-✓ Activates GABA (calming neurotransmitter)
-✓ Reduces nervous system activation
-✓ Improves sleep quality and depth
-[Strong Clinical Data]
-
-**L-Theanine** (200-400mg, 30-60 min before bed)
-✓ Promotes alpha brain waves (relaxation)
-✓ Reduces racing thoughts
-✓ No next-day grogginess
-✓ Safe to combine with magnesium
-[Strong Clinical Data]
-
-**💊 Tier 2 - Moderate Evidence:**
-
-**Glycine** (3-5g before bed)
-✓ Lowers core body temperature
-✓ Improves sleep onset time
-✓ Enhances deep sleep
-✓ Very safe (amino acid)
-[Moderate Evidence]
-
-**Apigenin** (50mg from chamomile, 1 hour before bed)
-✓ Mild sedative effect
-✓ Reduces anxiety
-✓ Gentle, non-habit forming
-[Moderate Evidence]
-
-**🔬 Tier 3 - Emerging/Targeted:**
-
-**Ashwagandha** (300-600mg with dinner)
-✓ Reduces cortisol (stress hormone)
-✓ Best for stress-related sleep issues
-✓ Takes 2-4 weeks for full effect
-[Strong Clinical Data for stress, Moderate for sleep]
-
-**Melatonin** (0.3-5mg, 30-60 min before bed)
-⚠️ Start LOW (0.3-1mg)
-✓ Regulates circadian rhythm
-✓ Best for jet lag or shift work
-❌ Not for long-term nightly use (may suppress natural production)
-[Strong Clinical Data]
-
-**⏰ Sample Sleep Stack Schedule:**
-
-**6:00 PM (With Dinner):**
-• Ashwagandha (if using)
-
-**8:00 PM (2 hours before bed):**
-• Magnesium Glycinate (300mg)
-• Glycine (3-5g - can mix in water)
-
-**9:00 PM (1 hour before bed):**
-• L-Theanine (200mg)
-• Apigenin (50mg)
-• Melatonin (0.5-1mg) - if needed
-
-**💡 Pro Tips:**
-✓ Start with magnesium + L-theanine (safest combo)
-✓ Add others one at a time to assess response
-✓ Effects build over 1-2 weeks of consistent use
-✓ Don't take everything - personalize to your needs
-
-**🚫 What to AVOID:**
-❌ Caffeine after 2 PM
-❌ High-dose B-vitamins at night (can be stimulating)
-❌ Large meals within 3 hours of bed
-
-⚠️ **Important Notes:**
-• These support sleep - not replace sleep hygiene
-• Consult doctor if on sleep medications
-• If sleep issues persist >4 weeks, see a doctor
-
-What specific sleep issue are you facing? (Falling asleep, staying asleep, sleep quality?) I can refine these recommendations!`;
-            }
-
-            if (lowerMessage.includes('working') || lowerMessage.includes('effective')) {
-                return `**📊 How to Know If Your Supplements Are Actually Working**
-
-This is THE most important question - and most people never answer it properly!
-
-**🎯 The Framework: Track → Measure → Adjust**
-
-**Method 1: Subjective Symptom Tracking** (Start Here)
-
-**Week 0: Baseline Phase**
-Before starting ANY supplement:
-• Rate your symptoms daily (1-10 scale)
-• Common metrics: Energy, sleep quality, mood, focus, stress
-• Track for 1-2 weeks minimum
-• Use a simple notes app or journal
-
-**Weeks 1-4: Testing Phase**
-• Continue rating same symptoms
-• Change NOTHING else (diet, exercise, sleep schedule)
-• Look for patterns after 2-3 weeks
-• Some work fast (L-theanine: days), others slow (Vitamin D: weeks)
-
-**The Truth:**
-⚠️ If you can't notice a difference after 4-8 weeks of consistent use → It's probably not working for YOU
-
-[Strong Clinical Data - individual response varies significantly]
-
-**📈 Method 2: Objective Biomarker Testing**
-
-**Get tested BEFORE starting, then retest 8-12 weeks later:**
-
-**For Vitamin D:** Test: 25-OH Vitamin D | Goal: 40-60 ng/mL | Cost: $30-50
-**For Omega-3:** Test: Omega-3 Index | Goal: >8% | Cost: $100-150
-**For Magnesium:** Test: RBC Magnesium (NOT serum!) | Cost: $50-80
-**For Iron:** Test: Ferritin + Iron Panel | Goal: Ferritin 50-100 ng/mL | Cost: $50-100
-
-**💡 The "Stop Test" Method:**
-
-1. Take supplement consistently for 4-8 weeks
-2. Rate how you feel
-3. STOP taking it for 2 weeks
-4. Rate how you feel
-5. Restart for 2 weeks
-6. Rate again
-
-✓ Symptoms worsen when you stop → It's working!
-❌ No difference when you stop → It's not working for you
-
-**⏰ Timeline Expectations:**
-
-**Fast (Days to 1 Week):** L-Theanine, Magnesium (if deficient), Caffeine + L-Theanine
-
-**Medium (2-4 Weeks):** Creatine, Ashwagandha, Vitamin D (if deficient)
-
-**Slow (4-12 Weeks):** Omega-3, Vitamin D (if severely deficient), Iron (if anemic)
-
-**💡 My Recommendation:**
-1. Pick 2-3 supplements max
-2. Have a CLEAR goal for each
-3. Track daily for 4 weeks
-4. Objectively assess
-5. Keep what works, drop what doesn't
-
-⚠️ **Important:** Supplements should complement—not replace—proper sleep, nutrition, exercise, and stress management. If those fundamentals aren't in place, supplements won't create miracles.
-
-Want me to help you design a tracking system for your current stack?`;
-            }
-
-            return `**Thanks for your question!**
-
-I'm currently in demo mode, but I can provide helpful information on most supplement topics!
-
-**💡 Here's what I can help with:**
-
-✓ Specific supplement mechanisms and benefits
-✓ Interaction checking between supplements
-✓ Optimal timing and dosing strategies  
-✓ Evidence-based stack building
-✓ Safety concerns and contraindications
-
-**🔥 Try asking me about:**
-• "Best magnesium for sleep?"
-• "Can I take iron and calcium together?"
-• "When should I take fish oil?"
-• "Check my stack: vitamin D, magnesium, ashwagandha"
-• "Best supplements for sleep?"
-• "How do I know if supplements are working?"
-
-**📱 For Full AI Analysis:**
-Download the SuppVis iOS app for:
-• Complete interaction checking across your full stack
-• Personalized daily schedules
-• Progress tracking and habit formation
-• Biomarker integration
-
-What specific supplement question can I help you with?`;
+            messages.scrollTop = messages.scrollHeight;
         }
+
+        function addMessage(role, text) {
+            const messages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${role}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = role === 'ai' ? 'S' : '\u{1F464}';
+
+            const content = document.createElement('div');
+            content.className = 'message-content';
+            content.innerHTML = text.replace(/\n/g, '<br>');
+
+            div.appendChild(avatar);
+            div.appendChild(content);
+            messages.appendChild(div);
+        }
+
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const input = document.getElementById('chatInput');
+            if (input) sendMessage(input.value);
+        });
+
+        document.getElementById('chatInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const input = document.getElementById('chatInput');
+                sendMessage(input.value);
+            }
+        });
+
+        document.querySelectorAll('.query-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                sendMessage(pill.getAttribute('data-query'));
+            });
+        });
     </script>
 </body>
 </html>
