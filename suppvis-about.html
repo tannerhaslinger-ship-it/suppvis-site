@@ -375,7 +375,15 @@
             .cta-buttons { flex-direction: column; }
             .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -415,7 +423,7 @@
                     Join the Waitlist
                 </a>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><i data-lucide="menu"></i></button>
         </nav>
     </header>
 
@@ -463,7 +471,7 @@
                     </div>
                     <div class="problems-grid">
                         <div class="problem-card">
-                            <span class="card-icon">🎯</span>
+                            <span class="card-icon"><i data-lucide="target"></i></span>
                             <h3 class="card-title">The Personalization Void</h3>
                             <div class="card-content">
                                 <p>Most advice is "one-size-fits-all," ignoring your unique goals, lifestyle, and existing health profile.</p>
@@ -492,7 +500,7 @@
                             </div>
                         </div>
                         <div class="problem-card">
-                            <span class="card-icon">📉</span>
+                            <span class="card-icon"><i data-lucide="trending-down"></i></span>
                             <h3 class="card-title">The Consistency Crisis</h3>
                             <div class="card-content">
                                 <p>Without a system to support habit formation, many people quit before the biological benefits 
@@ -534,7 +542,7 @@
                         </div>
                         <div class="advantage-card">
                             <div class="advantage-header">
-                                <span class="advantage-icon">🔗</span>
+                                <span class="advantage-icon"><i data-lucide="link"></i></span>
                                 <h4>Interaction Graph</h4>
                             </div>
                             <p class="advantage-suppvis">Our "secret weapon" maps relationships between ingredients, medications, and your goals.</p>
@@ -564,7 +572,7 @@
                     </div>
                     <div class="team-grid">
                         <div class="team-member">
-                            <div class="team-member-icon">👨‍💼</div>
+                            <div class="team-member-icon"><i data-lucide="briefcase"></i></div>
                             <h3>Tanner Haslinger</h3>
                             <p class="role">CEO & Co-Founder</p>
                             <p class="bio">
@@ -577,7 +585,7 @@
                             </p>
                         </div>
                         <div class="team-member">
-                            <div class="team-member-icon">👨‍⚕️</div>
+                            <div class="team-member-icon"><i data-lucide="stethoscope"></i></div>
                             <h3>Connor Haslinger</h3>
                             <p class="role">COO & Co-Founder</p>
                             <p class="bio">
@@ -695,5 +703,7 @@
             alert('Mobile menu coming soon!');
         });
     </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

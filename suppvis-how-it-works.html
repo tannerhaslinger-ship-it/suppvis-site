@@ -355,7 +355,15 @@
             .step:not(:last-child) .step-number-col::after { left: 23px; }
             .step-number { width: 46px; height: 46px; font-size: 17px; }
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -430,7 +438,7 @@
                             <div class="step-number">2</div>
                         </div>
                         <div class="step-body">
-                            <span class="step-icon">⚗️</span>
+                            <span class="step-icon"><i data-lucide="flask-conical"></i></span>
                             <h2 class="step-title">Refine Your Stack</h2>
                             <p class="step-text">Whether you are brand new to supplements or have been taking them for years, SuppVis meets you where you are. We look at your full picture. Your goals, your constraints, your budget, and everything you are already taking. Then we build a stack that actually fits your life. We do not just suggest more. We analyze what you are doing and cut what is not pulling its weight, so you stop spending money on things with negligible effects and start feeling the ones that actually matter.</p>
                         </div>
@@ -442,7 +450,7 @@
                             <div class="step-number">3</div>
                         </div>
                         <div class="step-body">
-                            <span class="step-icon">🛒</span>
+                            <span class="step-icon"><i data-lucide="shopping-bag"></i></span>
                             <h2 class="step-title">Shop With Confidence</h2>
                             <p class="step-text">The SuppVis shop is not a generic storefront. Every product you see is already filtered through your profile, so what you are browsing is personalized to you before you even search. SuppVis AI is embedded throughout to flag potential interactions, highlight what fits your goals, and surface the best option for your budget. You will always know why something is being recommended before you buy it.</p>
                         </div>
@@ -466,7 +474,7 @@
                             <div class="step-number">5</div>
                         </div>
                         <div class="step-body">
-                            <span class="step-icon">📖</span>
+                            <span class="step-icon"><i data-lucide="book-open"></i></span>
                             <h2 class="step-title">Read the Blog</h2>
                             <p class="step-text">Supplements are one of the most marketing driven industries on the planet. Fads move fast and the science rarely keeps up with the hype. The SuppVis Journal cuts through the noise with short, research backed reads that help you understand not just what to take but why it works and how to think critically about your own health. For anyone who wants to go deeper, the blog is where to start.</p>
                         </div>
@@ -478,7 +486,7 @@
                             <div class="step-number">6</div>
                         </div>
                         <div class="step-body">
-                            <span class="step-icon">📈</span>
+                            <span class="step-icon"><i data-lucide="trending-up"></i></span>
                             <h2 class="step-title">Track and Refine Over Time</h2>
                             <p class="step-text">Supplements work through consistency. The benefits build over weeks and months, not days. SuppVis gives you a tracking system to stay accountable to your stack, monitor how you feel over time, and conduct real research on your own body. The longer you track, the clearer the picture becomes and the better we can help you dial things in.</p>
                         </div>
@@ -537,5 +545,7 @@
             alert('Mobile menu coming soon!');
         });
     </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

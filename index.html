@@ -1842,7 +1842,15 @@
                 padding: 0 20px 20px;
             }
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
     <!-- Scroll Progress Indicator -->
@@ -1884,7 +1892,7 @@
                 Join the Waitlist
             </button>
         </div>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i data-lucide="menu"></i></button>
     </nav>
 </header>
 
@@ -1925,15 +1933,15 @@
 
                     <div class="trust-badges">
                         <div class="trust-badge">
-                            <span class="trust-icon">✓</span>
+                            <span class="trust-icon"><i data-lucide="check"></i></span>
                             <span>Brand-Agnostic</span>
                         </div>
                         <div class="trust-badge">
-                            <span class="trust-icon">✓</span>
+                            <span class="trust-icon"><i data-lucide="check"></i></span>
                             <span>Evidence-Based</span>
                         </div>
                         <div class="trust-badge">
-                            <span class="trust-icon">✓</span>
+                            <span class="trust-icon"><i data-lucide="check"></i></span>
                             <span>617 Supplements</span>
                         </div>
                         <div class="trust-badge">
@@ -1974,7 +1982,7 @@
 
                 <div class="features-grid">
                     <div class="feature-card">
-                        <span class="feature-icon">🔗</span>
+                        <span class="feature-icon"><i data-lucide="link"></i></span>
                         <h3>Proprietary Interaction Graph</h3>
                         <p>
                             Contextually understands your complete stack to identify dangerous 
@@ -1984,7 +1992,7 @@
                     </div>
 
                     <div class="feature-card">
-                        <span class="feature-icon">🔬</span>
+                        <span class="feature-icon"><i data-lucide="microscope"></i></span>
                         <h3>Explainability Engine</h3>
                         <p>
                             No "black boxes"—every recommendation is backed by peer-reviewed research 
@@ -2011,7 +2019,7 @@
                     </div>
 
                     <div class="feature-card">
-                        <span class="feature-icon">🔥</span>
+                        <span class="feature-icon"><i data-lucide="flame"></i></span>
                         <h3>Habit Architecture</h3>
                         <p>
                             Smart reminders and streak tracking make consistency effortless. 
@@ -2052,7 +2060,7 @@
                     <div class="message ai">
                         <div class="message-avatar">S</div>
                         <div class="message-content">
-                            <p>Hey! 👋 I'm SuppVis AI, your personal supplement optimization assistant.</p>
+                            <p>Hey! <i data-lucide="hand"></i> I'm SuppVis AI, your personal supplement optimization assistant.</p>
                             <p style="margin-top: 12px;">I can help you:</p>
                             <ul style="margin: 12px 0 0 20px;">
                                 <li>Understand how supplements work</li>
@@ -2134,7 +2142,7 @@
                     </div>
 
                     <div class="shop-feature">
-                        <div class="shop-icon">✓</div>
+                        <div class="shop-icon"><i data-lucide="check"></i></div>
                         <h4>Third-Party Tested</h4>
                         <p>
                             Only supplements with independent lab verification make it to our marketplace. 
@@ -2143,7 +2151,7 @@
                     </div>
 
                     <div class="shop-feature">
-                        <div class="shop-icon">⚗️</div>
+                        <div class="shop-icon"><i data-lucide="flask-conical"></i></div>
                         <h4>Clinical Dosing</h4>
                         <p>
                             Effective doses backed by peer-reviewed research—not marketing claims. 
@@ -2266,7 +2274,7 @@
                     </div>
 
                     <div class="blog-card" data-category="sleep stress">
-                        <div class="blog-image">🪨</div>
+                        <div class="blog-image"><i data-lucide="mountain"></i></div>
                         <div class="blog-content">
                             <span class="blog-category">Deep Dive</span>
                             <h4>Magnesium: The Master Mineral Explained</h4>
@@ -2276,7 +2284,7 @@
                     </div>
 
                     <div class="blog-card" data-category="energy focus">
-                        <div class="blog-image">🔋</div>
+                        <div class="blog-image"><i data-lucide="battery-full"></i></div>
                         <div class="blog-content">
                             <span class="blog-category">Strategy</span>
                             <h4>How to Build a Stack That Actually Works</h4>
@@ -2346,44 +2354,44 @@
                         <div class="comparison-cell">iOS App</div>
                     </div>
                     <div class="comparison-row">
-                        <div class="comparison-cell">📚 Global Science & Research</div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><i data-lucide="library"></i> Global Science & Research</div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
-                        <div class="comparison-cell">🛒 Curated Marketplace</div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><i data-lucide="shopping-bag"></i> Curated Marketplace</div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
-                        <div class="comparison-cell">📝 Blog & Education</div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><i data-lucide="file-text"></i> Blog & Education</div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
                         <div class="comparison-cell"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Personal Dashboard</div>
                         <div class="comparison-cell"><span class="cross">×</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
                         <div class="comparison-cell"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Daily Reminders</div>
                         <div class="comparison-cell"><span class="cross">×</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
-                        <div class="comparison-cell">🎯 Goal Tracking</div>
+                        <div class="comparison-cell"><i data-lucide="target"></i> Goal Tracking</div>
                         <div class="comparison-cell"><span class="cross">×</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
-                        <div class="comparison-cell">🔥 Streak System</div>
+                        <div class="comparison-cell"><i data-lucide="flame"></i> Streak System</div>
                         <div class="comparison-cell"><span class="cross">×</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                     <div class="comparison-row">
                         <div class="comparison-cell"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-1.01-3.08 3 3 0 0 1-.37-5.27 2.5 2.5 0 0 1 1.84-4.69Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 1.01-3.08 3 3 0 0 0 .37-5.27 2.5 2.5 0 0 0-1.84-4.69Z"/></svg> AI Personalization</div>
                         <div class="comparison-cell"><span class="cross">×</span></div>
-                        <div class="comparison-cell"><span class="check">✓</span></div>
+                        <div class="comparison-cell"><span class="check"><i data-lucide="check"></i></span></div>
                     </div>
                 </div>
 
@@ -2399,15 +2407,15 @@
 
                 <div class="trust-badges" style="margin-top: 40px;">
                     <div class="trust-badge">
-                        <span class="trust-icon">✓</span>
+                        <span class="trust-icon"><i data-lucide="check"></i></span>
                         <span>Free to start</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="trust-icon">✓</span>
+                        <span class="trust-icon"><i data-lucide="check"></i></span>
                         <span>No credit card required</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="trust-icon">🔒</span>
+                        <span class="trust-icon"><i data-lucide="lock"></i></span>
                         <span>Privacy-first</span>
                     </div>
                 </div>
@@ -2454,11 +2462,11 @@
                             Reserve My Spot →
                         </button>
                     </div>
-                    <p style="font-size:13px;color:#64748B;margin-top:14px;">🔒 No spam, ever. Unsubscribe anytime.</p>
+                    <p style="font-size:13px;color:#64748B;margin-top:14px;"><i data-lucide="lock"></i> No spam, ever. Unsubscribe anytime.</p>
                 </form>
                 <!-- Success state (hidden initially) -->
                 <div id="inlineSuccessState" style="display:none;padding:28px;background:rgba(16,185,129,0.1);border:1.5px solid rgba(16,185,129,0.3);border-radius:16px;">
-                    <div style="font-size:40px;margin-bottom:12px;">🎉</div>
+                    <div style="font-size:40px;margin-bottom:12px;"><i data-lucide="party-popper" style="width:40px;height:40px"></i></div>
                     <h3 style="color:#10B981;font-size:22px;margin-bottom:8px;">You're on the list!</h3>
                     <p style="color:#94A3B8;font-size:15px;">We'll reach out with beta access details soon. Keep an eye on your inbox.</p>
                 </div>
@@ -2483,22 +2491,22 @@
             <!-- Perks grid -->
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:880px;margin:0 auto;">
                 <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(20,184,166,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(20,184,166,0.35)';this.style.background='rgba(20,184,166,0.05)'" onmouseout="this.style.borderColor='rgba(20,184,166,0.15)';this.style.background='rgba(255,255,255,0.03)'">
-                    <div style="font-size:28px;margin-bottom:12px;">🚀</div>
+                    <div style="font-size:28px;margin-bottom:12px;"><i data-lucide="zap" style="width:28px;height:28px"></i></div>
                     <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Early Access</h4>
                     <p style="color:#64748B;font-size:14px;line-height:1.6;">Be among the first to use the full SuppVis platform before public launch.</p>
                 </div>
                 <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(20,184,166,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(20,184,166,0.35)';this.style.background='rgba(20,184,166,0.05)'" onmouseout="this.style.borderColor='rgba(20,184,166,0.15)';this.style.background='rgba(255,255,255,0.03)'">
-                    <div style="font-size:28px;margin-bottom:12px;">💰</div>
+                    <div style="font-size:28px;margin-bottom:12px;"><i data-lucide="coins" style="width:28px;height:28px"></i></div>
                     <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Founding Pricing</h4>
                     <p style="color:#64748B;font-size:14px;line-height:1.6;">Lock in exclusive rates that are never available again after public launch.</p>
                 </div>
                 <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(20,184,166,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(20,184,166,0.35)';this.style.background='rgba(20,184,166,0.05)'" onmouseout="this.style.borderColor='rgba(20,184,166,0.15)';this.style.background='rgba(255,255,255,0.03)'">
-                    <div style="font-size:28px;margin-bottom:12px;">🎯</div>
+                    <div style="font-size:28px;margin-bottom:12px;"><i data-lucide="target" style="width:28px;height:28px"></i></div>
                     <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Shape the Product</h4>
                     <p style="color:#64748B;font-size:14px;line-height:1.6;">Direct line to the team. Your feedback directly influences what we build.</p>
                 </div>
                 <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(20,184,166,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(20,184,166,0.35)';this.style.background='rgba(20,184,166,0.05)'" onmouseout="this.style.borderColor='rgba(20,184,166,0.15)';this.style.background='rgba(255,255,255,0.03)'">
-                    <div style="font-size:28px;margin-bottom:12px;">📬</div>
+                    <div style="font-size:28px;margin-bottom:12px;"><i data-lucide="mail" style="width:28px;height:28px"></i></div>
                     <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Insider Updates</h4>
                     <p style="color:#64748B;font-size:14px;line-height:1.6;">Monthly research drops and platform updates straight to your inbox.</p>
                 </div>
@@ -2539,8 +2547,8 @@
                         <option value="sleep" style="background:#0A1628;">Sleep Optimization</option>
                         <option value="performance" style="background:#0A1628;">Athletic Performance</option>
                         <option value="longevity" style="background:#0A1628;">Longevity & Anti-Aging</option>
-                        <option value="stress" style="background:#0A1628;">🧘 Stress & Recovery</option>
-                        <option value="weight" style="background:#0A1628;">⚖️ Body Composition</option>
+                        <option value="stress" style="background:#0A1628;">Stress & Recovery</option>
+                        <option value="weight" style="background:#0A1628;">Body Composition</option>
                         <option value="general" style="background:#0A1628;">General Wellness</option>
                     </select>
                 </div>
@@ -2548,12 +2556,12 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                     Reserve My Spot
                 </button>
-                <p style="text-align:center;font-size:12px;color:#64748B;margin-top:14px;">🔒 No spam, ever. Unsubscribe anytime.</p>
+                <p style="text-align:center;font-size:12px;color:#64748B;margin-top:14px;"><i data-lucide="lock"></i> No spam, ever. Unsubscribe anytime.</p>
             </form>
 
             <!-- Success state (hidden) -->
             <div id="modalSuccessState" style="display:none;text-align:center;padding:20px 0;">
-                <div style="font-size:56px;margin-bottom:20px;animation:fadeInUp 0.5s ease-out;">🎉</div>
+                <div style="font-size:56px;margin-bottom:20px;animation:fadeInUp 0.5s ease-out;"><i data-lucide="party-popper" style="width:56px;height:56px"></i></div>
                 <h3 style="font-size:26px;color:#10B981;font-weight:700;margin-bottom:12px;">You're on the list!</h3>
                 <p style="color:#94A3B8;font-size:16px;line-height:1.7;margin-bottom:28px;">Thanks for joining — we'll be in touch with your beta access details soon. Keep an eye on your inbox.</p>
                 <button onclick="closeWaitlistModal()" style="padding:14px 36px;background:rgba(16,185,129,0.15);border:1.5px solid rgba(16,185,129,0.4);border-radius:10px;color:#10B981;font-size:15px;font-weight:600;cursor:pointer;">Close</button>
@@ -2565,7 +2573,7 @@
     <!-- Sticky mobile waitlist CTA -->
     <div id="stickyWaitlistCTA" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9000;padding:16px 20px;background:linear-gradient(135deg,rgba(10,22,40,0.98),rgba(15,39,68,0.98));backdrop-filter:blur(20px);border-top:1px solid rgba(20,184,166,0.2);text-align:center;">
         <button onclick="openWaitlistModal()" style="width:100%;max-width:400px;padding:16px;background:linear-gradient(135deg,#14B8A6,#14B8A6);border:none;border-radius:12px;color:#0A1628;font-size:16px;font-weight:700;cursor:pointer;">
-            🚀 Join the Beta Waitlist — Free
+            <i data-lucide="zap"></i> Join the Beta Waitlist — Free
         </button>
     </div>
 
@@ -2853,7 +2861,7 @@
           const div = document.createElement('div');
           div.className = `message ${role}`;
           div.innerHTML = `
-            <div class="message-avatar">${role === 'ai' ? 'S' : '👤'}</div>
+            <div class="message-avatar">${role === 'ai' ? 'S' : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:3px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'}</div>
             <div class="message-content">${text.replace(/\n/g, '<br>')}</div>
           `;
           messages.appendChild(div);
@@ -2880,5 +2888,7 @@
         // ────────────────────────────────────────────────────────────
 
     </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

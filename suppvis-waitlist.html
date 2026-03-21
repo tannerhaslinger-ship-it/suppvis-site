@@ -325,7 +325,7 @@
             color: var(--text-muted); display: flex; align-items: center; gap: 5px;
             transition: color 0.35s;
         }
-        .price-lock-hint::before { content: '🔒'; font-size: 10px; }
+        .price-lock-hint::before { content: none; font-size: 10px; }
 
         /* ── FORM ── */
         .form-wrapper {
@@ -495,7 +495,15 @@
             .founder-note { flex-direction: column; text-align: center; }
             .spots-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -538,7 +546,7 @@
                     Join the Waitlist
                 </a>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><i data-lucide="menu"></i></button>
         </nav>
     </header>
 
@@ -568,7 +576,7 @@
 
         <!-- Countdown -->
         <div class="countdown-wrapper">
-            <p class="countdown-label">⏱ Beta Launch Countdown</p>
+            <p class="countdown-label"><i data-lucide="timer"></i> Beta Launch Countdown</p>
             <div class="countdown">
                 <div class="countdown-unit">
                     <div class="countdown-number" id="cd-days">--</div>
@@ -603,7 +611,7 @@
             </div>
             <div class="spots-footer">
                 <p class="spots-remaining" id="spots-remaining"></p>
-                <p class="price-lock-hint">$10/mo founding rate — locked in for life</p>
+                <p class="price-lock-hint"><i data-lucide="lock" style="width:12px;height:12px;margin-right:4px"></i> $10/mo founding rate — locked in for life</p>
             </div>
         </div>
 
@@ -618,9 +626,9 @@
                         <option value="energy">Energy & Performance</option>
                         <option value="sleep">Sleep Optimization</option>
                         <option value="focus">Focus & Cognition</option>
-                        <option value="longevity">🔬 Longevity & Anti-Aging</option>
-                        <option value="fat-loss">🏃 Fat Loss & Body Composition</option>
-                        <option value="stress">🧘 Stress & Recovery</option>
+                        <option value="longevity">Longevity & Anti-Aging</option>
+                        <option value="fat-loss">Fat Loss & Body Composition</option>
+                        <option value="stress">Stress & Recovery</option>
                         <option value="immune">Immune Health</option>
                         <option value="general">General Wellness</option>
                     </select>
@@ -632,14 +640,14 @@
             </form>
 
             <div class="success-state" id="successState">
-                <div class="success-icon">✓</div>
+                <div class="success-icon"><i data-lucide="check"></i></div>
                 <h3>Welcome to the first wave.</h3>
                 <p>You're in. We'll reach out before anyone else with your early access details and founding member rate.</p>
                 <div class="success-number" id="successNumber">Founding Member #—</div>
             </div>
 
             <p class="try-free-link">Not ready yet? <a href="suppvis-ai-chat.html">Try SuppVis AI free — no signup required.</a></p>
-            <p class="form-disclaimer">🔒 No spam. No selling your data. Unsubscribe anytime.</p>
+            <p class="form-disclaimer"><i data-lucide="lock"></i> No spam. No selling your data. Unsubscribe anytime.</p>
         </div>
 
         <div class="section-divider"></div>
@@ -647,7 +655,7 @@
         <!-- Outcome Trust Grid -->
         <div class="trust-grid">
             <div class="trust-card">
-                <span class="trust-card-icon">🎯</span>
+                <span class="trust-card-icon"><i data-lucide="target"></i></span>
                 <div class="trust-card-value">Actually personalized</div>
                 <div class="trust-card-label">Built around your goals, your stack, your body — not a generic template.</div>
             </div>
@@ -662,7 +670,7 @@
                 <div class="trust-card-label">We don't sell supplements. We have no incentive except your results.</div>
             </div>
             <div class="trust-card">
-                <span class="trust-card-icon">📚</span>
+                <span class="trust-card-icon"><i data-lucide="library"></i></span>
                 <div class="trust-card-value">40,000+ studies</div>
                 <div class="trust-card-label">Every recommendation is backed by peer-reviewed science, not influencer opinion.</div>
             </div>
@@ -670,12 +678,12 @@
 
         <!-- Feature Pills -->
         <div class="feature-pills">
-            <div class="feature-pill"><span>✓</span> Interaction Checker</div>
-            <div class="feature-pill"><span>✓</span> AI Stack Builder</div>
-            <div class="feature-pill"><span>✓</span> Timing Optimizer</div>
-            <div class="feature-pill"><span>✓</span> Evidence Ratings</div>
-            <div class="feature-pill"><span>✓</span> Habit Tracking</div>
-            <div class="feature-pill"><span>✓</span> No Brand Bias</div>
+            <div class="feature-pill"><span><i data-lucide="check"></i></span> Interaction Checker</div>
+            <div class="feature-pill"><span><i data-lucide="check"></i></span> AI Stack Builder</div>
+            <div class="feature-pill"><span><i data-lucide="check"></i></span> Timing Optimizer</div>
+            <div class="feature-pill"><span><i data-lucide="check"></i></span> Evidence Ratings</div>
+            <div class="feature-pill"><span><i data-lucide="check"></i></span> Habit Tracking</div>
+            <div class="feature-pill"><span><i data-lucide="check"></i></span> No Brand Bias</div>
         </div>
 
         <!-- Ticker -->
@@ -788,5 +796,7 @@
 
         document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
     </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

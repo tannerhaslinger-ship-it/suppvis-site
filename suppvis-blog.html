@@ -150,7 +150,15 @@
             .articles-grid { grid-template-columns: 1fr; }
             .carousel-number { display: none; }
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <header id="header">
@@ -177,7 +185,7 @@
                 Ask SuppVis AI
             </a>
         </div>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i data-lucide="menu"></i></button>
     </nav>
 </header>
 
@@ -192,7 +200,7 @@
 
     <!-- CAROUSEL -->
     <div class="carousel-section">
-        <div class="carousel-label">📌 Featured Articles</div>
+        <div class="carousel-label"><i data-lucide="pin"></i> Featured Articles</div>
         <div class="carousel-wrapper" id="carousel">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide">
@@ -252,10 +260,10 @@
         <button class="filter-btn active" data-filter="all">All Topics</button>
         <button class="filter-btn" data-filter="energy"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Energy</button>
         <button class="filter-btn" data-filter="sleep"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Sleep</button>
-        <button class="filter-btn" data-filter="focus">🎯 Focus</button>
+        <button class="filter-btn" data-filter="focus"><i data-lucide="target"></i> Focus</button>
         <button class="filter-btn" data-filter="performance"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Performance</button>
         <button class="filter-btn" data-filter="stress"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg> Stress</button>
-        <button class="filter-btn" data-filter="strategy">📋 Strategy</button>
+        <button class="filter-btn" data-filter="strategy"><i data-lucide="clipboard-list"></i> Strategy</button>
     </div>
 
     <!-- ARTICLES -->
@@ -281,7 +289,7 @@
         </a>
 
         <a class="article-card" href="article.html?slug=how-to-build-a-stack-that-works" data-category="energy focus strategy">
-            <div class="card-top"><div class="card-icon-wrap">🧩</div><div class="card-meta-top"><div class="card-tags"><span class="tag tag-strategy">Strategy</span><span class="tag tag-focus">Focus</span></div><span class="card-time">5 min read</span></div></div>
+            <div class="card-top"><div class="card-icon-wrap"><i data-lucide="puzzle"></i></div><div class="card-meta-top"><div class="card-tags"><span class="tag tag-strategy">Strategy</span><span class="tag tag-focus">Focus</span></div><span class="card-time">5 min read</span></div></div>
             <h4 class="card-title">How to Build a Stack That Actually Works</h4>
             <p class="card-excerpt">Most people buy supplements backwards. Here's the right order to build a stack that compounds over time — starting with foundations, not trends.</p>
             <div class="card-footer"><span class="card-date">Jan 15</span><span class="card-read">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
@@ -371,5 +379,7 @@
     });
     document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
 </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

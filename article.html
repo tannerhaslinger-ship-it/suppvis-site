@@ -67,7 +67,15 @@
         .not-found h2{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;margin-bottom:16px;color:var(--cream)}
         .not-found p{color:var(--slate);margin-bottom:32px}
         @media(max-width:768px){header{padding:14px 20px}.nav-links{display:none}.mobile-menu-toggle{display:block}.article-wrapper{padding:40px 16px 80px}.article-title{font-size:clamp(24px,6vw,36px)}}
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <header id="header">
@@ -350,8 +358,8 @@ if (!article) {
         </div>
         <h1 class="article-title">${article.title}</h1>
         <div class="article-meta">
-            <span class="article-meta-item">📅 ${article.date}</span>
-            <span class="article-meta-item">⏱ ${article.readTime} read</span>
+            <span class="article-meta-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:3px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${article.date}</span>
+            <span class="article-meta-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${article.readTime} read</span>
             <div class="goal-tags">${goalTagsHTML}</div>
         </div>
         <div class="article-excerpt">${article.excerpt}</div>
@@ -367,5 +375,7 @@ if (!article) {
     `;
 }
 </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

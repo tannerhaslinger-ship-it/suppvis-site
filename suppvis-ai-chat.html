@@ -349,7 +349,15 @@
             .suggested-queries::-webkit-scrollbar { display: none; }
             .input-area { padding: 12px 14px 16px; }
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -388,7 +396,7 @@
                     Join the Waitlist
                 </a>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><i data-lucide="menu"></i></button>
         </nav>
     </header>
 
@@ -405,16 +413,16 @@
                         <div class="message-avatar">S</div>
                         <div class="message-content">
                             <div class="welcome-card">
-                                <h3>👋 Welcome! I'm SuppVis AI</h3>
+                                <h3><i data-lucide="hand"></i> Welcome! I'm SuppVis AI</h3>
                                 <p>I'm your personal supplement optimization assistant, here to help you make smarter, safer decisions about your health stack.</p>
                             </div>
                             <p><strong>What I can help you with:</strong></p>
                             <ul>
-                                <li>✓ Understand how supplements work and their mechanisms</li>
-                                <li>✓ Check for dangerous interactions between supplements</li>
-                                <li>✓ Find optimal dosing and timing for maximum effectiveness</li>
-                                <li>✓ Build evidence-based stacks tailored to your goals</li>
-                                <li>✓ Answer any questions about supplement science</li>
+                                <li><i data-lucide="check"></i> Understand how supplements work and their mechanisms</li>
+                                <li><i data-lucide="check"></i> Check for dangerous interactions between supplements</li>
+                                <li><i data-lucide="check"></i> Find optimal dosing and timing for maximum effectiveness</li>
+                                <li><i data-lucide="check"></i> Build evidence-based stacks tailored to your goals</li>
+                                <li><i data-lucide="check"></i> Answer any questions about supplement science</li>
                             </ul>
                             <p style="margin-top: 14px; color: #2DD4BF; font-weight: 600;">Try a suggested question below, or ask me anything!</p>
                         </div>
@@ -457,7 +465,7 @@
                             </svg>
                         </button>
                     </div>
-                    <p class="disclaimer">⚕️ SuppVis AI provides educational information only. Always consult your healthcare provider before making changes to your supplement routine.</p>
+                    <p class="disclaimer"><i data-lucide="stethoscope"></i> SuppVis AI provides educational information only. Always consult your healthcare provider before making changes to your supplement routine.</p>
                 </div>
 
             </div><!-- /chat-container -->
@@ -582,5 +590,7 @@
             });
         });
     </script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
 </body>
 </html>

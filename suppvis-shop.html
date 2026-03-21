@@ -141,7 +141,15 @@
             .product-grid{grid-template-columns:1fr}
             .cta-banner{padding:16px 20px}
         }
-    </style>
+    
+        /* Lucide icon sizing */
+        .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
+        .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
+        .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
+        .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
+        .team-member-icon .lucide { width: 36px; height: 36px; }
+        </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <div class="animated-gradient"></div>
@@ -678,7 +686,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "Bioflavonoids increase Vitamin C absorption and potency",
-    "imageEmoji": "🍊",
+    "iconKey": "sun",
     "imageUrl": "https://m.media-amazon.com/images/I/61NqKHVeZXL._AC_SL300_.jpg"
   },
   {
@@ -699,7 +707,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "Quercetin synergizes with C for enhanced immune and heart support",
-    "imageEmoji": "🍊",
+    "iconKey": "sun",
     "imageUrl": "https://m.media-amazon.com/images/I/7149LKnKu4L._AC_SL300_.jpg"
   },
   {
@@ -720,7 +728,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "Liposomal delivery absorbs like an IV — 90%+ bioavailability",
-    "imageEmoji": "🍊",
+    "iconKey": "sun",
     "imageUrl": "https://m.media-amazon.com/images/I/71VjBD0d72L._AC_SL300_.jpg",
     "formNote": "Liposomal form delivers 6-8x more Vitamin C to cells than standard tablets"
   },
@@ -742,7 +750,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Shelf stable with proven survivability to the gut",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/71-tysKQBdL._AC_SL300_.jpg"
   },
   {
@@ -763,7 +771,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Hypoallergenic formula with clinically studied strains",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/71i80OQVD1L._AC_SL300_.jpg"
   },
   {
@@ -784,7 +792,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Pre + probiotic combo — most studied direct-to-consumer synbiotic",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/719X3gcKyEL._AC_SL300_.jpg",
     "formNote": "Outer capsule feeds the inner capsule protecting bacteria through stomach acid"
   },
@@ -806,7 +814,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Diverse 10-strain formula at excellent value",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/71JCpx3qBsL._AC_SL300_.jpg"
   },
   {
@@ -827,7 +835,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Fortigel has the most clinical evidence for joint cartilage specifically",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71bW6Jj6SPL._AC_SL300_.jpg",
     "formNote": "Must be taken with Vitamin C for collagen synthesis — this formula includes it"
   },
@@ -849,7 +857,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Skin and joint focused — BioCell form has strong absorption data",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71x9dEbU5BL._AC_SL300_.jpg"
   },
   {
@@ -870,7 +878,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Collagen + NR longevity combo — unique formulation",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71g5okWRDyL._AC_SL300_.jpg"
   },
   {
@@ -891,7 +899,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Complete beauty supplement — biotin, collagen, and elastin support",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71gxTMBtU3L._AC_SL300_.jpg"
   },
   {
@@ -912,7 +920,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Most recognized collagen brand — Costco's top seller for a reason",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71QZNoHaxdL._AC_SL300_.jpg"
   },
   {
@@ -1018,7 +1026,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "Standardized rosavins at clinical dose — proven anti-fatigue adaptogen",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71Ina237HGL._AC_SL300_.jpg",
     "formNote": "Must be standardized to 3% rosavins — unstandardized products are unreliable"
   },
@@ -1040,7 +1048,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "Third-party certified Rhodiola for stress and mental focus",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/612nzJj+lGL._AC_SL300_.jpg"
   },
   {
@@ -1061,7 +1069,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "Double dose standardized Rhodiola at budget price",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71BxWeDtnQL._AC_SL300_.jpg"
   },
   {
@@ -1082,7 +1090,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "Best value per serving for hypoallergenic Rhodiola",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71gAPtW8GrL._AC_SL300_.jpg"
   },
   {
@@ -1103,7 +1111,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "NSF Certified — Huberman protocol Rhodiola",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/61jU5qklPlL._AC_SL300_.jpg"
   },
   {
@@ -1124,7 +1132,7 @@ const PRODUCTS = [
       "Herb"
     ],
     "keyBenefit": "Clinical dose with strong metabolic and gut evidence",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/710CGlMIhbL._AC_SL300_.jpg",
     "formNote": "Take with meals — berberine has a short half-life, best split 2-3x daily"
   },
@@ -1146,7 +1154,7 @@ const PRODUCTS = [
       "Herb"
     ],
     "keyBenefit": "NSF Certified berberine with enhanced bioavailability formula",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71w7wWqUR-L._AC_SL300_.jpg"
   },
   {
@@ -1739,7 +1747,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "NSF Certified gut lining repair and muscle recovery support",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/61LhR9zKbgL._AC_SL300_.jpg"
   },
   {
@@ -1760,7 +1768,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Hypoallergenic gut lining support — easy capsule format",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71hqVQm0Z4L._AC_SL300_.jpg"
   },
   {
@@ -1781,7 +1789,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Bulk powder for high-dose gut healing protocols",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/817gHkzbg8L._AC_SL300_.jpg"
   },
   {
@@ -1802,7 +1810,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "NSF Certified capsule form — convenient daily gut support",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/610zPXZYeWL._AC_SL300_.jpg"
   },
   {
@@ -1823,7 +1831,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "NSF Certified zero sugar electrolytes for daily hydration",
-    "imageEmoji": "💧",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/81KxHzlCW5L._AC_SL300_.jpg"
   },
   {
@@ -1844,7 +1852,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Clean ingredients, no stevia, no artificial sweeteners",
-    "imageEmoji": "💧",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/61m7-A8xleL._AC_SL300_.jpg"
   },
   {
@@ -1865,7 +1873,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Science-backed high sodium formula — used by Huberman",
-    "imageEmoji": "💧",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/71Jk1OXuboL._AC_SL300_.jpg",
     "formNote": "High sodium is intentional — most people are chronically under-salted"
   },
@@ -1887,7 +1895,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Electrolyte replenishment + B vitamins for energy restoration",
-    "imageEmoji": "💧",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/71XV-ppeaKL._AC_SL300_.jpg"
   },
   {
@@ -1908,7 +1916,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Calm focus without drowsiness — perfect coffee companion",
-    "imageEmoji": "🍵",
+    "iconKey": "coffee",
     "imageUrl": "https://m.media-amazon.com/images/I/61xwHQ+l8tL._AC_SL300_.jpg"
   },
   {
@@ -1929,7 +1937,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Hypoallergenic L-Theanine for daily stress and relaxation support",
-    "imageEmoji": "🍵",
+    "iconKey": "coffee",
     "imageUrl": "https://m.media-amazon.com/images/I/71fuFWRW54L._AC_SL300_.jpg"
   },
   {
@@ -1950,7 +1958,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Suntheanine — the most studied, patented pure L-Theanine form",
-    "imageEmoji": "🍵",
+    "iconKey": "coffee",
     "imageUrl": "https://m.media-amazon.com/images/I/51gLwqdS1RL._AC_SL300_.jpg"
   },
   {
@@ -1971,7 +1979,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Best value L-Theanine at clinical 200mg dose",
-    "imageEmoji": "🍵",
+    "iconKey": "coffee",
     "imageUrl": "https://m.media-amazon.com/images/I/71dpvBT8FrL._AC_SL300_.jpg"
   },
   {
@@ -1992,7 +2000,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Serotonin precursor for mood, sleep, and appetite balance",
-    "imageEmoji": "😊",
+    "iconKey": "smile",
     "imageUrl": "https://m.media-amazon.com/images/I/61GuuKvqKsL._AC_SL300_.jpg",
     "formNote": "Take at night — 5-HTP supports serotonin which converts to melatonin"
   },
@@ -2014,7 +2022,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "B6 cofactor included — essential for 5-HTP to convert to serotonin",
-    "imageEmoji": "😊",
+    "iconKey": "smile",
     "imageUrl": "https://m.media-amazon.com/images/I/71jQ0DQ81HL._AC_SL300_.jpg"
   },
   {
@@ -2035,7 +2043,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Hypoallergenic 5-HTP for mood and sleep regulation",
-    "imageEmoji": "😊",
+    "iconKey": "smile",
     "imageUrl": "https://m.media-amazon.com/images/I/71GkdpaM6ZL._AC_SL300_.jpg"
   },
   {
@@ -2056,7 +2064,7 @@ const PRODUCTS = [
       "Amino Acid"
     ],
     "keyBenefit": "Best value 5-HTP for consistent daily mood support",
-    "imageEmoji": "😊",
+    "iconKey": "smile",
     "imageUrl": "https://m.media-amazon.com/images/I/710yijdX45L._AC_SL300_.jpg"
   },
   {
@@ -2478,7 +2486,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Phospholipids dramatically increase astaxanthin absorption",
-    "imageEmoji": "🦐",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/71vc4KEwWxL._AC_SL300_.jpg"
   },
   {
@@ -2499,7 +2507,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Most powerful natural antioxidant — 6000x stronger than Vitamin C",
-    "imageEmoji": "🦐",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/71NnJj+Gq9L._AC_SL300_.jpg"
   },
   {
@@ -2520,7 +2528,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Full spectrum digestive support — proteins, fats, carbs, fiber, dairy",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/71ZRt55K0fL._AC_SL300_.jpg"
   },
   {
@@ -2541,7 +2549,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Two-phase design — works in both stomach and small intestine",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/51sUBbUbvXL._AC_SL300_.jpg"
   },
   {
@@ -2562,7 +2570,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Best value digestive enzyme blend with proven enzymes",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/71BCwOsl4vL._AC_SL300_.jpg"
   },
   {
@@ -2583,7 +2591,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "NSF Certified — includes ox bile for fat digestion support",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/711E6JR0coL._SL300_.jpg"
   },
   {
@@ -2604,7 +2612,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "NSF Certified prebiotic fiber with antioxidants for gut health",
-    "imageEmoji": "🌾",
+    "iconKey": "wheat",
     "imageUrl": "https://m.media-amazon.com/images/I/71slOCeu61L._AC_SL300_.jpg"
   },
   {
@@ -2625,7 +2633,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Non-GMO pure psyllium — best value for daily fiber intake",
-    "imageEmoji": "🌾",
+    "iconKey": "wheat",
     "imageUrl": "https://m.media-amazon.com/images/I/71O3AqhHTzL._AC_SL300_.jpg"
   },
   {
@@ -2646,7 +2654,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Convenient capsule form — no mixing required",
-    "imageEmoji": "🌾",
+    "iconKey": "wheat",
     "imageUrl": "https://m.media-amazon.com/images/I/71Xg4PvMsZL._AC_SL300_.jpg"
   },
   {
@@ -2667,7 +2675,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Postbiotic that feeds colon cells directly — leaky gut repair",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/615RUfqkPjL._AC_SL300_.jpg"
   },
   {
@@ -2688,7 +2696,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "Tributyrin is better absorbed than sodium butyrate — reaches colon intact",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/71xb6YZzOuL._AC_SL300_.jpg"
   },
   {
@@ -2709,7 +2717,7 @@ const PRODUCTS = [
       "Probiotic / Gut"
     ],
     "keyBenefit": "NSF Certified botanical gut repair — IBS and leaky gut support",
-    "imageEmoji": "🦠",
+    "iconKey": "microscope",
     "imageUrl": "https://m.media-amazon.com/images/I/61zNkw5ScsL._AC_SL300_.jpg"
   },
   {
@@ -2730,7 +2738,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Micronized for better absorption — low dose for women and sensitive users",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/71IN9XPWRAL._AC_SL300_.jpg",
     "formNote": "DHEA is a precursor hormone — start low (10mg) and monitor levels with your doctor"
   },
@@ -2752,7 +2760,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Higher dose DHEA for men over 40 — check levels before using",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/61TcW70g-DL._AC_SL300_.jpg"
   },
   {
@@ -2773,7 +2781,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Sublingual delivery increases absorption — best value DHEA",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/71plWrpqu0L._AC_SL300_.jpg"
   },
   {
@@ -2794,7 +2802,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "Fermented beet + maca for energy, circulation, and hormone balance",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71wLR7-kY8L._AC_SL300_.jpg"
   },
   {
@@ -2815,7 +2823,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "High dose raw maca for libido and hormonal vitality",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71XtF3cPs1L._AC_SL300_.jpg"
   },
   {
@@ -2836,7 +2844,7 @@ const PRODUCTS = [
       "Adaptogen"
     ],
     "keyBenefit": "Triple maca blend — black, red, and yellow for comprehensive hormonal support",
-    "imageEmoji": "🌱",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71Ebjfvyn5L._AC_SL300_.jpg"
   },
   {
@@ -2857,7 +2865,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Estrogen metabolite balance — DIM + CDG detox pathway combo",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/71ROySLgnZL._AC_SL300_.jpg"
   },
   {
@@ -2878,7 +2886,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Bioavailable DIM specifically for estrogen metabolism support",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/51fzThbY2QL._AC_SL300_.jpg"
   },
   {
@@ -2899,7 +2907,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "DIM with liver detox support for comprehensive estrogen clearance",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/710WUBmBszL._AC_SL300_.jpg"
   },
   {
@@ -2920,7 +2928,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "BioResponse form — most studied DIM preparation for hormonal health",
-    "imageEmoji": "⚖️",
+    "iconKey": "scale",
     "imageUrl": "https://m.media-amazon.com/images/I/71Ov4whgnwL._AC_SL300_.jpg"
   },
   {
@@ -2941,7 +2949,7 @@ const PRODUCTS = [
       "Herb"
     ],
     "keyBenefit": "Organic chaste tree for PMS, cycle regularity, and progesterone support",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/717ObFTe+YL._AC_SL300_.jpg"
   },
   {
@@ -2962,7 +2970,7 @@ const PRODUCTS = [
       "Herb"
     ],
     "keyBenefit": "Vitex + Dong Quai combo for comprehensive cycle support",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71owgeygQqL._AC_SL300_.jpg"
   },
   {
@@ -2983,7 +2991,7 @@ const PRODUCTS = [
       "Herb"
     ],
     "keyBenefit": "Hypoallergenic Vitex for menstrual cycle regularity",
-    "imageEmoji": "🌸",
+    "iconKey": "leaf",
     "imageUrl": "https://m.media-amazon.com/images/I/71jlw6S2uCL._AC_SL300_.jpg"
   },
   {
@@ -3004,7 +3012,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "High potency biotin for hair growth and nail strength",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71s0duMsfeL._AC_SL300_.jpg"
   },
   {
@@ -3025,7 +3033,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "Third-party certified biotin for hair, nails, skin, and metabolism",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71sPExeyrtL._AC_SL300_.jpg"
   },
   {
@@ -3046,7 +3054,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "All-in-one beauty supplement — biotin, collagen, and vitamin support",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71mA2WJmnrL._AC_SL300_.jpg"
   },
   {
@@ -3067,7 +3075,7 @@ const PRODUCTS = [
       "Vitamin"
     ],
     "keyBenefit": "Maximum strength biotin at excellent value per serving",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/715YBu+t9HL._AC_SL300_.jpg"
   },
   {
@@ -3088,7 +3096,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Low molecular weight for joint lubrication and skin hydration",
-    "imageEmoji": "💧",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/71l0PZ0UqtL._AC_SL300_.jpg"
   },
   {
@@ -3109,7 +3117,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Double strength with alpha lipoic acid and grape seed — best value",
-    "imageEmoji": "💧",
+    "iconKey": "droplet",
     "imageUrl": "https://m.media-amazon.com/images/I/71f-xcw41cL._AC_SL300_.jpg"
   },
   {
@@ -3130,7 +3138,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Structural mineral for hair strength, skin elasticity, and bone density",
-    "imageEmoji": "✨",
+    "iconKey": "sparkles",
     "imageUrl": "https://m.media-amazon.com/images/I/71bRw-TcFyL._AC_SL300_.jpg"
   },
   {
@@ -3151,7 +3159,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "CherryPURE — most concentrated tart cherry for sleep and recovery",
-    "imageEmoji": "🍒",
+    "iconKey": "heart",
     "imageUrl": "https://m.media-amazon.com/images/I/71V2Bv3bZML._AC_SL300_.jpg"
   },
   {
@@ -3172,7 +3180,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Natural melatonin and anthocyanins for sleep and post-workout recovery",
-    "imageEmoji": "🍒",
+    "iconKey": "heart",
     "imageUrl": "https://m.media-amazon.com/images/I/71rzZo-GhWL._AC_SL300_.jpg"
   },
   {
@@ -3319,7 +3327,7 @@ const PRODUCTS = [
       "Supplement"
     ],
     "keyBenefit": "Active S,S form for mood, joint health, and liver function",
-    "imageEmoji": "😊",
+    "iconKey": "smile",
     "imageUrl": "https://m.media-amazon.com/images/I/71LmfirQxxL._AC_SL300_.jpg",
     "formNote": "Must be stored in a cool dry place — SAMe is unstable and degrades with heat"
   },
@@ -3623,7 +3631,13 @@ const ICONS = {
     heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
     target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
     star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-    check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+    check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    sparkles: '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
+    microscope: '<path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>',
+    coffee: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>',
+    smile: '<circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
+    wheat: '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4z"/><path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0z"/>',
+    scale: '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>'
 };
 function getIcon(key, size) {
     size = size || '1em';
@@ -3747,6 +3761,7 @@ document.getElementById('searchInput').addEventListener('input', e => {
 });
 
 renderProducts();
+if (window.lucide) lucide.createIcons();
 </script>
 </body>
 </html>
