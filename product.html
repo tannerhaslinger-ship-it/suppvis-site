@@ -4313,7 +4313,7 @@ function renderNotFound() {
     document.getElementById('app').innerHTML =
         '<div class="not-found">' +
         '<h1>Product not found</h1>' +
-        '<p>We couldn't find a product matching that ID.</p>' +
+        '<p>We couldn\u2019t find a product matching that ID.</p>' +
         '<a href="suppvis-shop.html">&larr; Back to Shop</a>' +
         '</div>';
 }
@@ -4332,7 +4332,7 @@ function renderProduct(p) {
     var imgHtml;
     if (p.imageUrl) {
         imgHtml = '<img src="' + esc(p.imageUrl) + '" alt="' + esc(p.productName) + '" ' +
-            'onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\"icon-fallback\">&#128138;</span>'">';
+            'onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<span style=\\\"font-size:72px;\\\">&#128138;</span>\'">';
     } else {
         imgHtml = '<span class="icon-fallback" style="font-size:72px;">' + getIcon(p.iconKey, '72px') + '</span>';
     }
@@ -4376,7 +4376,7 @@ function renderProduct(p) {
     if (related.length > 0) {
         var relCards = related.map(function(rp) {
             var rImg = rp.imageUrl
-                ? '<img src="' + esc(rp.imageUrl) + '" alt="' + esc(rp.productName) + '" onerror="this.parentElement.innerHTML='' + getIcon(rp.iconKey, '32px').replace(/'/g, "\'") + ''">'
+                ? '<img src="' + esc(rp.imageUrl) + '" alt="' + esc(rp.productName) + '" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.style.display=\'none\'">'
                 : getIcon(rp.iconKey, '32px');
             return '<a href="product.html?id=' + esc(rp.id) + '" class="related-card">' +
                 '<div class="related-card-img">' + rImg + '</div>' +
