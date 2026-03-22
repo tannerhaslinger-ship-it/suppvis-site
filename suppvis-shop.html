@@ -65,10 +65,9 @@
         .shop-title{font-family:"Syne",sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;background:linear-gradient(135deg,var(--cream) 0%,#C8E6E3 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         [data-theme="light"] .shop-title{background:linear-gradient(135deg,#0F172A 0%,#0D9488 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
         .shop-subtitle{font-size:17px;color:var(--slate);max-width:560px;line-height:1.7;margin:0 auto}
-        .shop-stats{display:flex;justify-content:center;gap:32px;margin-top:24px;flex-wrap:wrap}
-        .shop-stat{text-align:center}
-        .shop-stat-num{font-family:"Syne",sans-serif;font-size:28px;font-weight:800;color:var(--teal)}
-        .shop-stat-label{font-size:12px;color:var(--muted);font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:0.5px}
+        .shop-app-nudge{margin-top:24px;font-size:14px;color:var(--teal);opacity:0.8;letter-spacing:0.01em}
+        .shop-app-nudge a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(45,212,191,0.3);padding-bottom:1px;transition:opacity 0.2s,border-color 0.2s}
+        .shop-app-nudge a:hover{opacity:1;border-color:rgba(45,212,191,0.7)}
         .disclosure{max-width:1280px;margin:0 auto;padding:0 32px 24px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px}
         .disclosure::before{content:"\2139";font-size:13px;color:var(--teal);opacity:.6}
         .controls{max-width:1280px;margin:0 auto;padding:0 32px 28px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
@@ -286,11 +285,7 @@
     <div class="shop-header">
         <h1 class="shop-title">The Curated Shop</h1>
         <p class="shop-subtitle">Every product is handpicked for purity, bioavailability, and clinical backing. No proprietary blends. No underdosed formulas. No brand bias.</p>
-        <div class="shop-stats">
-            <div class="shop-stat"><div class="shop-stat-num">158</div><div class="shop-stat-label">Products</div></div>
-            <div class="shop-stat"><div class="shop-stat-num">46+</div><div class="shop-stat-label">Supplements</div></div>
-            <div class="shop-stat"><div class="shop-stat-num">10+</div><div class="shop-stat-label">Trusted Brands</div></div>
-        </div>
+        <p class="shop-app-nudge">For a fully personalized shop experience, <a href="suppvis-waitlist.html">download the SuppVis app.</a></p>
     </div>
     <div class="disclosure">Affiliate disclosure: SuppVis earns a small commission on purchases at no extra cost to you. This never influences which products we recommend &mdash; only science does.</div>
     <div class="controls">
