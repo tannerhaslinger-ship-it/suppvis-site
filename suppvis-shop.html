@@ -71,7 +71,7 @@
         .disclosure{max-width:1280px;margin:0 auto;padding:0 32px 24px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px}
         .disclosure::before{content:"\2139";font-size:13px;color:var(--teal);opacity:.6}
         .controls{max-width:1280px;margin:0 auto;padding:0 32px 28px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-        .search-box{flex:1;min-width:200px;max-width:340px;position:relative}
+        .search-box{flex:0 0 280px;width:280px;position:relative;margin-left:auto}
         .search-box input{width:100%;padding:10px 16px 10px 40px;background:var(--input-bg);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--cream);font-family:"DM Sans",sans-serif;font-size:14px;outline:none;transition:border-color .2s}
         .search-box input:focus{border-color:rgba(45,212,191,0.4)}
         .search-box input::placeholder{color:var(--muted)}
@@ -80,10 +80,6 @@
         .filter-btn{padding:8px 16px;border-radius:30px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:var(--slate);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;white-space:nowrap}
         .filter-btn:hover{border-color:rgba(45,212,191,0.3);color:var(--teal)}
         .filter-btn.active{background:rgba(45,212,191,0.12);border-color:rgba(45,212,191,0.4);color:var(--teal);font-weight:600}
-        .tier-filter{display:flex;gap:6px}
-        .tier-btn{padding:6px 14px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:var(--muted);font-size:12px;cursor:pointer;transition:all .2s;font-family:"DM Mono",monospace}
-        .tier-btn:hover{border-color:rgba(45,212,191,0.3);color:var(--teal)}
-        .tier-btn.active{background:rgba(45,212,191,0.1);border-color:rgba(45,212,191,0.35);color:var(--teal)}
         .results-bar{max-width:1280px;margin:0 auto;padding:0 32px 20px;display:flex;align-items:center;justify-content:space-between}
         .results-count{font-size:13px;color:var(--muted);font-family:"DM Mono",monospace}
         .section-label{max-width:1280px;margin:0 auto;padding:0 32px 16px;display:flex;align-items:center;gap:16px}
@@ -289,10 +285,6 @@
     </div>
     <div class="disclosure">Affiliate disclosure: SuppVis earns a small commission on purchases at no extra cost to you. This never influences which products we recommend &mdash; only science does.</div>
     <div class="controls">
-        <div class="search-box">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            <input type="text" id="searchInput" placeholder="Search supplements...">
-        </div>
         <div class="filter-bar" id="filterBar">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="Mineral">Minerals</button>
@@ -304,11 +296,9 @@
             <button class="filter-btn" data-filter="Probiotic / Gut">Gut Health</button>
             <button class="filter-btn" data-filter="Supplement">Supplements</button>
         </div>
-        <div class="tier-filter" id="tierFilter">
-            <button class="tier-btn active" data-tier="all">All Tiers</button>
-            <button class="tier-btn" data-tier="premium">Premium</button>
-            <button class="tier-btn" data-tier="value">Value</button>
-            <button class="tier-btn" data-tier="budget">Budget</button>
+        <div class="search-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="searchInput" placeholder="Search supplements...">
         </div>
     </div>
     <div class="results-bar"><span class="results-count" id="resultsCount">158 products</span></div>
@@ -3685,7 +3675,7 @@ const header = document.getElementById('header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
 document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
 
-let currentFilter = 'all', currentTier = 'all', currentSearch = '';
+let currentFilter = 'all', currentSearch = '';
 let eduOpen = {};
 
 function getAmazonUrl(asin, tag) {
@@ -3735,10 +3725,9 @@ function getIcon(key, size) {
 function renderProducts() {
     let filtered = PRODUCTS.filter(p => {
         const matchCat = currentFilter === 'all' || p.categories.includes(currentFilter);
-        const matchTier = currentTier === 'all' || p.tier === currentTier;
         const q = currentSearch.toLowerCase();
         const matchSearch = !q || p.supplementName.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.productName.toLowerCase().includes(q) || (p.keyBenefit && p.keyBenefit.toLowerCase().includes(q));
-        return matchCat && matchTier && matchSearch;
+        return matchCat && matchSearch;
     });
 
     document.getElementById('resultsCount').textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
@@ -3832,14 +3821,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-document.querySelectorAll('.tier-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentTier = btn.dataset.tier;
-        renderProducts();
-    });
-});
 
 let searchTimer;
 document.getElementById('searchInput').addEventListener('input', e => {
