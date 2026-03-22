@@ -87,39 +87,22 @@
         .section-line{flex:1;height:1px;background:rgba(255,255,255,0.07)}
         .section-count{font-family:"DM Mono",monospace;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:3px 10px}
         .product-grid{max-width:1280px;margin:0 auto;padding:0 32px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-        .product-card{background:var(--card-bg);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:all .3s;position:relative;display:flex;flex-direction:column}
+        .product-card{background:var(--card-bg);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:all .3s;position:relative;cursor:pointer;display:flex;flex-direction:column;text-decoration:none}
         .product-card:hover{border-color:rgba(45,212,191,0.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(45,212,191,0.1)}
-        .product-card-top{padding:24px 24px 16px;display:flex;gap:14px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,0.06)}
-        .product-img{width:64px;height:64px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.15)}
-        .product-img img{width:60px;height:60px;object-fit:contain;border-radius:10px}
-        .product-meta{flex:1;min-width:0}
-        .product-supp-name{font-family:"DM Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:500;color:var(--teal)}
-        .product-name{font-family:"Syne",sans-serif;font-size:14px;font-weight:700;color:var(--cream);line-height:1.3;margin-bottom:3px}
-        .product-brand{font-size:12px;color:var(--muted);margin-bottom:8px}
-        .product-badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-        .badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-family:"DM Mono",monospace;font-size:10px;font-weight:500}
-        .badge-premium{background:rgba(45,212,191,0.1);color:var(--teal);border:1px solid rgba(45,212,191,0.2)}
-        .badge-value{background:rgba(16,185,129,0.1);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
-        .badge-budget{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2)}
-        .badge-verified{background:rgba(16,185,129,0.1);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
-        .product-education{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
-        .product-education.open{max-height:260px;padding:16px 24px 0}
-        .edu-content{font-size:13px;color:var(--slate);line-height:1.7;border-left:2px solid rgba(45,212,191,0.25);padding-left:12px;margin-bottom:12px}
-        .edu-content strong{color:var(--cream);font-weight:500}
-        .key-facts{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}
-        .key-fact{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:5px;padding:3px 8px;font-family:"DM Mono",monospace;font-size:10px;color:var(--muted)}
-        .product-card-footer{padding:14px 24px 18px;margin-top:auto;display:flex;flex-direction:column;gap:8px}
-        .product-price{font-family:"DM Mono",monospace;font-size:13px;color:var(--teal);font-weight:500}
-        .product-dose{font-size:11px;color:var(--muted)}
-        .learn-toggle{background:none;border:none;cursor:pointer;font-size:12px;color:var(--teal);font-family:"DM Sans",sans-serif;display:flex;align-items:center;gap:5px;padding:0;transition:opacity .2s;font-weight:500}
-        .learn-toggle:hover{opacity:.75}
-        .learn-arrow{transition:transform .3s;display:inline-block;font-size:10px}
-        .learn-toggle.open .learn-arrow{transform:rotate(180deg)}
-        .buy-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--navy);font-family:"Syne",sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
-        .buy-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,212,191,0.4)}
-        .learn-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:10px;background:rgba(45,212,191,0.06);border:1px solid rgba(45,212,191,0.18);color:var(--teal);font-family:"Syne",sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s}
-        .learn-btn:hover{background:rgba(45,212,191,0.13);transform:translateY(-1px)}
-        .amazon-note{font-size:10px;color:var(--muted);text-align:center;font-family:"DM Mono",monospace}
+        .product-img-wrap{position:relative;width:100%;padding-top:100%;background:#f7f7f3;overflow:hidden}
+        .product-img-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px}
+        .product-img-inner img{width:100%;height:100%;object-fit:contain}
+        .product-tp-badge{position:absolute;top:10px;right:10px;background:#22c55e;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,0.18)}
+        .product-tier-pill{position:absolute;bottom:10px;left:10px;background:rgba(45,212,191,0.92);color:var(--navy);font-family:"DM Mono",monospace;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:.4px}
+        .product-tier-pill.value{background:rgba(52,211,153,0.92)}
+        .product-tier-pill.budget{background:rgba(245,158,11,0.92)}
+        .product-card-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:2px;flex:1}
+        .product-brand-label{font-size:11px;color:var(--muted)}
+        .product-supp-label{font-family:"Syne",sans-serif;font-size:15px;font-weight:700;color:var(--cream);line-height:1.25;margin-top:2px}
+        .product-form-label{font-size:11px;color:var(--slate);margin-top:1px;line-height:1.4}
+        .product-price-row{display:flex;align-items:baseline;gap:5px;margin-top:10px}
+        .product-price-val{font-family:"DM Mono",monospace;font-size:14px;color:var(--teal);font-weight:500}
+        .product-price-tag{font-size:11px;color:var(--muted)}
         .no-results{text-align:center;padding:80px 24px;color:var(--slate)}
         .no-results h3{font-family:"Syne",sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;color:var(--cream)}
         .bottom-cta{max-width:800px;margin:0 auto;padding:0 32px 80px;text-align:center}
@@ -3752,51 +3735,33 @@ function renderProducts() {
         html += `<div class="section-label"><h2>${getIcon(products[0].iconKey)} ${suppName}</h2><div class="section-line"></div><span class="section-count">${products.length} product${products.length !== 1 ? 's' : ''}</span></div>`;
         html += `<div class="product-grid">`;
         products.forEach(p => {
-            const aUrl = getAmazonUrl(p.asin, p.affiliateTag);
-            const imgHtml = p.imageUrl && !p.useSearchFallback
-                ? `<img src="${p.imageUrl}" alt="${p.productName}" onerror="this.style.display='none';this.parentElement.innerHTML=getIcon('${p.iconKey}', '56px')">`
+            const imgContent = p.imageUrl && !p.useSearchFallback
+                ? `<img src="${p.imageUrl}" alt="${p.productName}" onerror="this.style.display='none'">`
                 : getIcon(p.iconKey, '56px');
-            const tpBadge = p.thirdPartyTested ? `<span class="badge badge-verified">&#10003; 3rd Party</span>` : '';
-            const formNoteHtml = p.formNote ? `<p><strong>Form note:</strong> ${p.formNote}</p>` : '';
+            const tpBadge = p.thirdPartyTested ? `<div class="product-tp-badge">&#10003;</div>` : '';
+            const tierClass = p.tier === 'value' ? ' value' : p.tier === 'budget' ? ' budget' : '';
             html += `
-            <div class="product-card" data-id="${p.id}" onclick="if(!event.target.closest('.buy-btn'))location.href='product.html?id=${p.id}'" style="cursor:pointer;">
-                <div class="product-card-top">
-                    <div class="product-img">${imgHtml}</div>
-                    <div class="product-meta">
-                        <div class="product-supp-name">${p.supplementName}</div>
-                        <div class="product-name">${p.productName}</div>
-                        <div class="product-brand">${p.brand}</div>
-                        <div class="product-badges">
-                            <span class="badge ${getBadgeClass(p.tier)}">${getTierLabel(p.tier)}</span>
-                            ${tpBadge}
-                        </div>
+            <a class="product-card" href="product.html?id=${p.id}">
+                <div class="product-img-wrap">
+                    <div class="product-img-inner">${imgContent}</div>
+                    ${tpBadge}
+                    <div class="product-tier-pill${tierClass}">${getTierLabel(p.tier)}</div>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-brand-label">${p.brand}</div>
+                    <div class="product-supp-label">${p.supplementName}</div>
+                    <div class="product-form-label">${p.productName}</div>
+                    <div class="product-price-row">
+                        <span class="product-price-val">${p.price ? '$' + p.price.toFixed(2) : '\u2014'}</span>
+                        <span class="product-price-tag">on Amazon</span>
                     </div>
                 </div>
-                <div class="product-card-footer">
-                    <span class="product-price">$${p.price ? p.price.toFixed(2) : '—'}</span>
-                    <a href="${aUrl}" target="_blank" rel="noopener" class="buy-btn" onclick="event.stopPropagation()">
-                        View on Amazon
-                        <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/></svg>
-                    </a>
-                    <a href="product.html?id=${p.id}" class="learn-btn" onclick="event.stopPropagation()">
-                        Learn More
-                    </a>
-                    <div class="amazon-note">via Amazon &middot; ${p.affiliateTag}</div>
-                </div>
-            </div>`;
+            </a>`;
         });
         html += `</div>`;
     });
 
     content.innerHTML = html;
-}
-
-function toggleEdu(id, btn) {
-    const panel = document.getElementById('edu-' + id);
-    const isOpen = panel.classList.contains('open');
-    panel.classList.toggle('open', !isOpen);
-    btn.classList.toggle('open', !isOpen);
-    btn.querySelector('span').textContent = isOpen ? 'Learn more' : 'Hide details';
 }
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
