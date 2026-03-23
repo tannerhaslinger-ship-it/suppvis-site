@@ -473,6 +473,17 @@
             0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+        [data-theme="light"] .ticker-outer {
+            background: #F0F4F8;
+            border-top: 1px solid rgba(45,212,191,0.2);
+            border-bottom: 1px solid rgba(45,212,191,0.2);
+        }
+        [data-theme="light"] .ticker-track span {
+            color: #475569;
+        }
+        [data-theme="light"] .ticker-track span::before {
+            color: #2DD4BF;
+        }
 
         .back-link {
             font-size: 13px; color: var(--text-muted); text-decoration: none;
