@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <title>SuppVis - Master Your Biology. Eliminate the Guesswork.</title>
     <meta name="description" content="SuppVis is the independent AI health companion that eliminates supplement guesswork. Optimize your biology with data-driven recommendations and interaction safety.">
     <meta name="keywords" content="AI supplement optimization, personalized health tracking, supplement interaction checker, brand-agnostic supplements, wellness dashboard">
@@ -40,6 +41,7 @@
         }
 
         /* ── LIGHT MODE: section backgrounds ── */
+        [data-theme="light"] #problems,
         [data-theme="light"] #about,
         [data-theme="light"] #ai,
         [data-theme="light"] #shop,
@@ -92,6 +94,11 @@
         [data-theme="light"] .feature-card {
             background: rgba(0,0,0,0.04) !important;
         }
+        [data-theme="light"] .problem-card {
+            background: rgba(0,0,0,0.04) !important;
+        }
+        [data-theme="light"] .problem-card h3 { color: var(--text-primary) !important; }
+        [data-theme="light"] .problem-card p  { color: var(--text-slate) !important; }
         [data-theme="light"] .chat-title-group h3 { color: var(--text-primary) !important; }
         [data-theme="light"] .message-content { color: var(--text-primary) !important; }
         [data-theme="light"] .chat-container {
@@ -193,10 +200,11 @@
 
         html {
             scroll-behavior: smooth;
+            scrollbar-gutter: stable;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Symbol', sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -1058,6 +1066,50 @@
             line-height: 1.7;
         }
 
+        /* Problems Section */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-top: 3px solid rgba(239,68,68,0.6);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        .problem-card .problem-icon {
+            color: #2DD4BF;
+            width: 32px;
+            height: 32px;
+            margin-bottom: 16px;
+        }
+
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .problem-card p {
+            font-size: 14px;
+            color: var(--text-slate);
+            line-height: 1.6;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .chat-container {
                 height: 100vh;
@@ -1601,6 +1653,14 @@
             .team-member,
             .blog-content {
                 padding: 28px 22px;
+            }
+
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-card {
+                padding: 24px 20px;
             }
 
             .feature-card {
@@ -2303,7 +2363,8 @@
         .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
         .blog-image .lucide, .shop-icon .lucide, .card-icon-wrap .lucide { width: 28px; height: 28px; }
         .team-member-icon .lucide { width: 36px; height: 36px; }
-        
+        .problem-icon.lucide { width: 32px; height: 32px; }
+
         /* ── SITE FOOTER ── */
         .sv-footer { background: #060E1A; font-family: 'DM Sans', sans-serif; margin-top: 80px; }
         .sv-footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
@@ -2496,6 +2557,34 @@
                             <span>60,000+ Studies</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problems Section -->
+        <section id="problems" style="padding: 100px 5%; text-align: center;">
+            <h2 class="section-title">The Supplement Industry is Broken</h2>
+            <p class="section-subtitle">Here is what we fixed.</p>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <i data-lucide="trending-up" class="problem-icon"></i>
+                    <h3>Marketing Over Science</h3>
+                    <p>Most supplements are sold on hype, not evidence. Brands pay influencers, not researchers.</p>
+                </div>
+                <div class="problem-card">
+                    <i data-lucide="shuffle" class="problem-icon"></i>
+                    <h3>Dangerous Interactions Ignored</h3>
+                    <p>95% of people taking multiple supplements never check for interactions. Some combinations are risky.</p>
+                </div>
+                <div class="problem-card">
+                    <i data-lucide="user-x" class="problem-icon"></i>
+                    <h3>Generic Advice for Everyone</h3>
+                    <p>Your biology, goals, and lifestyle are unique. One-size-fits-all stacks leave results on the table.</p>
+                </div>
+                <div class="problem-card">
+                    <i data-lucide="dollar-sign" class="problem-icon"></i>
+                    <h3>Wasted Money on the Wrong Things</h3>
+                    <p>Americans waste $15B+ annually on supplements that do not work for their specific situation.</p>
                 </div>
             </div>
         </section>
@@ -3521,7 +3610,7 @@
       <span class="legal-sep">|</span>
       <a href="/suppvis-privacy.html">Privacy Policy</a>
       <span class="legal-sep">|</span>
-      <a href="mailto:hello@suppvis.health">Contact</a>
+      <!--email_off--><a href="mailto:hello@suppvis.health">Contact</a><!--/email_off-->
     </div>
     <p class="legal-footer-disclosure">As an Amazon Associate, I earn from qualifying purchases. SuppVis participates in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
     <p class="legal-footer-copy">&copy; 2026 SuppVis. All rights reserved.</p>

@@ -35,7 +35,7 @@
             background: linear-gradient(-45deg, #EEF2F7, #F0F4F8, #EEF2F7, #E8EEF5) !important;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -509,6 +509,7 @@
 
     </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>!function(){var t=localStorage.getItem("sv-theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark");document.documentElement.setAttribute("data-theme",t)}();</script>
 </head>
 <body>
 
@@ -624,7 +625,7 @@
                         <button type="submit" class="form-submit">Send Message</button>
                     </form>
 
-                    <p class="contact-direct">Or email us directly at <a href="mailto:partnerships@suppvis.health">partnerships@suppvis.health</a></p>
+                    <p class="contact-direct">Or email us directly at <!--email_off--><a href="mailto:partnerships@suppvis.health">partnerships@suppvis.health</a><!--/email_off--></p>
                 </div>
 
             </div>
@@ -759,7 +760,7 @@
       <span class="legal-sep">|</span>
       <a href="/suppvis-privacy.html">Privacy Policy</a>
       <span class="legal-sep">|</span>
-      <a href="mailto:hello@suppvis.health">Contact</a>
+      <!--email_off--><a href="mailto:hello@suppvis.health">Contact</a><!--/email_off-->
     </div>
     <p class="legal-footer-disclosure">As an Amazon Associate, I earn from qualifying purchases. SuppVis participates in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
     <p class="legal-footer-copy">&copy; 2026 SuppVis. All rights reserved.</p>

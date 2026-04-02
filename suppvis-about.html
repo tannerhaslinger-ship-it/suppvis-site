@@ -37,7 +37,7 @@
             background: linear-gradient(-45deg, #EEF2F7, #F0F4F8, #EEF2F7, #E8EEF5) !important;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -92,8 +92,7 @@
         .logo {
             display: flex; align-items: center; gap: 12px;
             font-size: 24px; font-weight: 700; color: var(--text-primary);
-            text-decoration: none; transition: transform 0.3s;
-            font-family: 'Syne', sans-serif;
+            text-decoration: none; transition: transform 0.3s, color 0.35s;
         }
         .logo:hover { transform: scale(1.05); }
         .logo-icon {
@@ -370,6 +369,7 @@
         /* Responsive */
         @media (max-width: 1024px) {
             .problems-grid, .advantage-grid, .team-grid { grid-template-columns: 1fr; }
+            nav { flex-wrap: wrap; gap: 12px; }
             .nav-links, .nav-actions { display: none; }
             .mobile-menu-toggle { display: block; margin-left: auto; }
             nav.mobile-nav-open .nav-links,
@@ -406,44 +406,54 @@
             header { padding: 16px 20px; }
             nav { flex-wrap: wrap; gap: 12px; }
             .about-hero { padding: 40px 0 44px; }
-            .about-hero h1 { font-size: 32px; margin-bottom: 16px; }
-            .about-hero .subtitle { font-size: 16px; }
-            .section-header { margin-bottom: 28px; }
-            .section-title { font-size: 26px; }
-            .section-subtitle { font-size: 15px; }
-            section { margin-bottom: 48px; }
-            .content-wrapper { padding: 0 16px 48px; }
-            .mission-statement { padding: 24px 20px; margin-top: 24px; }
-            .large-text { font-size: 15px; line-height: 1.75; }
-            .problem-card, .advantage-card { padding: 20px; }
-            .problems-grid, .advantage-grid { gap: 12px; }
-            .card-title { font-size: 17px; }
+            .about-hero h1 { font-size: 28px; line-height: 1.25; margin-bottom: 14px; }
+            .about-hero .subtitle { font-size: 15px; }
+            .section-header { margin-bottom: 24px; text-align: center; }
+            .section-title { font-size: 24px; text-align: center; }
+            .section-subtitle { font-size: 14px; text-align: center; }
+            section { margin-bottom: 40px; }
+            .content-wrapper { padding: 0 16px 40px; }
+            .mission-statement { padding: 20px 18px; margin-top: 20px; border-radius: 14px; }
+            .large-text { font-size: 15px; line-height: 1.75; text-align: center; }
+
+            /* Problems grid — single column, centered */
+            .problems-grid { grid-template-columns: 1fr; gap: 12px; }
+            .problem-card { padding: 20px 18px; border-radius: 14px; text-align: center; }
+            .card-icon { font-size: 28px; margin-bottom: 10px; }
+            .card-title { font-size: 16px; margin-bottom: 10px; }
             .card-content p { font-size: 14px; }
             .card-content p + p { display: none; }
-            .advantage-suppvis { font-size: 14px; }
-            .advantage-description { display: none; }
-            .team-member { padding: 24px 20px; }
+
+            /* Advantage grid — single column, centered */
+            .advantage-grid { grid-template-columns: 1fr; gap: 12px; }
+            .advantage-card { padding: 20px 18px; border-radius: 14px; text-align: center; }
+            .advantage-header { flex-direction: column; align-items: center; gap: 8px; margin-bottom: 10px; }
+            .advantage-icon { font-size: 28px; }
+            .advantage-header h4 { font-size: 16px; }
+            .advantage-suppvis { font-size: 14px; text-align: center; }
+            .advantage-description { font-size: 13px; text-align: center; }
+
+            /* Team grid — single column */
+            .team-grid { grid-template-columns: 1fr; gap: 12px; }
+            .team-member { padding: 24px 18px; border-radius: 16px; }
             .team-member-icon { width: 64px; height: 64px; font-size: 32px; }
             .team-member h3 { font-size: 20px; }
             .team-member .bio { font-size: 14px; margin-bottom: 12px; }
             .team-member .credentials { font-size: 13px; }
-            .team-grid { gap: 12px; }
-            .card-icon { font-size: 28px; }
-            .cta-section { padding: 32px 20px; }
-            .cta-section p { font-size: 15px; }
-            .cta-buttons { flex-direction: column; }
-            .btn-primary, .btn-secondary { width: 100%; justify-content: center; font-size: 15px; padding: 14px 24px; }
+
+            .cta-section { padding: 28px 18px; border-radius: 16px; }
+            .cta-section h2 { font-size: 22px; }
+            .cta-section p { font-size: 14px; }
+            .cta-buttons { flex-direction: column; gap: 10px; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; font-size: 15px; padding: 14px 20px; }
         }
-    
+
         @media (max-width: 768px) {
+            /* Founder / Our Story cards */
             .founder-card {
-                padding: 24px 20px !important;
+                padding: 20px 16px !important;
                 margin-bottom: 12px !important;
                 border-radius: 14px !important;
-            }
-            /* Our Story section inline styles override */
-            section > div[style*="max-width: 900px"] > div[style*="text-align: center"] {
-                margin-bottom: 28px !important;
             }
             .founder-card p {
                 font-size: 14px !important;
@@ -451,6 +461,18 @@
                 margin-bottom: 14px !important;
             }
             .founder-card p:last-child { margin-bottom: 0 !important; }
+            /* Quote block inside Connor's card */
+            .founder-card div[style*="border-left"] {
+                padding: 14px 16px !important;
+                margin: 16px 0 !important;
+            }
+            .founder-card div[style*="border-left"] p {
+                font-size: 13px !important;
+            }
+            /* Our Story section header */
+            section > div[style*="max-width: 900px"] > div[style*="text-align: center"] {
+                margin-bottom: 20px !important;
+            }
         }
 
         /* Lucide icon sizing */
@@ -547,6 +569,7 @@
 
         </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>!function(){var t=localStorage.getItem("sv-theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark");document.documentElement.setAttribute("data-theme",t)}();</script>
 </head>
 <body>
 
@@ -936,7 +959,7 @@
       <span class="legal-sep">|</span>
       <a href="/suppvis-privacy.html">Privacy Policy</a>
       <span class="legal-sep">|</span>
-      <a href="mailto:hello@suppvis.health">Contact</a>
+      <!--email_off--><a href="mailto:hello@suppvis.health">Contact</a><!--/email_off-->
     </div>
     <p class="legal-footer-disclosure">As an Amazon Associate, I earn from qualifying purchases. SuppVis participates in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
     <p class="legal-footer-copy">&copy; 2026 SuppVis. All rights reserved.</p>
