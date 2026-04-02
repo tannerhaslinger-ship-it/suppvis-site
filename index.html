@@ -945,7 +945,7 @@
         .chat-input-area {
             padding: 24px 32px;
             border-top: 1px solid rgba(45, 212, 191, 0.2);
-            background: rgba(45, 212, 191, 0.03);
+            background: #ffffff;
         }
 
         .chat-input-container {
@@ -957,10 +957,10 @@
         .chat-input {
             flex: 1;
             padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(45, 212, 191, 0.2);
+            background: #f8fafc;
+            border: 1px solid rgba(45, 212, 191, 0.4);
             border-radius: 12px;
-            color: var(--text-primary);
+            color: #0A1628;
             font-size: 16px;
             font-family: inherit;
             resize: none;
@@ -972,12 +972,12 @@
         .chat-input:focus {
             outline: none;
             border-color: #2DD4BF;
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
         }
 
         .chat-input::placeholder {
-            color: #64748B;
+            color: #94a3b8;
         }
 
         .send-btn {
@@ -1021,6 +1021,8 @@
             gap: 32px;
             margin-top: 60px;
         }
+
+
 
         .feature-card {
             background: rgba(255, 255, 255, 0.05);
@@ -1222,6 +1224,10 @@
         #app-closer {
             background: var(--bg-primary);
             text-align: center;
+        }
+
+        .mobile-comparison {
+            display: none;
         }
 
         .comparison-table {
@@ -1432,10 +1438,45 @@
             }
 
             .features-grid,
-            .shop-features,
-            .blog-grid {
+            .shop-features {
                 grid-template-columns: 1fr;
             }
+
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .blog-image {
+                height: 80px;
+                font-size: 32px;
+            }
+
+            .blog-content {
+                padding: 14px 14px 16px;
+            }
+
+            .blog-card h4 {
+                font-size: 13px;
+                line-height: 1.4;
+                margin-bottom: 0;
+            }
+
+            .blog-category {
+                font-size: 10px;
+                padding: 3px 8px;
+                margin-bottom: 8px;
+            }
+
+            .blog-card p {
+                display: none;
+            }
+
+            .blog-content > div {
+                display: none;
+            }
+
+
 
             .about-content {
                 grid-template-columns: 1fr;
@@ -1558,9 +1599,37 @@
             }
 
             .team-member,
-            .feature-card,
             .blog-content {
                 padding: 28px 22px;
+            }
+
+            .feature-card {
+                padding: 24px 20px;
+                min-height: 180px;
+            }
+
+            .shop-product-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .features-grid {
+                margin-top: 32px;
+                gap: 16px;
+            }
+
+            .feature-icon {
+                font-size: 36px;
+                margin-bottom: 14px;
+            }
+
+            .feature-card h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .feature-card p {
+                font-size: 14px;
+                line-height: 1.6;
             }
 
             .about-content,
@@ -1595,49 +1664,72 @@
             }
 
             .comparison-table {
-                margin: 40px auto 32px;
-                border-radius: 18px;
-            }
-
-            .comparison-row {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                padding: 18px 18px;
-                text-align: left;
-            }
-
-            .comparison-row.header {
                 display: none;
             }
 
-            .comparison-cell {
-                justify-content: flex-start;
+            .waitlist-perks-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+            }
+
+            .waitlist-perks-grid > div {
+                padding: 16px 14px !important;
+            }
+
+            .waitlist-perks-grid > div div[style*="font-size:28px"] {
+                font-size: 20px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .waitlist-perks-grid h4 {
+                font-size: 13px !important;
+                margin-bottom: 0 !important;
+            }
+
+            .waitlist-perks-grid p {
+                display: none;
+            }
+
+            .mobile-comparison {
+                display: block;
+                margin: 32px auto;
+                max-width: 380px;
+            }
+
+            .mobile-comparison-label {
+                font-size: 12px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #2DD4BF;
+                margin-bottom: 16px;
+                text-align: center;
+            }
+
+            .mobile-comparison-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 gap: 10px;
-                font-size: 15px;
-                line-height: 1.45;
             }
 
-            .comparison-cell:first-child {
-                font-size: 16px;
+            .mobile-comparison-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: rgba(45,212,191,0.06);
+                border: 1px solid rgba(45,212,191,0.2);
+                border-radius: 12px;
+                padding: 12px 14px;
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--text-primary);
             }
 
-            .comparison-cell:not(:first-child) {
-                justify-content: space-between;
-                padding-top: 6px;
-                font-size: 14px;
-            }
-
-            .comparison-cell:not(:first-child)::before {
-                font-weight: 600;
-                color: var(--text-muted);
-            }
-
-            .comparison-row .comparison-cell:nth-child(2)::before {
-                content: 'Web';
-            }
-
-            .comparison-row .comparison-cell:nth-child(3)::before {
-                content: 'iOS App';
+            .mobile-comparison-item .lucide {
+                width: 16px;
+                height: 16px;
+                color: #2DD4BF;
+                flex-shrink: 0;
             }
 
             .check,
@@ -1709,27 +1801,64 @@
                 margin-top: 0;
             }
 
+            /* Mobile footer: logo + tagline first, then nav grid */
             .sv-footer-main {
-                padding: 48px 0 36px;
-            }
-
-            .sv-footer-left {
-                gap: 28px;
-                padding-bottom: 28px;
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                padding: 40px 0 24px;
+                gap: 0;
             }
 
             .sv-footer-divider {
+                display: none;
+            }
+
+            /* Logo/tagline block */
+            .sv-footer-right {
+                padding: 0 0 32px;
+                gap: 6px;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
                 margin-bottom: 28px;
             }
 
-            .sv-footer-right {
-                gap: 8px;
+            .sv-footer-powered,
+            .sv-footer-privacy,
+            .sv-footer-form {
+                display: none;
             }
 
-            .sv-footer-tagline,
-            .sv-footer-powered,
-            .sv-footer-privacy {
+            .sv-footer-tagline {
+                font-size: 13px;
                 max-width: 100%;
+            }
+
+            /* Nav columns: 3-up tight grid */
+            .sv-footer-left {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0 12px;
+                padding: 0;
+            }
+
+            .sv-footer-col h4 {
+                font-size: 11px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .sv-footer-col ul {
+                gap: 10px !important;
+            }
+
+            .sv-footer-col ul li a {
+                font-size: 12px !important;
+            }
+
+            .sv-footer-strip {
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+                padding: 20px 0;
+                font-size: 11px;
             }
 
             .legal-footer-inner {
@@ -1779,7 +1908,7 @@
             width: 100%;
             max-width: 900px;
             max-height: 90vh;
-            background: rgba(255, 255, 255, 0.05);
+            background: #ffffff;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(45, 212, 191, 0.3);
             border-radius: 24px;
@@ -2032,7 +2161,7 @@
 
         .chat-input-container {
             padding: 24px 32px;
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             border-top: 1px solid rgba(45, 212, 191, 0.2);
             display: flex;
             gap: 12px;
@@ -2042,10 +2171,10 @@
         .chat-input {
             flex: 1;
             padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(45, 212, 191, 0.2);
+            background: #f8fafc;
+            border: 1px solid rgba(45, 212, 191, 0.4);
             border-radius: 12px;
-            color: var(--text-primary);
+            color: #0A1628;
             font-size: 15px;
             font-family: inherit;
             resize: none;
@@ -2057,11 +2186,12 @@
         .chat-input:focus {
             outline: none;
             border-color: #2DD4BF;
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
         }
 
         .chat-input::placeholder {
-            color: #64748B;
+            color: #94a3b8;
         }
 
         .chat-send-btn {
@@ -2124,12 +2254,15 @@
         @media (max-width: 768px) {
             .chat-modal {
                 padding: 0;
+                background: #ffffff;
             }
 
             .chat-container {
                 max-width: 100%;
+                height: 100vh;
                 max-height: 100vh;
                 border-radius: 0;
+                background: #ffffff;
             }
 
             .chat-header {
@@ -2399,44 +2532,7 @@
                         <span class="feature-icon"><i data-lucide="link"></i></span>
                         <h3>Proprietary Interaction Graph</h3>
                         <p>
-                            Contextually understands your complete stack to identify dangerous 
-                            conflicts or synergistic benefits. We catch what 95% of users miss, including combinations that could make you sick.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <span class="feature-icon"><i data-lucide="microscope"></i></span>
-                        <h3>Explainability Engine</h3>
-                        <p>
-                            No black boxes. Every recommendation is backed by peer-reviewed research
-                            and scientific consensus. See the why behind every suggestion.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-1.01-3.08 3 3 0 0 1-.37-5.27 2.5 2.5 0 0 1 1.84-4.69Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 1.01-3.08 3 3 0 0 0 .37-5.27 2.5 2.5 0 0 0-1.84-4.69Z"/></svg></span>
-                        <h3>Adaptive Logic</h3>
-                        <p>
-                            The AI evolves as your health goals shift. Whether optimizing for Sleep, 
-                            Focus, Stress, or Energy, your plan adapts with you.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-                        <h3>Optimal Timing</h3>
-                        <p>
-                            When you take it matters as much as what you take. Get personalized 
-                            schedules that maximize absorption and effectiveness.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <span class="feature-icon"><i data-lucide="flame"></i></span>
-                        <h3>Habit Architecture</h3>
-                        <p>
-                            Smart reminders and streak tracking make consistency effortless. 
-                            85% adherence rate vs. 30% industry average.
+                            Catches dangerous conflicts and hidden synergies that 95% of users miss entirely.
                         </p>
                     </div>
 
@@ -2444,8 +2540,39 @@
                         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
                         <h3>Outcome Tracking</h3>
                         <p>
-                            Track sleep, energy, focus, and stress. See patterns invisible to you. 
-                            Know exactly what's working and what isn't.
+                            Track sleep, energy, focus, and stress to see exactly what's working for you.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon"><i data-lucide="microscope"></i></span>
+                        <h3>Explainability Engine</h3>
+                        <p>
+                            No black boxes. Every recommendation is backed by peer-reviewed research you can read.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-1.01-3.08 3 3 0 0 1-.37-5.27 2.5 2.5 0 0 1 1.84-4.69Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 1.01-3.08 3 3 0 0 0 .37-5.27 2.5 2.5 0 0 0-1.84-4.69Z"/></svg></span>
+                        <h3>Adaptive Logic</h3>
+                        <p>
+                            Your plan evolves as your goals shift. Sleep, focus, stress, energy: it adapts with you.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                        <h3>Optimal Timing</h3>
+                        <p>
+                            When you take it matters as much as what you take. Schedules built to maximize absorption.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon"><i data-lucide="flame"></i></span>
+                        <h3>Habit Architecture</h3>
+                        <p>
+                            Smart reminders and streak tracking keep you consistent. 85% adherence vs. 30% industry average.
                         </p>
                     </div>
                 </div>
@@ -2515,7 +2642,7 @@
                         <textarea 
                             class="chat-input" 
                             id="chatInput" 
-                            placeholder="Ask about supplements, interactions, timing, dosing..."
+                            placeholder="Your next step in optimization..."
                             rows="1"
                         ></textarea>
                         <button class="send-btn" id="sendBtn">
@@ -2580,7 +2707,7 @@
                     <p style="text-align:center;color:var(--text-muted);font-size:14px;margin-bottom:32px;">
                         158 products across 30+ categories, curated for quality and evidence
                     </p>
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:1000px;margin:0 auto;">
+                    <div class="shop-product-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:1000px;margin:0 auto;">
 
                         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#14B8A6';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
                             <img src="https://m.media-amazon.com/images/I/71BwFPGbYaL._AC_SL300_.jpg" alt="Thorne Magnesium Glycinate" style="width:80px;height:80px;object-fit:contain;background:#fff;border-radius:10px;padding:6px;margin-bottom:12px;">
@@ -2808,6 +2935,20 @@
                     </div>
                 </div>
 
+                <div class="mobile-comparison">
+                    <p class="mobile-comparison-label">Everything in the app</p>
+                    <div class="mobile-comparison-list">
+                        <div class="mobile-comparison-item"><i data-lucide="bar-chart-2"></i>Personal Dashboard</div>
+                        <div class="mobile-comparison-item"><i data-lucide="clock"></i>Daily Reminders</div>
+                        <div class="mobile-comparison-item"><i data-lucide="target"></i>Goal Tracking</div>
+                        <div class="mobile-comparison-item"><i data-lucide="flame"></i>Streak System</div>
+                        <div class="mobile-comparison-item"><i data-lucide="sparkles"></i>AI Personalization</div>
+                        <div class="mobile-comparison-item"><i data-lucide="shopping-bag"></i>Curated Marketplace</div>
+                        <div class="mobile-comparison-item"><i data-lucide="microscope"></i>Science &amp; Research</div>
+                        <div class="mobile-comparison-item"><i data-lucide="book-open"></i>Blog &amp; Education</div>
+                    </div>
+                </div>
+
                 <div class="cta-group">
                     <a href="https://apps.apple.com" target="_blank" class="btn-primary">
                         <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
@@ -2902,7 +3043,7 @@
             </div>
 
             <!-- Perks grid -->
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:880px;margin:0 auto;">
+            <div class="waitlist-perks-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:880px;margin:0 auto;">
                 <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(20,184,166,0.15);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(20,184,166,0.35)';this.style.background='rgba(20,184,166,0.05)'" onmouseout="this.style.borderColor='rgba(20,184,166,0.15)';this.style.background='rgba(255,255,255,0.03)'">
                     <div style="font-size:28px;margin-bottom:12px;"><i data-lucide="zap" style="width:28px;height:28px"></i></div>
                     <h4 style="color:#F5F1E8;font-size:16px;margin-bottom:8px;">Early Access</h4>
