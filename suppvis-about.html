@@ -126,9 +126,14 @@
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(45,212,191,0.4); }
         .mobile-menu-toggle {
             display: none; background: none; border: none;
-            color: #2DD4BF; font-size: 28px; cursor: pointer; padding: 8px;
-            border-radius: 10px; transition: background 0.2s ease, color 0.2s ease;
+            color: #2DD4BF !important; font-size: 28px; cursor: pointer;
+            padding: 8px; border-radius: 10px;
+            transition: background 0.2s ease;
+            min-width: 40px; min-height: 40px;
+            align-items: center; justify-content: center;
+            flex-shrink: 0;
         }
+        .mobile-menu-toggle svg { display: block; color: #2DD4BF; stroke: #2DD4BF; }
         .mobile-menu-toggle:hover { background: rgba(45,212,191,0.12); }
         .mobile-menu-toggle:focus-visible { outline: 2px solid #2DD4BF; outline-offset: 2px; }
 
@@ -362,7 +367,7 @@
             .problems-grid, .advantage-grid, .team-grid { grid-template-columns: 1fr; }
             nav { flex-wrap: wrap; gap: 12px; }
             .nav-links, .nav-actions { display: none; }
-            .mobile-menu-toggle { display: block; margin-left: auto; }
+            .mobile-menu-toggle { display: flex !important; margin-left: auto; min-width: 40px; min-height: 40px; align-items: center; justify-content: center; }
             nav.mobile-nav-open .nav-links,
             nav.mobile-nav-open .nav-actions {
                 display: flex; width: 100%; flex-direction: column;
