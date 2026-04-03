@@ -339,25 +339,7 @@
         [data-theme="light"] .cta-section p { color: var(--text-slate) !important; }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            header { padding: 16px 20px; }
-            .nav-links { display: none; }
-            .mobile-menu-toggle { display: block; }
-            .page-hero h1 { font-size: 36px; }
-            .page-hero .subtitle { font-size: 17px; }
-            .content-wrapper { padding: 0 16px 60px; }
-            .step { grid-template-columns: 48px 1fr; gap: 0 20px; }
-            .step-body { padding: 24px 22px; }
-            .step-title { font-size: 19px; }
-            .step-text { font-size: 15px; }
-            .cta-section { padding: 40px 24px; }
-            .cta-buttons { flex-direction: column; }
-            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-            .step:not(:last-child) .step-number-col::after { left: 23px; }
-            .step-number { width: 46px; height: 46px; font-size: 17px; }
-        }
-    
-        /* Lucide icon sizing */
+/* Lucide icon sizing */
         .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
         .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
         .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
@@ -440,18 +422,7 @@
             border-top: 1px solid rgba(255,255,255,0.05);
         }
         .sv-footer-strip span { font-size: 12px; color: #334155; }
-        @media (max-width: 900px) {
-            .sv-footer-main { flex-direction: column; gap: 0; padding: 56px 0 48px; }
-            .sv-footer-left { flex: none; padding-right: 0; padding-bottom: 48px; }
-            .sv-footer-divider { width: 100%; height: 1px; align-self: auto; margin-bottom: 48px; }
-            .sv-footer-right { flex: none; padding-left: 0; }
-        }
-        @media (max-width: 600px) {
-            .sv-footer-inner { padding: 0 24px; }
-            .sv-footer-left { grid-template-columns: 1fr; gap: 36px; }
-            .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
-        }
-            .sv-footer-cols { grid-template-columns: 1fr; gap: 36px; padding: 48px 0 40px; }
+.sv-footer-cols { grid-template-columns: 1fr; gap: 36px; padding: 48px 0 40px; }
             .sv-footer-form { flex-direction: column; gap: 10px; }
             .sv-footer-form button { width: 100%; }
             .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
@@ -459,6 +430,225 @@
 
         </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- Mobile responsive CSS from main -->
+    <style>
+        @media (max-width: 1024px) {
+            .nav-links, .nav-actions { display: none; }
+            .mobile-menu-toggle { display: block; margin-left: auto; }
+            nav.mobile-nav-open .nav-links,
+            nav.mobile-nav-open .nav-actions {
+                display: flex; width: 100%; flex-direction: column;
+                align-items: stretch; gap: 0; padding: 16px 18px;
+                border: 1px solid rgba(45,212,191,0.18); border-radius: 18px;
+                background: var(--card-bg); box-shadow: 0 16px 40px rgba(10,22,40,0.28);
+            }
+            nav.mobile-nav-open .nav-links { order: 3; margin-top: 4px; }
+            nav.mobile-nav-open .nav-links li { width: 100%; }
+            nav.mobile-nav-open .nav-links a {
+                display: block; padding: 14px 0;
+                border-bottom: 1px solid rgba(148,163,184,0.12);
+            }
+            nav.mobile-nav-open .nav-links li:last-child a { border-bottom: none; }
+            nav.mobile-nav-open .nav-actions {
+                order: 4; flex-direction: row;
+                justify-content: space-between; align-items: center; gap: 12px;
+            }
+            nav.mobile-nav-open .nav-cta { justify-content: center; flex: 1; }
+            @media (max-width: 560px) {
+                nav.mobile-nav-open .nav-actions {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+            }
+        }
+
+        @media (max-width: 560px) {
+                nav.mobile-nav-open .nav-actions {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+            }
+
+        @media (max-width: 768px) {
+            header { padding: 16px 20px; }
+            nav { flex-wrap: wrap; gap: 12px; }
+
+            /* Hero */
+            .page-hero { padding: 44px 0 40px; }
+            .page-hero h1 { font-size: clamp(28px, 8vw, 36px); margin-bottom: 14px; }
+            .page-hero .subtitle { font-size: 16px; line-height: 1.65; }
+            .content-wrapper { padding: 0 16px 56px; }
+
+            /* ── TIMELINE LAYOUT ── */
+            .steps-list {
+                margin-top: 36px;
+                gap: 0;
+                /* Vertical line runs through the left column */
+                position: relative;
+            }
+            /* The continuous spine line */
+            .steps-list::before {
+                content: '';
+                position: absolute;
+                top: 18px;         /* starts at center of first node */
+                bottom: 18px;      /* ends at center of last node */
+                left: 17px;        /* center of 36px node col */
+                width: 2px;
+                background: linear-gradient(
+                    180deg,
+                    rgba(45,212,191,0.6) 0%,
+                    rgba(45,212,191,0.2) 60%,
+                    rgba(45,212,191,0.05) 100%
+                );
+                border-radius: 2px;
+                z-index: 0;
+            }
+
+            .step {
+                display: grid;
+                grid-template-columns: 36px 1fr;
+                gap: 0 14px;
+                padding-bottom: 16px;
+                align-items: flex-start;
+                position: relative;
+            }
+
+            /* Number node — sits ON the spine */
+            .step-number-col {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+                z-index: 1;
+                padding-top: 2px;
+            }
+            /* Hide the desktop ::after connector (spine handles it now) */
+            .step:not(:last-child) .step-number-col::after { display: none; }
+
+            .step-number {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+                background: linear-gradient(135deg, #0d2035, #132d4a);
+                border: 2px solid rgba(45,212,191,0.55);
+                box-shadow: 0 0 0 3px rgba(45,212,191,0.08);
+                flex-shrink: 0;
+            }
+
+            /* Card body — full border-radius, proper padding */
+            .step-body {
+                border-radius: 16px;
+                padding: 18px 16px;
+                margin-bottom: 0;
+                /* override desktop transform on hover */
+                transform: none !important;
+            }
+            .step:hover .step-body { transform: none !important; }
+
+            .step-icon { display: none; }
+
+            .step-title {
+                font-size: 16px;
+                margin-bottom: 8px;
+                line-height: 1.3;
+            }
+            .step-text {
+                font-size: 14px;
+                line-height: 1.7;
+                color: #94A3B8;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            /* CTA */
+            .cta-section { padding: 36px 20px; margin-top: 24px; }
+            .cta-section h2 { font-size: 22px; margin-bottom: 10px; }
+            .cta-section p { font-size: 15px; margin-bottom: 28px; }
+            .cta-buttons { flex-direction: column; gap: 12px; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; padding: 14px 24px; font-size: 16px; }
+
+            .sv-footer {
+                margin-top: 0;
+            }
+
+            .sv-footer-main {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                padding: 40px 0 24px;
+                gap: 0;
+            }
+
+            .sv-footer-divider {
+                display: none;
+            }
+
+            .sv-footer-right {
+                padding: 0 0 32px;
+                gap: 6px;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                margin-bottom: 28px;
+            }
+
+            .sv-footer-powered,
+            .sv-footer-privacy,
+            .sv-footer-form {
+                display: none;
+            }
+
+            .sv-footer-tagline {
+                font-size: 13px;
+                max-width: 100%;
+            }
+
+            .sv-footer-left {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0 12px;
+                padding: 0;
+            }
+
+            .sv-footer-col h4 {
+                font-size: 11px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .sv-footer-col ul {
+                gap: 10px !important;
+            }
+
+            .sv-footer-col ul li a {
+                font-size: 12px !important;
+            }
+
+            .sv-footer-strip {
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+                padding: 20px 0;
+                font-size: 11px;
+            }
+
+            .legal-footer-inner {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sv-footer-main { flex-direction: column; gap: 0; padding: 56px 0 48px; }
+            .sv-footer-left { flex: none; padding-right: 0; padding-bottom: 48px; }
+            .sv-footer-divider { width: 100%; height: 1px; align-self: auto; margin-bottom: 48px; }
+            .sv-footer-right { flex: none; padding-left: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .sv-footer-inner { padding: 0 24px; }
+            .sv-footer-left { grid-template-columns: 1fr; gap: 36px; }
+            .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
+        }
+    </style>
 </head>
 <body>
 
@@ -631,9 +821,34 @@
             const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             scrollProgress.style.width = pct + '%';
         });
-        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
-            alert('Mobile menu coming soon!');
-        });
+                // Mobile menu toggle
+        const siteNav = document.getElementById('siteNav');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNavLinks = siteNav ? siteNav.querySelectorAll('.nav-links a, .nav-actions a') : [];
+        const setMobileMenuState = (isOpen) => {
+            if (!siteNav || !mobileMenuToggle) return;
+            siteNav.classList.toggle('mobile-nav-open', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            mobileMenuToggle.innerHTML = isOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+            if (window.lucide) lucide.createIcons();
+        };
+        if (siteNav && mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                setMobileMenuState(!siteNav.classList.contains('mobile-nav-open'));
+            });
+            mobileNavLinks.forEach((link) => {
+                link.addEventListener('click', () => { if (window.innerWidth <= 1024) setMobileMenuState(false); });
+            });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && siteNav.classList.contains('mobile-nav-open')) {
+                    setMobileMenuState(false); mobileMenuToggle.focus();
+                }
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 1024 && siteNav.classList.contains('mobile-nav-open')) setMobileMenuState(false);
+            });
+        }
     </script>
 
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>

@@ -195,13 +195,57 @@
         [data-theme="light"] .legal-footer-disclosure,[data-theme="light"] .legal-footer-copy{color:#64748B;}
         .legal-footer-copy{font-size:11px;color:#4A6A68;margin:0;}
 
-        @media (max-width: 768px) {
+</style>
+
+    <!-- Mobile responsive CSS from main -->
+    <style>
+        @media (max-width: 1024px) {
             header { padding: 16px 20px; }
             header.scrolled { padding: 10px 20px; }
-            .nav-links { display: none; }
-            .mobile-menu-toggle { display: block; }
+            nav { flex-wrap: wrap; gap: 12px; }
+            .nav-links, .nav-actions { display: none; }
+            .mobile-menu-toggle { display: block; margin-left: auto; }
+            nav.mobile-nav-open .nav-links,
+            nav.mobile-nav-open .nav-actions {
+                display: flex; width: 100%; flex-direction: column;
+                align-items: stretch; gap: 0; padding: 16px 18px;
+                border: 1px solid rgba(45,212,191,0.18); border-radius: 18px;
+                background: var(--card-bg); box-shadow: 0 16px 40px rgba(10,22,40,0.28);
+            }
+            nav.mobile-nav-open .nav-links { order: 3; margin-top: 4px; }
+            nav.mobile-nav-open .nav-links li { width: 100%; }
+            nav.mobile-nav-open .nav-links a {
+                display: block; padding: 14px 0;
+                border-bottom: 1px solid rgba(148,163,184,0.12);
+            }
+            nav.mobile-nav-open .nav-links li:last-child a { border-bottom: none; }
+            nav.mobile-nav-open .nav-actions {
+                order: 4; flex-direction: row;
+                justify-content: space-between; align-items: center; gap: 12px;
+            }
+            nav.mobile-nav-open .nav-cta { justify-content: center; flex: 1; }
             .content-wrapper { padding: 0 16px 80px; }
             .page-hero { padding: 56px 0 48px; }
+        }
+
+        @media (max-width: 560px) {
+            nav.mobile-nav-open .nav-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sv-footer-main { flex-direction: column; gap: 0; padding: 56px 0 48px; }
+            .sv-footer-left { flex: none; padding-right: 0; padding-bottom: 48px; }
+            .sv-footer-divider { width: 100%; height: 1px; align-self: auto; margin-bottom: 48px; }
+            .sv-footer-right { flex: none; padding-left: 0; }
+        }
+
+        @media (max-width: 640px) {
+            .sv-footer-inner { padding: 0 24px; }
+            .sv-footer-left { grid-template-columns: 1fr; gap: 36px; }
+            .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
         }
     </style>
 </head>
@@ -358,7 +402,34 @@
             const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             scrollProgress.style.width = pct + '%';
         });
-        document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
+                // Mobile menu toggle
+        const siteNav = document.getElementById('siteNav');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNavLinks = siteNav ? siteNav.querySelectorAll('.nav-links a, .nav-actions a') : [];
+        const setMobileMenuState = (isOpen) => {
+            if (!siteNav || !mobileMenuToggle) return;
+            siteNav.classList.toggle('mobile-nav-open', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            mobileMenuToggle.innerHTML = isOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+            if (window.lucide) lucide.createIcons();
+        };
+        if (siteNav && mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                setMobileMenuState(!siteNav.classList.contains('mobile-nav-open'));
+            });
+            mobileNavLinks.forEach((link) => {
+                link.addEventListener('click', () => { if (window.innerWidth <= 1024) setMobileMenuState(false); });
+            });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && siteNav.classList.contains('mobile-nav-open')) {
+                    setMobileMenuState(false); mobileMenuToggle.focus();
+                }
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 1024 && siteNav.classList.contains('mobile-nav-open')) setMobileMenuState(false);
+            });
+        }
     </script>
 </body>
 </html>

@@ -498,20 +498,7 @@
         @keyframes fadeIn     { from{opacity:0} to{opacity:1} }
 
         /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-            header { padding: 14px 20px; }
-            .nav-links { display: none; }
-            .mobile-menu-toggle { display: block; }
-            main { padding: 100px 16px 60px; }
-            .countdown-unit { min-width: 72px; padding: 14px 16px; }
-            .countdown-sep { font-size: 28px; }
-            .countdown { gap: 8px; }
-            .trust-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .founder-note { flex-direction: column; text-align: center; }
-            .spots-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
-        }
-    
-        /* Lucide icon sizing */
+/* Lucide icon sizing */
         .lucide { width: 20px; height: 20px; display: inline-block; vertical-align: middle; stroke: currentColor; stroke-width: 1.5; fill: none; flex-shrink: 0; }
         .step-icon .lucide, .feature-icon .lucide, .card-icon .lucide,
         .trust-card-icon .lucide, .advantage-icon .lucide, .carousel-icon .lucide,
@@ -594,18 +581,7 @@
             border-top: 1px solid rgba(255,255,255,0.05);
         }
         .sv-footer-strip span { font-size: 12px; color: #334155; }
-        @media (max-width: 900px) {
-            .sv-footer-main { flex-direction: column; gap: 0; padding: 56px 0 48px; }
-            .sv-footer-left { flex: none; padding-right: 0; padding-bottom: 48px; }
-            .sv-footer-divider { width: 100%; height: 1px; align-self: auto; margin-bottom: 48px; }
-            .sv-footer-right { flex: none; padding-left: 0; }
-        }
-        @media (max-width: 600px) {
-            .sv-footer-inner { padding: 0 24px; }
-            .sv-footer-left { grid-template-columns: 1fr; gap: 36px; }
-            .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
-        }
-            .sv-footer-cols { grid-template-columns: 1fr; gap: 36px; padding: 48px 0 40px; }
+.sv-footer-cols { grid-template-columns: 1fr; gap: 36px; padding: 48px 0 40px; }
             .sv-footer-form { flex-direction: column; gap: 10px; }
             .sv-footer-form button { width: 100%; }
             .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
@@ -613,6 +589,171 @@
 
         </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- Mobile responsive CSS from main -->
+    <style>
+        @media (max-width: 1024px) {
+            .nav-links,
+            .nav-actions {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                margin-left: auto;
+            }
+
+            nav.mobile-nav-open .nav-links,
+            nav.mobile-nav-open .nav-actions {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 16px 18px;
+                border: 1px solid rgba(45, 212, 191, 0.18);
+                border-radius: 18px;
+                background: var(--card-bg);
+                box-shadow: 0 16px 40px rgba(10, 22, 40, 0.28);
+            }
+
+            nav.mobile-nav-open .nav-links {
+                order: 3;
+                margin-top: 4px;
+            }
+
+            nav.mobile-nav-open .nav-links li {
+                width: 100%;
+            }
+
+            nav.mobile-nav-open .nav-links a {
+                display: block;
+                padding: 14px 0;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+            }
+
+            nav.mobile-nav-open .nav-links li:last-child a {
+                border-bottom: none;
+            }
+
+            nav.mobile-nav-open .nav-actions {
+                order: 4;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+            }
+
+            nav.mobile-nav-open .nav-cta {
+                justify-content: center;
+                flex: 1;
+            }
+
+            @media (max-width: 560px) {
+                nav.mobile-nav-open .nav-actions {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+            }
+        }
+
+        @media (max-width: 560px) {
+                nav.mobile-nav-open .nav-actions {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+            }
+
+        @media (max-width: 768px) {
+            header { padding: 14px 20px; }
+            nav { flex-wrap: wrap; gap: 12px; }
+            main { padding: 100px 16px 60px; }
+            .countdown-unit { min-width: 72px; padding: 14px 16px; }
+            .countdown-sep { font-size: 28px; }
+            .countdown { gap: 8px; }
+            .trust-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .founder-note { flex-direction: column; text-align: center; }
+            .spots-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+            .sv-footer {
+                margin-top: 0;
+            }
+
+            .sv-footer-main {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                padding: 40px 0 24px;
+                gap: 0;
+            }
+
+            .sv-footer-divider {
+                display: none;
+            }
+
+            .sv-footer-right {
+                padding: 0 0 32px;
+                gap: 6px;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                margin-bottom: 28px;
+            }
+
+            .sv-footer-powered,
+            .sv-footer-privacy,
+            .sv-footer-form {
+                display: none;
+            }
+
+            .sv-footer-tagline {
+                font-size: 13px;
+                max-width: 100%;
+            }
+
+            .sv-footer-left {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0 12px;
+                padding: 0;
+            }
+
+            .sv-footer-col h4 {
+                font-size: 11px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .sv-footer-col ul {
+                gap: 10px !important;
+            }
+
+            .sv-footer-col ul li a {
+                font-size: 12px !important;
+            }
+
+            .sv-footer-strip {
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+                padding: 20px 0;
+                font-size: 11px;
+            }
+
+            .legal-footer-inner {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sv-footer-main { flex-direction: column; gap: 0; padding: 56px 0 48px; }
+            .sv-footer-left { flex: none; padding-right: 0; padding-bottom: 48px; }
+            .sv-footer-divider { width: 100%; height: 1px; align-self: auto; margin-bottom: 48px; }
+            .sv-footer-right { flex: none; padding-left: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .sv-footer-inner { padding: 0 24px; }
+            .sv-footer-left { grid-template-columns: 1fr; gap: 36px; }
+            .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
+        }
+    </style>
 </head>
 <body>
 
@@ -913,119 +1054,32 @@
     </footer>
 
     <script>
-        // ── THEME TOGGLE ──
-        const html = document.documentElement;
-        const themeToggle = document.getElementById('themeToggle');
+        // Mobile menu toggle
+        const siteNav = document.getElementById('siteNav');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 
-        // Initialise: saved pref → system pref → dark
-        const savedTheme = localStorage.getItem('sv-theme');
-        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-        const initTheme = savedTheme || (systemLight ? 'light' : 'dark');
-        html.setAttribute('data-theme', initTheme);
+        const setMobileMenuState = (isOpen) => {
+            if (!siteNav || !mobileMenuToggle) return;
+            siteNav.classList.toggle('mobile-nav-open', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            mobileMenuToggle.innerHTML = isOpen
+                ? '<i data-lucide="x"></i>'
+                : '<i data-lucide="menu"></i>';
+            lucide.createIcons();
+        };
 
-        themeToggle.addEventListener('click', () => {
-            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('sv-theme', next);
-        });
-
-        // ── HEADER SCROLL ──
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
-
-        // ── COUNTDOWN — June 1, 2026 ──
-        const LAUNCH_DATE = new Date(2026, 5, 1, 8, 0, 0);
-        function updateCountdown() {
-            const diff = LAUNCH_DATE - new Date();
-            if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00'); return; }
-            const pad = n => String(n).padStart(2,'0');
-            const vals = {
-                'cd-days':  pad(Math.floor(diff / 86400000)),
-                'cd-hours': pad(Math.floor((diff / 3600000) % 24)),
-                'cd-mins':  pad(Math.floor((diff / 60000) % 60)),
-                'cd-secs':  pad(Math.floor((diff / 1000) % 60))
-            };
-            Object.entries(vals).forEach(([id, val]) => {
-                const el = document.getElementById(id);
-                if (el.textContent !== val) {
-                    el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
-                    el.textContent = val;
-                }
+        if (siteNav && mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                setMobileMenuState(!siteNav.classList.contains('mobile-nav-open'));
+            });
+            siteNav.querySelectorAll('.nav-links a, .nav-actions a').forEach(link => {
+                link.addEventListener('click', () => setMobileMenuState(false));
             });
         }
-        updateCountdown(); setInterval(updateCountdown, 1000);
 
-        // ── SPOTS PROGRESS ──
-        const TOTAL = 500;
-        let claimed = 347;
-        function updateSpots() {
-            const pct = (claimed / TOTAL) * 100;
-            document.getElementById('spots-text').textContent = `${claimed} / ${TOTAL} claimed`;
-            document.getElementById('progress-fill').style.width = pct + '%';
-            document.getElementById('spots-remaining').innerHTML = `<span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> Only ${TOTAL - claimed} spots left</span>`;
-        }
-        updateSpots();
-        setInterval(() => { if (claimed < TOTAL - 5 && Math.random() < 0.3) { claimed++; updateSpots(); } }, 18000);
-
-        // ── FORM ──
-        const form = document.getElementById('waitlistForm');
-        const successState = document.getElementById('successState');
-        const submitBtn = document.getElementById('submitBtn');
-        const formMsg = document.getElementById('formMsg');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const email = form.querySelector('input[name="email"]').value.trim();
-            if (!email) {
-                formMsg.textContent = 'Please enter your email address.';
-                formMsg.className = 'form-msg error';
-                return;
-            }
-            formMsg.textContent = '';
-            formMsg.className = 'form-msg';
-
-            const originalHTML = submitBtn.innerHTML;
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-
-            try {
-                const res = await fetch('https://suppvis-platform.vercel.app/api/waitlist', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({
-                        name: form.querySelector('input[name="name"]').value.trim(),
-                        email: email,
-                        goal: form.querySelector('select[name="goal"]').value
-                    })
-                });
-
-                if (res.ok) {
-                    claimed++;
-                    updateSpots();
-                    form.style.display = 'none';
-                    document.querySelector('.form-wrapper > p.try-free-link').style.display = 'none';
-                    document.querySelector('.form-wrapper > p.form-disclaimer').style.display = 'none';
-                    successState.querySelector('p').textContent = 'You are on the list. We will be in touch soon.';
-                    successState.classList.add('visible');
-                    document.getElementById('successNumber').textContent = `Founding Member #${claimed}`;
-                } else if (res.status === 409) {
-                    formMsg.textContent = 'You are already on the list.';
-                    formMsg.className = 'form-msg info';
-                    submitBtn.innerHTML = originalHTML;
-                    submitBtn.disabled = false;
-                } else {
-                    throw new Error();
-                }
-            } catch {
-                formMsg.textContent = 'Something went wrong. Please try again.';
-                formMsg.className = 'form-msg error';
-                submitBtn.innerHTML = originalHTML;
-                submitBtn.disabled = false;
-            }
-        });
-
-        document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
+        // Init lucide icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     </script>
 
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
