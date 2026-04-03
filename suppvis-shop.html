@@ -107,6 +107,11 @@
         .product-price-val{font-family:"DM Mono",monospace;font-size:14px;color:var(--teal);font-weight:500}
         .product-price-tag{font-size:11px;color:var(--muted)}
         .no-results{text-align:center;padding:80px 24px;color:var(--slate)}
+        .shop-pagination{display:flex;align-items:center;justify-content:center;gap:16px;padding:40px 32px 16px;flex-wrap:wrap}
+        .page-btn{background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.25);border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600;color:#2DD4BF;cursor:pointer;transition:background 0.2s,opacity 0.2s;font-family:'DM Sans',sans-serif}
+        .page-btn:hover:not(:disabled){background:rgba(45,212,191,0.18)}
+        .page-btn:disabled{opacity:0.3;cursor:default}
+        .page-info{font-size:14px;color:var(--slate);font-family:'DM Sans',sans-serif}
         .no-results h3{font-family:"Syne",sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;color:var(--cream)}
         .bottom-cta{max-width:800px;margin:0 auto;padding:0 32px 80px;text-align:center}
         .bottom-cta-card{background:rgba(45,212,191,0.05);border:1px solid rgba(45,212,191,0.18);border-radius:24px;padding:52px 40px;position:relative;overflow:hidden}
@@ -4683,7 +4688,8 @@ window.addEventListener('scroll', () => header.classList.toggle('scrolled', wind
                 if (window.innerWidth > 1024 && siteNav.classList.contains('mobile-nav-open')) setMobileMenuState(false);
             });
         }
-let currentFilter = 'all', currentSearch = '';
+let currentFilter = 'all', currentSearch = '', currentPage = 1;
+const PAGE_SIZE = 40;
 let eduOpen = {};
 
 function getAmazonUrl(asin, tag) {
@@ -4738,6 +4744,11 @@ function renderProducts() {
         return matchCat && matchSearch;
     });
 
+    const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+    if (currentPage > totalPages) currentPage = 1;
+    const pageStart = (currentPage - 1) * PAGE_SIZE;
+    const paginated = filtered.slice(pageStart, pageStart + PAGE_SIZE);
+
     document.getElementById('resultsCount').textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
 
     const content = document.getElementById('shopContent');
@@ -4746,9 +4757,9 @@ function renderProducts() {
         return;
     }
 
-    // Group by supplementName
+    // Group page slice by supplementName
     const groups = {};
-    filtered.forEach(p => {
+    paginated.forEach(p => {
         if (!groups[p.supplementName]) groups[p.supplementName] = [];
         groups[p.supplementName].push(p);
     });
@@ -4784,7 +4795,22 @@ function renderProducts() {
         html += `</div>`;
     });
 
+    // Pagination controls
+    if (totalPages > 1) {
+        html += `<div class="shop-pagination">`;
+        html += `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&#8592; Prev</button>`;
+        html += `<span class="page-info">Page ${currentPage} of ${totalPages}</span>`;
+        html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next &#8594;</button>`;
+        html += `</div>`;
+    }
+
     content.innerHTML = html;
+}
+
+function changePage(page) {
+    currentPage = page;
+    renderProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -4792,6 +4818,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentFilter = btn.dataset.filter;
+        currentPage = 1;
         renderProducts();
     });
 });
@@ -4800,7 +4827,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 let searchTimer;
 document.getElementById('searchInput').addEventListener('input', e => {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { currentSearch = e.target.value; renderProducts(); }, 250);
+    searchTimer = setTimeout(() => { currentSearch = e.target.value; currentPage = 1; renderProducts(); }, 250);
 });
 
 renderProducts();
