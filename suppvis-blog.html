@@ -296,6 +296,11 @@
         
         /* ── SITE FOOTER ── */
         .sv-footer { background: #060E1A; font-family: 'DM Sans', sans-serif; margin-top: 80px; }
+        [data-theme="light"] .sv-footer { background: #E8EDF4; }
+        [data-theme="light"] .sv-footer-brand p, [data-theme="light"] .sv-footer-col ul li a, [data-theme="light"] .sv-footer-col h4 { color: #334155; }
+        [data-theme="light"] .sv-footer-col ul li a:hover { color: #0D9488; }
+        [data-theme="light"] .sv-footer-form input { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.15); color: #0F172A; }
+        [data-theme="light"] .sv-footer-bottom { border-top-color: rgba(0,0,0,0.1); color: #64748B; }
         .sv-footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
         .sv-footer-main {
             display: flex;
@@ -386,7 +391,7 @@
 
         </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script>!function(){var t=localStorage.getItem("sv-theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark");document.documentElement.setAttribute("data-theme",t)}();</script>
+        <script>(function(){document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');})();</script>
 </head>
 <body>
 <header id="header">
@@ -404,10 +409,6 @@
             <li><a href="suppvis-waitlist.html">Waitlist</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
-            </button>
             <a href="suppvis-ai-chat.html" class="nav-cta">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 Ask SuppVis AI
@@ -552,11 +553,11 @@
 <script>
     const html = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('sv-theme');
-    html.setAttribute('data-theme', saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-    themeToggle.addEventListener('click', () => {
-        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next); localStorage.setItem('sv-theme', next);
+    const applyTheme = () => {
+            html.setAttribute('data-theme', window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        };
+        applyTheme();
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', applyTheme);
     });
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
