@@ -1071,5 +1071,34 @@
   </div>
 </div>
 
+
+    <script>
+        // Mobile menu toggle
+        const siteNav = document.getElementById('siteNav');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+
+        const setMobileMenuState = (isOpen) => {
+            if (!siteNav || !mobileMenuToggle) return;
+            siteNav.classList.toggle('mobile-nav-open', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            mobileMenuToggle.innerHTML = isOpen
+                ? '<i data-lucide="x"></i>'
+                : '<i data-lucide="menu"></i>';
+            lucide.createIcons();
+        };
+
+        if (siteNav && mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                setMobileMenuState(!siteNav.classList.contains('mobile-nav-open'));
+            });
+            siteNav.querySelectorAll('.nav-links a, .nav-actions a').forEach(link => {
+                link.addEventListener('click', () => setMobileMenuState(false));
+            });
+        }
+
+        // Init lucide icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
 </body>
 </html>
